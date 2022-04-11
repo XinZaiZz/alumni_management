@@ -36,6 +36,7 @@ public class ShiroConfig {
          * user : 必须拥有记住我功能才能使用
          * perms : 必须拥有对某个资源的权限才能访问
          * role : 必须拥有某个角色权限才能访问
+         * 
          * */
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 //        filterChainDefinitionMap.put("/static/**","anon");
