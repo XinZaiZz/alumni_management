@@ -1,0 +1,26 @@
+spring:
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+
+  messages:
+    basename: i18n.login
+
+  datasource:
+    username: root
+    password: 1234
+    #假如时区报错，则添加时区的配置 serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/alumni_management?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+#整合mybatis
+mybatis:
+  type-aliases-package: com.youxin.alumni_management.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+server:
+  port: 8080

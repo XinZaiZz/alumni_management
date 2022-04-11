@@ -1,0 +1,82 @@
+body {
+	background:url(../../img/admin-login/admin_login_bg.png) #f8f6e9;
+}
+
+#myTitle {
+    position: absolute;
+    height: 100px;
+    width: 100%;
+    font-size: 50px;
+    font-family: 方正舒体;
+    margin-top: 50px;
+    padding: 50px;
+}
+
+#title {
+    position: relative;
+    text-align: center;
+    color: #eff507;
+    background-image: linear-gradient(90deg, #eff507 0%, #da12c0 50%, #e60a0d 100%);
+    -webkit-background-clip: text; /*必需加前缀 -webkit- 才支持这个text值 */
+    -webkit-text-fill-color: transparent; /*text-fill-color会覆盖color所定义的字体颜色： */
+
+}
+
+.signin {
+	width:477px;
+	height:479px;
+	background:url(../../img/admin-login/login_bg.png) no-repeat;
+	margin:0 auto;
+	
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-239px;
+	margin-left:-238px;
+}
+.signin-head {
+	margin:0 auto;
+	padding-top:30px;
+	width:120px;
+}
+.form-signin {
+  max-width: 330px;
+  padding: 43px 15px 15px 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  padding-left: 20px;
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: 14px;
+  border-radius: 0;
+  background: url(../../img/admin-login/login_user.png) 0 0 #bdbdbd no-repeat;
+  padding-left:60px;
+  color:#FFFFFF;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-radius: 0;
+  background: url(../../img/admin-login/login_pas.png) 0 0 #bdbdbd no-repeat;
+  padding-left:60px;
+  color:#FFFFFF;
+}
+.form-signin button {
+  border-radius: 0;
+}

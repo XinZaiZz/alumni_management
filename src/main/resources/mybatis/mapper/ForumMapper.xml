@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youxin.alumni_management.mapper.ForumMapper">
+    <resultMap id="ForumMap" type="Forum">
+        <!-- column是查询结果的列名, property是对应实体类中的属性名 -->
+        <id column="forumId" jdbcType="INTEGER" property="forumId"/>
+        <result column="userId" jdbcType="INTEGER" property="userId"/>
+        <result column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+        <result column="forumContent" jdbcType="VARCHAR" property="forumContent"/>
+        <result column="forumHTMLContent" jdbcType="VARCHAR" property="forumHTMLContent"/>
+        <result column="forumTitle" jdbcType="VARCHAR" property="forumTitle"/>
+        <result column="forumTabloid" jdbcType="VARCHAR" property="forumTabloid"/>
+        <result column="forumDate" jdbcType="TIMESTAMP" property="forumDate"/>
+        <!-- 多表查询时连接user属性段 -->
+        <association property="user" javaType="User" >
+            <id column="userId" jdbcType="INTEGER" property="userId"/>
+            <!-- 不需要的字段可以注释掉 -->
+            <!--<result column="userName" jdbcType="VARCHAR" property="userName"/>-->
+            <!--<result column="password" jdbcType="VARCHAR" property="password"/>-->
+            <!--<result column="departmentId" jdbcType="INTEGER" property="departmentId"/>-->
+            <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+            <!--<result column="gender" jdbcType="VARCHAR" property="gender"/>-->
+        </association>
+    </resultMap>
+
+    <insert id="insForum" parameterType="Forum">
+        insert into forum(userId, departmentId, forumContent, forumHTMLContent, forumTitle, forumTabloid, forumDate)
+        values (#{userId}, #{departmentId}, #{forumContent}, #{forumHTMLContent}, #{forumTitle}, #{forumTabloid}, #{forumDate})
+    </insert>
+
+    <!-- 这里使用上面定义的resultMap -->
+    <select id="findAllForum" resultMap="ForumMap">
+        select * from forum join user on forum.userId = user.userId where 0 = 0 order by forumDate desc
+    </select>
+
+</mapper>

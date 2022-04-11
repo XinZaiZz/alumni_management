@@ -1,0 +1,124 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/3/20
+  Time: 16:27
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>攀枝花学院校友后台管理系统</title>
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" th:href="@{/backadmin/bootstrap/css/bootstrap.min.css}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" th:href="@{/backadmin/font-awesome/css/font-awesome.min.css}">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css" th:href="@{/backadmin/css/fontastic.css}">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" th:href="@{https://fonts.googleapis.com/css?family=Poppins:300,400,700}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet" th:href="@{/backadmin/css/style.default.css}">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css" th:href="@{/backadmin/css/custom.css}">
+</head>
+
+<body>
+<!-- 如果传过来存在没有用户认证信息-->
+<!--<div th:if="${session.unAuthorized == null}" >
+    <script>
+        alert("用户未认证，请登录!");
+        window.location.href="/toAdminLogin";
+    </script>
+</div>-->
+
+<div class="page">
+<div th:replace="~{/commons/backcommons.html::topbar}"></div>
+    <div class="page-content d-flex align-items-stretch">
+        <!-- side bar -->
+        <div th:replace="~{/commons/backcommons::sidebar(active = 'main.html')}"></div>
+        <!-- 具体内容 -->
+        <div class="content-inner">
+            <!-- Page Header-->
+            <header class="page-header">
+                <div class="container-fluid">
+                    <h2 class="no-margin-bottom">主页</h2>
+                </div>
+            </header>
+
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-holder container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Tables</li>
+                </ul>
+            </div>
+            <!-- 传递参数给组件 -->
+            <section class="tables">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" id="closeCard3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                                    </div>
+                                </div>
+                                <div class="card-header d-flex align-items-center">
+                                    <h3 class="h4">请求名单</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>注册id</th>
+                                                <th>注册用户名</th>
+                                                <th>用户昵称</th>
+                                                <th>性别</th>
+                                                <th>学院</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="registerUser : ${allRegisteringUser}">
+                                                <th scope="row" th:text="${registerUser.getRegisterId}">1</th>
+                                                <td th:text="${registerUser.getUsername}">Mark</td>
+                                                <td th:text="${registerUser.getNickName}">Otto</td>
+                                                <td th:text="${registerUser.getGender}">@mdo</td>
+                                                <td th:text="${registerUser.getDepartmentId}">@mdo</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div th:replace="~{/commons/backcommons::footerbar}"></div>
+        </div>
+    </div>
+</div>
+<!-- JavaScript files-->
+<script src="vendor/jquery/jquery.min.js" th:src="@{/backadmin/jquery/jquery.min.js}"></script>
+<script src="vendor/popper.js/umd/popper.min.js" th:src="@{/backadmin/popper.js/umd/popper.min.js}"> </script>
+<script src="vendor/bootstrap/js/bootstrap.min.js" th:src="@{/backadmin/bootstrap/js/bootstrap.min.js}"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js" th:src="@{/backadmin/jquery.cookie/jquery.cookie.js}"> </script>
+<script src="vendor/chart.js/Chart.min.js" th:src="@{/backadmin/chart.js/Chart.min.js}"></script>
+<script src="vendor/jquery-validation/jquery.validate.min.js" th:src="@{/backadmin/jquery-validation/jquery.validate.min.js}"></script>
+<script src="js/charts-home.js" th:src="@{/backadmin/js/charts-home.js}"></script>
+<!-- 涉及到图标操作js操作的script -->
+<script th:src="@{/backadmin/js/front.js}"></script>
+
+</body>
+
+</html>
