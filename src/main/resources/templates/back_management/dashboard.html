@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
-                                    <h3 class="h4">请求名单</h3>
+                                    <h3 class="h4">用户注册申请名单</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -84,6 +84,7 @@
                                                 <th>用户昵称</th>
                                                 <th>性别</th>
                                                 <th>学院</th>
+                                                <th>操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -93,6 +94,12 @@
                                                 <td th:text="${registerUser.getNickName}">Otto</td>
                                                 <td th:text="${registerUser.getGender}">@mdo</td>
                                                 <td th:text="${registerUser.getDepartmentId}">@mdo</td>
+                                                <td>
+                                                    <div class="btn-group" role="group" aria-label="...">
+                                                        <a type="button" class="btn btn-sm btn-success" th:href="@{/admin/register/Pass-Or-UnPass/} + ${registerUser.getRegisterId} + @{/1}" >允&nbsp;&nbsp;&nbsp;&nbsp;许</a>
+                                                        <a type="button" class="btn btn-sm btn-danger" th:href="@{/admin/register/Pass-Or-UnPass/} + ${registerUser.getRegisterId} + @{/2}">未通过</a>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>

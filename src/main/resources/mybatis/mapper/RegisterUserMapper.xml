@@ -10,4 +10,8 @@
 
     </select>
 
+    <update id="updUserStatus" parameterType="int">
+        update register_user set status = #{status} where registerId = #{registerId}
+    </update>
+
 </mapper>

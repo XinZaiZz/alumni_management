@@ -164,7 +164,7 @@ public class LoginController {
     public String toDashboard(Model model, HttpServletRequest request){
         //获取当前用户
         Admin admin = (Admin) request.getSession().getAttribute("admin");
-        request.setAttribute("admin",admin);
+        model.addAttribute("admin",admin);
         //如果当前用户已经登录
         if (admin != null) {
             //获取注册用户信息

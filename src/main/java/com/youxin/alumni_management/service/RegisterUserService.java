@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface RegisterUserService {
     List<RegisterUser> findAllRegisterUser(Integer departmentId);
+
+    int updUserStatus(Integer registerId, Integer status);
 }

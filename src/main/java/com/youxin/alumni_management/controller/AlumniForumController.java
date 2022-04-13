@@ -6,9 +6,9 @@ import com.youxin.alumni_management.pojo.User;
 import com.youxin.alumni_management.service.ForumService;
 import com.youxin.alumni_management.utils.BuildArticleTabloidUtil;
 import com.youxin.alumni_management.utils.DateUtil;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,10 +35,10 @@ public class AlumniForumController {
 
     //跳转校友论坛页面
     @GetMapping("/toAlumniForum")
-    public String toAlumniForumPage(HttpServletRequest request) {
+    public String toAlumniForumPage(Model model) {
         //查询所有论坛文章
         List<Forum> allForum = forumService.findAllForum();
-        request.setAttribute("forumList", allForum);
+        model.addAttribute("forumList", allForum);
         return "forum/alumni_forum";
     }
 
