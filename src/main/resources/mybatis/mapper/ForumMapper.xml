@@ -35,4 +35,8 @@
         select * from forum join user on forum.userId = user.userId where 0 = 0 order by forumDate desc
     </select>
 
+    <select id="findForumById" parameterType="int" resultType="Forum">
+        select * from forum where forumId = #{forumId}
+    </select>
+
 </mapper>

@@ -1,8 +1,11 @@
 package com.youxin.alumni_management.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -40,40 +43,49 @@ public class Result implements Serializable {
 //        this.message = resultCode.message();
 //    }
 
+    static ObjectMapper objectMapper = new ObjectMapper();
+
 
     //直接使用静态方法调用成功或失败
-    public static Result success(ResultCode resultCode, Object data) {
+    @SneakyThrows
+    public static String success(ResultCode resultCode, Object data){
         Result result = new Result();
         result.setCode(resultCode.code());
         result.setMessage(resultCode.message());
 //        result.setResultCode(resultCode);
         result.setData(data);
-        return result;
+
+        return objectMapper.writeValueAsString(result);
     }
 
-    public static Result success(ResultCode resultCode) {
+    @SneakyThrows
+    public static String success(ResultCode resultCode){
+
         Result result = new Result();
         result.setCode(resultCode.code());
         result.setMessage(resultCode.message());
-        return result;
+
+        return objectMapper.writeValueAsString(result);
     }
 
     //返回失败
-    public static Result failure(ResultCode resultCode, Object data) {
+    @SneakyThrows
+    public static String failure(ResultCode resultCode, Object data) {
         Result result = new Result();
         result.setCode(resultCode.code());
         result.setMessage(resultCode.message());
 //        result.setResultCode(resultCode);
         result.setData(data);
-        return result;
+        return objectMapper.writeValueAsString(result);
     }
 
     //返回失败
-    public static Result failure(ResultCode resultCode) {
+    @SneakyThrows
+    public static String failure(ResultCode resultCode) {
         Result result = new Result();
         result.setCode(resultCode.code());
         result.setMessage(resultCode.message());
 //        result.setResultCode(resultCode);
-        return result;
+        return objectMapper.writeValueAsString(result);
     }
 }

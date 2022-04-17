@@ -1,5 +1,6 @@
 package com.youxin.alumni_management.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.youxin.alumni_management.pojo.Admin;
 import com.youxin.alumni_management.pojo.RegisterUser;
 import com.youxin.alumni_management.service.RegisterUserService;
@@ -31,7 +32,7 @@ public class RegisterUserController {
     private final RegisterUserService registerUserService;
 
     @GetMapping("/findAllRegisterUser/{departmentId}")
-    public Object findAllRegisterUser(@PathVariable("departmentId") Integer departmentId, HttpServletRequest request) {
+    public Object findAllRegisterUser(@PathVariable("departmentId") Integer departmentId, HttpServletRequest request) throws JsonProcessingException {
 
         List<RegisterUser> allRegisteringUser = registerUserService.findAllRegisterUser(departmentId);
 

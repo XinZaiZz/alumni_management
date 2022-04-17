@@ -11,4 +11,7 @@ public interface ForumService {
 
     //查询所有论坛文章
     List<Forum> findAllForum();
+
+    //根据文章id查询文章
+    Forum findForumById(Integer forumId);
 }

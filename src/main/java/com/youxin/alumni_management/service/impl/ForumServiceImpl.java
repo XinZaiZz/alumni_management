@@ -3,6 +3,7 @@ package com.youxin.alumni_management.service.impl;
 import com.youxin.alumni_management.mapper.ForumMapper;
 import com.youxin.alumni_management.pojo.Forum;
 import com.youxin.alumni_management.service.ForumService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,11 @@ import java.util.List;
  * @date 2022-04-05 12:53
  */
 @Service
+@RequiredArgsConstructor
 public class ForumServiceImpl implements ForumService {
 
-    @Autowired
-    ForumMapper forumMapper;
+//    @Autowired
+    private final ForumMapper forumMapper;
 
     @Override
     public int insForum(Forum forum) {
@@ -28,5 +30,10 @@ public class ForumServiceImpl implements ForumService {
     @Override
     public List<Forum> findAllForum() {
         return forumMapper.findAllForum();
+    }
+
+    @Override
+    public Forum findForumById(Integer forumId) {
+        return forumMapper.findForumById(forumId);
     }
 }

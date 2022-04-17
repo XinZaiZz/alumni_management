@@ -42,4 +42,7 @@ public class Forum {
 
     //关联的用户信息
     private User user;
+
+    //文章评论
+    private String comment;
 }

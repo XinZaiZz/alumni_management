@@ -11,6 +11,7 @@ import com.youxin.alumni_management.utils.DateUtil;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -111,9 +112,9 @@ public class ArticleController {
     }
 
     @GetMapping("/article/show/{id}")
-    public String findArticleById(@PathVariable("id") Integer newArticleId, HttpServletRequest request) {
+    public String findArticleById(@PathVariable("id") Integer newArticleId, Model model) {
         NewsArticle currentArticle  = articleService.findArticleById(newArticleId);
-        request.setAttribute("currentArticle", currentArticle);
+        model.addAttribute("currentArticle", currentArticle);
         return "article/show_article";
     }
 

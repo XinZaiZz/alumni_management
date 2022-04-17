@@ -28,16 +28,22 @@
 <div th:replace="~{commons/commons.html::topbar}"></div>
 
     <div style="padding-top: 3%; padding-left: 5%; padding-right: 5%; padding-bottom: 3%" >
-        <div class="col-md-1 column ">
+        <div class="row" style="margin: 50px">
+            <div class="col-md-1 column ">
+            </div>
+
+            <div class="col-md-10 column my-solid">
+
+                <!--将值赋给hidden域-->
+                <input type="hidden" th:value="${currentArticle.getNewArticleHTMLContent}" id="articleContent-hidden"/>
+                <div id="articleContent" style="font-size: medium; padding: 50px"></div>
+            </div>
+            <div class="col-md-1 column ">
+            </div>
         </div>
 
-        <div class="col-md-10 column my-solid">
-
-            <!--将值赋给hidden域-->
-            <input type="hidden" th:value="${currentArticle.getNewArticleHTMLContent}" id="articleContent-hidden"/>
-            <div id="articleContent"></div>
-        </div>
-        <div class="col-md-1 column ">
+        <div class="row" style="margin: 50px">
+            <hr/>
         </div>
     </div>
 

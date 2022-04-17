@@ -13,4 +13,7 @@ public interface ForumMapper {
 
     //查询所有论坛文章
     List<Forum> findAllForum();
+
+    //根据文章id查询论坛内容
+    Forum findForumById(Integer forumId);
 }
