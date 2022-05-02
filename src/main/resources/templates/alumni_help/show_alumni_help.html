@@ -1,0 +1,95 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/4/30
+  Time: 10:38
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- 使用X-UA-Compatible来设置IE浏览器兼容模式，最新的渲染模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--
+        viewport表示用户是否可以缩放页面;width指定视区的逻辑宽度;
+        device-width指示视区宽度应为设备的屏幕宽度;
+        initial-scale指令用于设置web页面的初始缩放比例;
+        initial-scale=1则将显示未经缩放的web文档
+     -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>校友帮扶查看</title>
+    <!-- 网页图标引入 -->
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" >
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/my.css}">
+</head>
+<body>
+<div th:replace="~{commons/commons.html::topbar}"></div>
+
+<div style="padding-top: 3%; padding-left: 5%; padding-right: 5%; padding-bottom: 3%" >
+    <div class="row" style="margin: 50px">
+        <div class="col-md-1 column ">
+        </div>
+
+        <div class="col-md-10 column my-solid">
+
+            <!--将值赋给hidden域-->
+            <input type="hidden" th:value="${alumniHelp.getHelpHTMLContent()}" id="helpContent-hidden"/>
+            <div id="helpContent" style="font-size: medium; padding: 50px"></div>
+        </div>
+        <div class="col-md-1 column ">
+        </div>
+    </div>
+
+    <div class="row" style="margin: 50px">
+        <div class="col-md-1 column ">
+        </div>
+        <div class="col-md-10 column ">
+            <form th:action="@{/help/downloadFile/} + ${alumniHelp.getHelpFileName}" th:method="GET">
+                <!-- 保存文件名 -->
+                <input type="hidden" th:value="${alumniHelp.getHelpFileName()}" id="helpFileName">
+                <!-- 保存HelpId -->
+                <input type="hidden" th:value="${alumniHelp.getHelpId()}" id="helpId">
+                <button type="submit" id="downloadFileBtn" class="btn btn-info">下载附加文件</button>&nbsp&nbsp<span style="color: red">*</span>
+            </form>
+        </div>
+        <div class="col-md-1 column ">
+        </div>
+    </div>
+
+    <div class="row" style="margin: 50px">
+        <hr/>
+    </div>
+
+
+</div>
+
+<div th:replace="~{commons/commons.html::buttombar}"></div>
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script th:src="@{/dist/js/bootstrap.js}"></script>
+<script>
+    let html = $('#helpContent-hidden').val();
+    let helpContent = $('#helpContent');
+    helpContent.html(html);
+    let downloadFileBtn = $("#downloadFileBtn");
+    let helpFileName = $('#helpFileName');
+
+    // downloadFileBtn.click(function (){
+    if (helpFileName.val() === '' || helpFileName.val() === null) {
+        downloadFileBtn.attr("data-toggle", "tooltip");
+        downloadFileBtn.attr("data-placement", "top");
+        downloadFileBtn.attr("title", "该活动没有可供下载的文件！");
+        downloadFileBtn.attr("disabled", "disabled");
+
+        // downloadFileBtn.className += 'data-toggle="tooltip" data-placement="top" title="该活动没有可供下载的文件！" disabled="disabled"';
+    }
+    // })
+</script>
+</body>
+</html>

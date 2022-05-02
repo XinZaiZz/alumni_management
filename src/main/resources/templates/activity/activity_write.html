@@ -1,0 +1,97 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/4/20
+  Time: 22:14
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- 使用X-UA-Compatible来设置IE浏览器兼容模式，最新的渲染模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--
+        viewport表示用户是否可以缩放页面;width指定视区的逻辑宽度;
+        device-width指示视区宽度应为设备的屏幕宽度;
+        initial-scale指令用于设置web页面的初始缩放比例;
+        initial-scale=1则将显示未经缩放的web文档
+     -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>活动发布</title>
+    <!-- 网页图标引入 -->
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" >
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/editormd/editor.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/editormd/editormd.min.css}">
+
+
+</head>
+<body>
+<div th:replace="~{commons/commons.html::topbar}"></div>
+
+
+<div id="writeArticle" style="padding-top: 3%; padding-left: 5%; padding-right: 5%; padding-bottom: 3%">
+    <div class="zhy-editor">
+        <div class="zhy-editor-input">
+            <input id="zhy-editor-title" type="text" placeholder="输入文章标题">
+            <button type="button" class="publishForumBtn btn btn-success" style="position: relative;left: 20px" data-toggle="modal" data-target="#myModal">发布活动</button>
+        </div>
+    </div>
+    <div class="zhy-editor-writing">
+        <!--MarkDown的id标志 -->
+        <div id="my-editormd">
+            <!-- 书写与实时显示的textarea -->
+            <textarea id="my-editormd-markdown-doc" name="my-editormd-markdown-doc" style="display:none;"></textarea>
+            <!-- 用于后端获取md稳当内容，Java中：request.getParameter("my-editormd-html-code")。 -->
+            <textarea id="my-editormd-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
+        </div>
+<!--        <form>-->
+            <div class="form-group">
+                <label for="uploadFile">活动文件上传 <span style="color: red">*</span></label>
+                <input type="file" id="uploadFile">
+                <p class="help-block">在这里选择你想上传的文件.</p>
+            </div>
+<!--        </form>-->
+    </div>
+
+    <div class="notice-box notice-box-title">
+        <span> 文章标题不能为空</span>
+    </div>
+    <div class="notice-box notice-box-content">
+        <span> 文章內容不能为空</span>
+    </div>
+</div>
+
+<!-- 模态框 -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">发布活动</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <p style="text-align: center">确认要发布吗(๑•̀ㅂ•́)و✧</p>
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <!--<button type="button" class="surePublishBtn btn btn-primary" onclick="window.location.href = '/toIndex'">发布博客</button>-->
+                <button type="button" class="surePublishActivityBtn btn btn-primary">发布</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<script th:src="@{/dist/js/jquery.min.js}"></script>
+<script th:src="@{/dist/js/bootstrap.js}"></script>
+<script th:src="@{/dist/js/editormd/editor.js}"></script>
+<script th:src="@{/dist/js/editormd/editormd.js}"></script>
+</body>
+</html>

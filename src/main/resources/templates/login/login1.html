@@ -1,0 +1,76 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/3/26
+  Time: 11:15
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>[[#{login.btn}]]</title>
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" href="dist/css/bootstrap.css" rel="stylesheet" th:href="@{/dist/css/bootstrap.css}" >
+    <!-- Custom styles for this template -->
+    <link type="text/css" href="dist/css/signin.css" rel="stylesheet" th:href="@{/dist/css/signin.css}" >
+    <link type="text/css" href="dist/css/login.css" rel="stylesheet" th:href="@{/dist/css/login.css}" >
+</head>
+
+<body>
+
+<div class="dowebok">
+    <form class="text-center" th:action="@{/user/login}" method="post">
+
+        <!--<img class="mb-4" src="asserts/img/bootstrap-solid.svg" alt="" width="72" height="72" th:src="@{/img/bootstrap-solid.svg}" >-->
+        <div class="logo"></div>
+        <div class="text-center">
+            <h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}" style="color: white">Please sign in</h1>
+        </div>
+        <!-- 判断msg是否为空，如果为空就不显示，否则显示msg，用session传递参数 -->
+        <div class="text-center">
+            <p style="color: #ff0000" th:text="${session.msg} " th:if="${session.msg != null}"></p>
+            <!--<p style="color: #ff0000" th:text="${msg} "></p>-->
+        </div>
+        <!-- 用model传递参数 -->
+        <!--<p style="color: #ff0000" th:text="${msg} " th:if="${not #strings.isEmpty(msg)}"></p>-->
+        <!-- 第二种方式默认为'' -->
+        <!--<p style="color: #ff0000" th:text="${#strings.defaultString(msg,'' )} "></p>-->
+        <div class="form-item" style="text-align: center">
+            <label class="sr-only">Username</label>
+            <input id="username" type="text" name="username"  required autofocus="" th:placeholder="#{login.username}">
+        </div>
+        <p style="color: #ff0000; position: relative; left: 25%" th:text="${msg} " th:if="${msg == '用户名错误！'}"></p>
+
+        <div class="form-item" >
+            <label class="sr-only">Password</label>
+            <input id="password" type="password" name="password" required th:placeholder="#{login.password}">
+        </div>
+        <p style="color: #ff0000; position: relative; left: 25%" th:text="${msg} " th:if="${msg == '密码错误！'}"></p>
+        <div class="text-center">
+            <div class="checkbox mb-3">
+                <label>
+                    <input name="rememberMe" type="checkbox" value="remember-me"> [[#{login.remember}]]
+                </label>
+            </div>
+        </div>
+        <div class="form-item">
+            <button  type="submit" th:text="#{login.btn}" id="submit">Sign in</button>
+        </div>
+        <div style="text-align: center">
+            <p class="mt-5 mb-3 text-muted">© 2022-2023</p>
+            <a class="btn btn-sm" th:href="@{/toLogin(lang='zh_CN')}" style="color: white">中文</a>
+            <a class="btn btn-sm" th:href="@{/toLogin(lang='en_US')}" style="color: white">English</a>
+        </div>
+
+    </form>
+</div>
+
+
+</body>
+
+</html>

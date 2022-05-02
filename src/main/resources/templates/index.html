@@ -270,6 +270,7 @@
         </div>
     </div>-->
     <div th:replace="~{commons/commons.html::buttombar}"></div>
+    <input type="hidden" th:if="${unAuthorized != null}" th:value="${unAuthorized}" id="unAuthorized">
 
 </div>
 
@@ -277,7 +278,8 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script th:src="@{/dist/js/bootstrap.js}"></script>
 <!-- 没用到 -->
-<script>
+<script th:inline="javascript">
+    let unAuthorized = $('#unAuthorized') ;
     $(document).ready(function () {
         $.ajax({
             url: "/findAllNewsArticle",
@@ -292,6 +294,12 @@
             },
         })
     })
+
+
+    if (typeof(unAuthorized.val()) !== "undefined") {
+        alert(unAuthorized.val());
+    }
+
 </script>
 </body>
 </html>

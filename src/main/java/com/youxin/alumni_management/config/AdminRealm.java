@@ -42,7 +42,7 @@ public class AdminRealm extends AuthorizingRealm {
         List<String> perms_list = Arrays.asList(permStr.split(","));
         //添加权限
         //添加一个权限
-        info.addStringPermission(currentAdmin.getPerms());
+//        info.addStringPermission(currentAdmin.getPerms());
         //添加多个权限
         info.addStringPermissions(perms_list);
         return info;
@@ -53,7 +53,7 @@ public class AdminRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken userToken = (UsernamePasswordToken)token;
 
-        //数据库中查询
+        //数据库中查询对应用户信息
         Admin admin = loginService.findAdminByName(userToken.getUsername());
         //用户名验证
         if (admin == null) {

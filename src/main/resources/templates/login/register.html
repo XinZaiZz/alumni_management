@@ -1,0 +1,171 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/4/30
+  Time: 16:07
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>注册页面</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="static/css/bootstrap.min.css" th:href="@{/dist/css/bootstrap.css}">
+  <!-- Fontawesome CSS -->
+  <link rel="stylesheet" href="static/css/fontawesome-all.min.css" th:href="@{/dist/css/login/fontawesome-all.min.css}">
+  <!-- Flaticon CSS -->
+  <link rel="stylesheet" href="static/css/flaticon.css" th:href="@{/dist/css/login/flaticon.css}">
+  <!-- Google Web Fonts -->
+  <link href="static/css/css.css" rel="stylesheet" th:href="@{/dist/css/login/css.css}">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="static/css/style.css" th:href="@{/dist/css/login/style.css}">
+</head>
+
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div id="preloader" class="preloader">
+  <div class='inner'>
+    <div class='line1'></div>
+    <div class='line2'></div>
+    <div class='line3'></div>
+  </div>
+</div>
+<section class="fxt-template-animation fxt-template-layout34" data-bg-image="img/elements/bg1.png">
+  <div class="fxt-shape">
+    <div class="fxt-transformX-L-50 fxt-transition-delay-1">
+      <img src="static/picture/shape1.png" th:src="@{/dist/img/shape1.png}" alt="Shape">
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="fxt-column-wrap justify-content-between">
+          <div class="fxt-animated-img">
+            <div class="fxt-transformX-L-50 fxt-transition-delay-10">
+              <img src="static/picture/bg34-1.png" alt="Animated Image" th:src="@{/dist/img/bg34-1.png}">
+            </div>
+          </div>
+          <div class="fxt-transformX-L-50 fxt-transition-delay-3">
+            <a href="login-34.html" th:href="@{/toLogin}" class="fxt-logo"><img src="static/picture/logo-34.png" th:src="@{/img/logo.jpg}" alt="Logo" style="width: 140px; height: 140px"></a>
+          </div>
+          <div class="fxt-transformX-L-50 fxt-transition-delay-5">
+            <div class="fxt-middle-content">
+              <h1 class="fxt-main-title">校友用户申请</h1>
+              <div class="fxt-switcher-description1">如果你已经有攀枝花学院校友信息管理系统账号，请<a href="login-34.html" th:href="@{/toLogin}" class="fxt-switcher-text ms-2">登入</a></div>
+            </div>
+          </div>
+          <!--<div class="fxt-transformX-L-50 fxt-transition-delay-7">
+            <div class="fxt-qr-code">
+              <img src="static/picture/qr-register-34.png" th:src="@{/dist/img/qr-register-34.png}" alt="QR">
+            </div>
+          </div>-->
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="fxt-column-wrap justify-content-center">
+          <div class="fxt-form">
+            <form method="POST" id="registerForm" th:action="@{/register/registerUser}">
+              <div class="form-group">
+                <input type="text" class="form-control" id="username" name="username" placeholder="用户名" required="required">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="nickName" name="nickName" placeholder="昵称" required="required">
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" id="email" name="email" placeholder="邮箱地址" required="required">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="********" required="required">
+                <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+              </div>
+
+              <div class="form-group">
+                <select class="form-control" name="department" id="department">
+                  <option selected th:text="---请选择所属学院---"></option>
+                  <option th:value="1001">数学与计算机学院</option>
+                  <option>土木与建筑工程学院</option>
+                  <option>外国语学院</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="radio-inline">
+                  <input type="radio" name="gender" id="radioMale" value="male" checked> 男
+                </label>
+                <label class="radio-inline" style="position: relative; left: 80px">
+                  <input type="radio" name="gender" id="radioFemale" value="female" th:text="女">
+                </label>
+              </div>
+              <!--<div class="form-group">
+                <div class="fxt-checkbox-box">
+                  <input id="checkbox1" type="checkbox">
+                  <label for="checkbox1" class="ps-4">I agree with <a class="terms-link" href="#">Terms</a> and <a class="terms-link" href="#">Privacy Policy</a></label>
+                </div>
+              </div>-->
+              <div class="form-group">
+                <button type="submit" class="fxt-btn-fill" id="submitForm">注册</button>
+              </div>
+            </form>
+          </div>
+          <div class="fxt-style-line">
+            <span>用户注册</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- jquery-->
+<script src="static/js/jquery-3.5.0.min.js" th:src="@{/dist/js/jquery-3.5.0.min.js}"></script>
+<!-- Bootstrap js -->
+<script src="static/js/bootstrap.min.js" th:src="@{/dist/js/bootstrap.js}"></script>
+<!-- Imagesloaded js -->
+<script src="static/js/imagesloaded.pkgd.min.js" th:src="@{/dist/js/login/imagesloaded.pkgd.min.js}"></script>
+<!-- Validator js -->
+<script src="static/js/validator.min.js" th:src="@{/dist/js/login/validator.min.js}"></script>
+<!-- Custom Js -->
+<script src="static/js/main.js" th:src="@{/dist/js/login/main.js}"></script>
+
+<script>
+  let submit = $('#submitForm');
+  let department = $('#department');
+  let username = $('#username');
+  let password = $('#password');
+  let nickName = $('#nickName');
+  let email = $('#email');
+
+
+  submit.click(function () {
+    // alert(department.val());
+    if (department.val() == null || department.val() === '---请选择所属学院---') {
+      alert("学院选项不能为空！")
+      return false;
+    }
+    if (username.val() == null || username.val() === '') {
+      alert("用户名不能为空！")
+      return false;
+    }
+    if (password.val() == null || password.val() === '') {
+      alert("密码不能为空！")
+      return false;
+    }
+    if (email.val() == null || email.val() === '') {
+      alert("邮箱不能为空！")
+      return false;
+    }
+    if (nickName.val() == null || nickName.val() === '') {
+      alert("昵称不能为空！")
+      return false;
+    }
+  });
+</script>
+
+</body>
+
+</html>

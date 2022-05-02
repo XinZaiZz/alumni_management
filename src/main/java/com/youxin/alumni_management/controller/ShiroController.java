@@ -1,6 +1,7 @@
 package com.youxin.alumni_management.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +18,8 @@ public class ShiroController {
 
     @RequestMapping("/unAuthorized")
     public String unAuthorized(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.setAttribute("unAuthorized","授权未成功!");
-        return "index";
+        request.setAttribute("unAuthorized","未授权成功，返回首页！");
+        return "forward:/toIndex";
     }
 
 }

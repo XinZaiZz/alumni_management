@@ -7,10 +7,10 @@ import com.youxin.alumni_management.service.RegisterUserService;
 import com.youxin.alumni_management.utils.Result;
 import com.youxin.alumni_management.utils.ResultCode;
 import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -28,8 +28,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RegisterUserController {
 
+    private final Logger logger = Logger.getLogger(this.getClass());
+
 //    @Autowired
     private final RegisterUserService registerUserService;
+
+    @GetMapping("/toRegisterPage")
+    public String toRegisterPage() {
+        return "login/register";
+    }
 
     @GetMapping("/findAllRegisterUser/{departmentId}")
     public Object findAllRegisterUser(@PathVariable("departmentId") Integer departmentId, HttpServletRequest request) throws JsonProcessingException {
@@ -59,5 +66,26 @@ public class RegisterUserController {
         }
         //修改失败返回到500错误页面
         return "500";
+    }
+
+    @PostMapping("/register/registerUser")
+    public String registerUser(@ModelAttribute RegisterUser registerUser, HttpServletRequest request) {
+        registerUser.setDepartmentId(Integer.parseInt(request.getParameter("department")));
+        String gender = registerUser.getGender();
+        switch (gender) {
+            case "male" :
+                registerUser.setGender("男");
+            case "female" :
+                registerUser.setGender("女");
+        }
+        logger.info("注册用户：" + registerUser);
+        int data = -1;
+        if ((data = registerUserService.insRegisterUser(registerUser)) > 0) {
+            //插入成功
+            return "redirect:/toIndex";
+        }
+        //插入失败
+        return "500";
+
     }
 }

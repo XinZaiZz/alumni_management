@@ -40,7 +40,7 @@ public class ShiroConfig {
          * */
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 //        filterChainDefinitionMap.put("/static/**","anon");
-        filterChainDefinitionMap.put("back_management/dashboard","perms[admin:admin]");
+        filterChainDefinitionMap.put("/dashboard","perms[admin:admin]");
 
         //其他资源都需要认证  authc 表示需要认证才能进行访问 user表示配置记住我或认证通过可以访问的地址
         filterChainDefinitionMap.put("index", "anon");

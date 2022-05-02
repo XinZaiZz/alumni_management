@@ -1,0 +1,103 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/4/29
+  Time: 15:24
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- 使用X-UA-Compatible来设置IE浏览器兼容模式，最新的渲染模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--
+        viewport表示用户是否可以缩放页面;width指定视区的逻辑宽度;
+        device-width指示视区宽度应为设备的屏幕宽度;
+        initial-scale指令用于设置web页面的初始缩放比例;
+        initial-scale=1则将显示未经缩放的web文档
+     -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>校友帮扶</title>
+    <!-- 网页图标引入 -->
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" >
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/my.css}">
+    <!-- 添加响应式选项卡css -->
+    <link rel="stylesheet" th:href="@{/dist/css/jquery.horizontalmenu.css}">
+</head>
+<body>
+<div th:replace="~{commons/commons.html::topbar}"></div>
+
+<div style="padding-top: 3%; padding-left: 5%; padding-right: 5%; padding-bottom: 3%">
+    <div class="ah-tab-wrapper">
+        <div class="ah-tab">
+            <a class="ah-tab-item" data-ah-tab-active="true" href="">全部活动</a>
+            <a class="ah-tab-item" href="">只看本学院</a>
+            <!--<a class="ah-tab-item" href="">菜单项4</a>-->
+            <!--<a class="ah-tab-item" href="">菜单项5</a>-->
+<!--            <a type="button" class="btn btn-info btn-lg" id="toWriteForumPage" th:href="@{/activity/toActivityWritePage}">发起活动</a>-->
+        </div>
+    </div>
+    <div class="ah-tab-content-wrapper">
+        <div class="ah-tab-content" data-ah-tab-active="true">
+            <tr th:each="alumniHelp:${alumniHelps}" id="article">
+                <div class="my-solid">
+                    <td>
+                        <div>
+                            <p></p>
+                            <span style="font-size: 30px" th:text="${alumniHelp.getHelpTitle()}"></span>
+                            <span class="my-nickname" style="position: absolute; right: 6%; width: 100%">
+                                <strong>发布学院 : </strong>
+                                <span th:text="${alumniHelp.getDepartment.getDepartmentName}"></span>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <p th:text="${alumniHelp.getHelpTabloid()}"></p>
+                    </td>
+                    <td>
+                        <div>
+                            <p>
+                                <a class="btn" th:href="@{/help/alumniHelp/show/} + ${alumniHelp.getHelpId}">查看详情 »</a>
+                                <span class="my-date" style="position: absolute; right: 9%">
+                                    <strong>发布时间 : </strong>
+                                    <span th:text="${alumniHelp.getHelpDate()}" ></span>
+                                </span>
+                            </p>
+                        </div>
+                    </td>
+                </div>
+            </tr>
+        </div>
+        <div class="ah-tab-content">
+            <h2>Contacts</h2>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div th:replace="~{commons/commons.html::buttombar}"></div>
+
+
+
+<script th:src="@{/dist/js/jquery.min.js}"></script>
+<script th:src="@{/dist/js/jquery.horizontalmenu.js}"></script>
+<script th:src="@{/dist/js/bootstrap.js}"></script>
+<script>
+    $(function () {
+        $('.ah-tab-wrapper').horizontalmenu({
+            itemClick : function(item) {
+                $('.ah-tab-content-wrapper .ah-tab-content').removeAttr('data-ah-tab-active');
+                $('.ah-tab-content-wrapper .ah-tab-content:eq(' + $(item).index() + ')').attr('data-ah-tab-active', 'true');
+                return false; //if this finction return true then will be executed http request
+            }
+        });
+    });
+</script>
+</body>
+</html>

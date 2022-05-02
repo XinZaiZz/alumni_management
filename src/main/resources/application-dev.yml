@@ -19,6 +19,10 @@ spring:
     host: localhost
     database: 7 #使用redis中第七个数据库
     port: 6379
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
 
 
 #整合mybatis
@@ -28,3 +32,4 @@ mybatis:
 
 server:
   port: 8080
+

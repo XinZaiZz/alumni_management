@@ -40,11 +40,13 @@
         });
 
     var publishBtn = $('.publishBtn');
-    var articleTitle = $('#zhy-editor-title');
-    var articleContent = $('#my-editormd-html-code');
+    var articleTitle = $('#zhy-editor-title');//文章标题
+    var articleContent = $('#my-editormd-html-code');//文章内容
     var noticeBoxTitle = $('.notice-box-title');
     var noticeBoxContent = $('.notice-box-content');
     var noticeBox = $('.notice-box');
+    let uploadFile = $("#uploadFile");//上传文件
+    let uploadImage = $("#uploadImage");
 
     publishBtn.click(function () {
         var articleTitleValues =  articleTitle.val();
@@ -275,7 +277,7 @@
             dataType:"json",
             success:function (data) {
                 //发布成功
-                if(data['status'] == 1){
+                if(data['status'] === 1){
                     // window.removeEventListener('beforeunload',fnClose);
                     // $.get("/toLogin",function(data,status,xhr){
                     //发布成功不需要确认是否需要退出该页面
@@ -284,7 +286,7 @@
                     //成功后返回首页
                     window.location.replace("/toIndex");
                     // });
-                }else if (data['status'] == 0) {
+                }else if (data['status'] === 0) {
                     //发布成功不需要确认是否需要退出该页面
                     // window.removeEventListener('beforeunload',fnClose);
                     alert("发布失败，请检查或通知管理人员吧！");
@@ -296,7 +298,7 @@
                 }*/
             },
             error:function () {
-                alert("发表博客异常")
+                alert("发表异常")
             }
         });
 
@@ -320,7 +322,7 @@
         }, 3000);
     });
 
-    // 发表博客
+    // 发表论坛
     var surePublishForumBtn = $('.surePublishForumBtn');
 
     surePublishForumBtn.click(function () {
@@ -337,7 +339,7 @@
             dataType:"json",
             success:function (data) {
                 //发布成功
-                if(data['status'] == 1){
+                if(data['status'] === 1){
                     // window.removeEventListener('beforeunload',fnClose);
                     // $.get("/toLogin",function(data,status,xhr){
                     //发布成功不需要确认是否需要退出该页面
@@ -346,12 +348,12 @@
                     //成功后返回首页
                     window.location.replace("/toAlumniForum");
                     // });
-                }else if (data['status'] == 0) {
+                }else if (data['status'] === 0) {
                     //发布成功不需要确认是否需要退出该页面
                     // window.removeEventListener('beforeunload',fnClose);
                     alert(data['message']);
                     window.location.replace("/toAlumniForum");
-                }else if (data['status'] == 2) {
+                }else if (data['status'] === 2) {
                     alert(data['message']);
                     //如果未登录跳转登录界面
                     window.location.replace("/toLogin");
@@ -365,6 +367,114 @@
         }, 3000);
     });
 
+
+    // 发表活动
+    let surePublishActivityBtn = $('.surePublishActivityBtn');
+
+    surePublishActivityBtn.click(function () {
+        //普通通过ajax是不能发送file类型的input的，只能通过FormData类发送，并且processData，contentType必须有且为false
+        let formData = new FormData();
+        formData.append("articleTitle", articleTitle.val());
+        formData.append("articleContent", articleContent.val());
+        formData.append("articleHtmlContent", testEditor.getHTML());
+        formData.append("uploadFile", $("#uploadFile")[0].files[0]);
+        $.ajax({
+            processData: false,//这个必须有，不然会报错
+            contentType: false,//这个必须有，不然会报错
+            type:"POST",
+            url:"/activity/publishActivity",
+            // traditional: true,// 传数组
+            data: formData,
+            // contentType:"application/x-www-form-urlencoded; charset=utf-8",
+            dataType:"json",
+            success:function (data) {
+                //发布成功
+                if(data['status'] === 1){
+                    // window.removeEventListener('beforeunload',fnClose);
+                    // $.get("/toLogin",function(data,status,xhr){
+                    //发布成功不需要确认是否需要退出该页面
+                    window.removeEventListener('beforeunload',fnClose);
+                    alert(data['message']);
+                    //成功后返回首页
+                    window.location.replace("/toActivityPage");
+                    // });
+                }else if (data['status'] === 0) {
+                    //发布成功不需要确认是否需要退出该页面
+                    // window.removeEventListener('beforeunload',fnClose);
+                    alert(data['message']);
+                    window.location.replace("/toActivityPage");
+                }else if (data['status'] === 2) {
+                    alert(data['message']);
+                    //如果未登录跳转登录界面
+                    window.location.replace("/toLogin");
+                }
+            }
+        });
+
+        // 定时关闭错误提示框
+        var closeNoticeBox = setTimeout(function () {
+            noticeBox.hide();
+        }, 3000);
+    });
+
+    // 发表校友帮扶
+    let surePublishAlumniHelpBtn = $('.surePublishAlumniHelpBtn');
+
+    surePublishAlumniHelpBtn.click(function () {
+        //普通通过ajax是不能发送file类型的input的，只能通过FormData类发送，并且processData，contentType必须有且为false
+        let uploadImageVal = uploadImage.val();
+        let imageFileType = uploadImageVal.substring(uploadImageVal.lastIndexOf('.') + 1).toLowerCase();
+        // alert(imageFileType);
+        //判断封面图片只能够为img或者png格式
+        if (imageFileType === 'img' || imageFileType === 'png') {
+            let formData = new FormData();
+            formData.append("articleTitle", articleTitle.val());
+            formData.append("articleContent", articleContent.val());
+            formData.append("articleHtmlContent", testEditor.getHTML());
+            formData.append("uploadFile", $("#uploadFile")[0].files[0]);
+            formData.append("uploadImage", uploadImage[0].files[0]);
+            $.ajax({
+                processData: false,//这个必须有，不然会报错
+                contentType: false,//这个必须有，不然会报错
+                type: "POST",
+                url: "/help/publishAlumniHelp",
+                // traditional: true,// 传数组
+                data: formData,
+                // contentType:"application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    //发布成功
+                    if (data['status'] === 1) {
+                        // window.removeEventListener('beforeunload',fnClose);
+                        // $.get("/toLogin",function(data,status,xhr){
+                        //发布成功不需要确认是否需要退出该页面
+                        window.removeEventListener('beforeunload', fnClose);
+                        alert(data['message']);
+                        //成功后返回首页
+                        window.location.replace("/help/toAlumniHelp");
+                        // });
+                    } else if (data['status'] === 0) {
+                        //发布成功不需要确认是否需要退出该页面
+                        // window.removeEventListener('beforeunload',fnClose);
+                        alert(data['message']);
+                        window.location.replace("/help/toAlumniHelp");
+                    } else if (data['status'] === 2) {
+                        alert(data['message']);
+                        //如果未登录跳转登录界面
+                        window.location.replace("/toLogin");
+                    }
+                }
+            });
+
+            // 定时关闭错误提示框
+            var closeNoticeBox = setTimeout(function () {
+                noticeBox.hide();
+            }, 3000);
+        }
+        else {
+            alert("图片上传格式只支持img或者png格式哦！")
+        }
+    });
 
 
 

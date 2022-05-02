@@ -31,4 +31,9 @@ public class RegisterUserServiceImpl implements RegisterUserService {
     public int updUserStatus(Integer registerId, Integer status) {
         return registerUserMapper.updUserStatus(registerId, status);
     }
+
+    @Override
+    public int insRegisterUser(RegisterUser registerUser) {
+        return registerUserMapper.insRegisterUser(registerUser);
+    }
 }

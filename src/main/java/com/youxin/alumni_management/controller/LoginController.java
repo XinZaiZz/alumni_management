@@ -47,8 +47,14 @@ public class LoginController {
     }
 
     @GetMapping("/toLogin")
-    public String toLoginPage(HttpSession session) {
-        session.setAttribute("msg","请先登陆！");
+    public String toLoginPage(HttpServletRequest request, Model model) {
+        //是否进入未授权请求
+        String unAuthorized = (String) request.getAttribute("unAuthorized");
+        if (unAuthorized != null) {
+            model.addAttribute("unAuthorized", unAuthorized);
+        }
+//        System.out.println("unAuthorized==>" + unAuthorized);
+        request.setAttribute("msg","请先登陆！");
         return "login/login";
     }
 
@@ -174,4 +180,6 @@ public class LoginController {
         }
         return "back_management/dashboard";
     }
+
+
 }

@@ -14,4 +14,9 @@
         update register_user set status = #{status} where registerId = #{registerId}
     </update>
 
+    <insert id="insRegisterUser" parameterType="registerUser">
+        insert register_user(username, password, nickName, gender, departmentId, email)
+        values (#{username}, #{password}, #{nickName}, #{gender}, #{departmentId}, #{email})
+    </insert>
+
 </mapper>

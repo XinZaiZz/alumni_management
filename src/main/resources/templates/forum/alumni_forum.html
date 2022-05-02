@@ -49,7 +49,7 @@
                         <div>
                             <p></p>
                             <span style="font-size: 30px" th:text="${forum.getForumTitle}"></span>
-                            <span class="my-nickname">
+                            <span class="my-nickname" style="position: absolute; right: -2.5%; width: 100%">
                                 <strong>发布者 : </strong>
                                 <span th:text="${forum.getUser.getNickName}"></span>
                             </span>
@@ -62,7 +62,7 @@
                         <div>
                             <p>
                                 <a class="btn" th:href="@{/forum/show/} + ${forum.getForumId}">查看详情 »</a>
-                                <span class="my-date">
+                                <span class="my-date" style="position: absolute; right: 9%">
                                     <strong>发布时间 : </strong>
                                     <span th:text="${forum.getForumDate}" ></span>
                                 </span>

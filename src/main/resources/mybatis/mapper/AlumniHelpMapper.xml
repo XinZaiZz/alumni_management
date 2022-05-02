@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youxin.alumni_management.mapper.AlumniHelpMapper">
+    <resultMap id="AlumniHelpMap" type="AlumniHelp">
+        <!-- column是查询结果的列名, property是对应实体类中的属性名 -->
+        <id column="helpId" jdbcType="INTEGER" property="helpId"/>
+        <result column="adminId" jdbcType="INTEGER" property="adminId"/>
+        <result column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+        <result column="helpContent" jdbcType="VARCHAR" property="helpContent"/>
+        <result column="helpHTMLContent" jdbcType="VARCHAR" property="helpHTMLContent"/>
+        <result column="helpTitle" jdbcType="VARCHAR" property="helpTitle"/>
+        <result column="helpTabloid" jdbcType="VARCHAR" property="helpTabloid"/>
+        <result column="helpDate" jdbcType="TIMESTAMP" property="helpDate"/>
+        <result column="helpFileName" jdbcType="VARCHAR" property="helpFileName"/>
+        <result column="helpHeadImage" jdbcType="VARCHAR" property="helpHeadImage"/>
+        <!-- 多表查询时连接user属性段 -->
+        <association property="department" javaType="Department" >
+            <id column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+            <result column="departmentName" jdbcType="VARCHAR" property="departmentName"/>
+        </association>
+    </resultMap>
+
+    <select id="findAllAlumniHelp" resultMap="AlumniHelpMap">
+        select *
+        from alumni_help
+                 join department on department.departmentId = alumni_help.departmentId
+        where 0 = 0 order by helpDate desc;
+    </select>
+
+    <insert id="insAlumniHelp" parameterType="alumniHelp">
+        insert into alumni_help(adminId, departmentId, helpContent, helpHTMLContent, helpTitle, helpTabloid, helpDate, helpFileName, helpHeadImage)
+        values (#{adminId}, #{departmentId}, #{helpContent}, #{helpHTMLContent}, #{helpTitle}, #{helpTabloid}, #{helpDate}, #{helpFileName}, #{helpHeadImage})
+    </insert>
+
+    <select id="selAlumniHelpById" parameterType="int" resultMap="AlumniHelpMap">
+        select * from alumni_help left join department on department.departmentId = alumni_help.departmentId
+        where helpId = #{helpId}
+    </select>
+</mapper>

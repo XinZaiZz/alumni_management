@@ -38,6 +38,11 @@ public class RegisterUser implements Serializable {
     private Integer departmentId;
 
     /**
+     * 用户邮箱
+     */
+    private String email;
+
+    /**
      * 申请状态：0为申请中，1为通过，2为未通过
      */
     private Integer status;
@@ -142,6 +147,14 @@ public class RegisterUser implements Serializable {
         this.status = status;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -160,6 +173,7 @@ public class RegisterUser implements Serializable {
             && (this.getNickName() == null ? other.getNickName() == null : this.getNickName().equals(other.getNickName()))
             && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
             && (this.getDepartmentId() == null ? other.getDepartmentId() == null : this.getDepartmentId().equals(other.getDepartmentId()))
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()));
     }
 
@@ -173,6 +187,7 @@ public class RegisterUser implements Serializable {
         result = prime * result + ((getNickName() == null) ? 0 : getNickName().hashCode());
         result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
         result = prime * result + ((getDepartmentId() == null) ? 0 : getDepartmentId().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         return result;
     }
@@ -189,6 +204,7 @@ public class RegisterUser implements Serializable {
         sb.append(", nickName=").append(nickName);
         sb.append(", gender=").append(gender);
         sb.append(", departmentId=").append(departmentId);
+        sb.append(", email=").append(email);
         sb.append(", status=").append(status);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
