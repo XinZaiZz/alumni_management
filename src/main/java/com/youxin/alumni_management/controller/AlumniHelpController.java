@@ -46,7 +46,13 @@ public class AlumniHelpController {
     }
 
     @GetMapping("/toAlumniHelpWritePage")
-    public String toAlumniHelpWritePage() {
+    public String toAlumniHelpWritePage(HttpServletRequest request) {
+        //获取当前登录用户信息
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        //如果用户未登录
+        if (admin == null) {
+            return "redirect:/unAuthorized";
+        }
         return "alumni_help/alumni_help_write";
     }
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youxin.alumni_management.mapper.AlumniPhotoMapper">
+
+    <resultMap id="alumniPhotoMap" type="com.youxin.alumni_management.pojo.AlumniPhoto">
+            <id property="photoId" column="photoId" jdbcType="INTEGER"/>
+            <result property="adminId" column="adminId" jdbcType="INTEGER"/>
+            <result property="departmentId" column="departmentId" jdbcType="INTEGER"/>
+            <result property="photoContent" column="photoContent" jdbcType="VARCHAR"/>
+            <result property="photoHTMLContent" column="photoHTMLContent" jdbcType="VARCHAR"/>
+            <result property="photoTitle" column="photoTitle" jdbcType="VARCHAR"/>
+            <result property="photoDate" column="photoDate" jdbcType="TIMESTAMP"/>
+            <result property="photoImageName" column="photoImageName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="findAllAlumniPhotos" resultType="alumniPhoto">
+        select *
+        from alumni_photo
+        order by photoDate desc;
+    </select>
+
+    <insert id="insAlumniPhoto" parameterType="alumniPhoto">
+        insert into alumni_photo(adminId, departmentId, photoContent, photoHTMLContent, photoTitle, photoDate, photoImageName)
+        values (#{adminId}, #{departmentId}, #{photoContent}, #{photoHTMLContent}, #{photoTitle}, #{photoDate}, #{photoImageName});
+    </insert>
+
+    <select id="findTop12AlumniPhotos" resultType="alumniPhoto">
+        select * from alumni_photo order by photoDate desc LIMIT 12;
+    </select>
+
+    <select id="findOtherAlumniPhotos" resultType="alumniPhoto">
+        select *
+        from alumni_photo
+        where 1 = 1 order by photoDate desc limit 12, count(photoId);
+    </select>
+
+    <select id="findAlumniPhotoById" resultType="alumniPhoto">
+        select * from alumni_photo where photoId = #{photoId};
+    </select>
+
+    <insert id="insAlumniPhotoNoImage" parameterType="alumniPhoto">
+        insert into alumni_photo(adminId, departmentId, photoContent, photoHTMLContent, photoTitle, photoDate)
+        values (#{adminId}, #{departmentId}, #{photoContent}, #{photoHTMLContent}, #{photoTitle}, #{photoDate});
+    </insert>
+</mapper>

@@ -1,0 +1,153 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/5/2
+  Time: 11:18
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校友风采展示</title>
+    <link href='https://fonts.googleapis.com/css?family=Caveat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" th:href="@{/dist/css/photo/normalize.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/square-loader.min.css" th:href="@{/dist/css/photo/square-loader.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/default.css" th:href="@{/dist/css/photo/default.css}">
+    <link rel="stylesheet" type="text/css" href="css/component.css" th:href="@{/dist/css/photo/component.css}"/>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" >
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/my.css}">
+    <script>
+        document.documentElement.className = 'js';
+    </script>
+</head>
+<body>
+<div class="view">
+    <div th:replace="~{commons/commons.html::topbar}"></div>
+    <section class="page page--mover">
+        <div class="la-square-loader"><div></div></div>
+    </section>
+    <div class="title-wrap">
+        <h1 class="title title--main">你好<em>!</em>遇见</h1>
+        <p class="title title--sub">自律攀大人.</p>
+
+    </div>
+    <section class="page page--static">
+        <div class="page__title">
+            <h2 class="page__title-main">欢迎查看攀枝花学院优秀校友个人风采展示</h2>
+            <p class="page__title-sub">单击重新刷新<a href="http://localhost:8080/toPhotoPage" target="_self">个人展示</a>页面</p>
+        </div>
+        <ul class="grid">
+            <li class="grid__item" th:each="alumniPhoto : ${alumniPhotos}">
+                <a class="grid__link" href="#" th:href="@{/toAlumniShowPage/} + ${alumniPhoto.getPhotoId}">
+                    <img class="grid__img" src="/photos/1.jpg" th:src="@{/photos/} + ${alumniPhoto.getPhotoImageName}" alt="Some image" />
+                    <h3 class="grid__item-title" th:text="${alumniPhoto.getPhotoTitle}">Natural saturation effects</h3>
+                </a>
+            </li>
+            <!--<li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="/photos/2.jpg" th:src="@{/photos/2.jpg}" alt="Some image" />
+                    <h3 class="grid__item-title">Auto-color and light</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/3.jpg" th:src="@{/photos/3.jpg}" alt="Some image" />
+                    <h3 class="grid__item-title">That special blur</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/4.jpg" th:src="@{/photos/4.jpg}" alt="Some image" />
+                    <h3 class="grid__item-title">Drama where you need it</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/5.jpg" th:src="@{/photos/5.jpg}" alt="Some image" />
+                    <h3 class="grid__item-title">Realistic depth</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/6.jpg" th:src="@{/photos/6.jpg}" alt="Some image" />
+                    <h3 class="grid__item-title">The common, but special</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/7.jpg" th:src="@{/photos/7.jpg}" alt="Some image" />
+                    <h3 class="grid__item-title">Natural saturation effects</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/8.jpg" alt="Some image" />
+                    <h3 class="grid__item-title">That special blur</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/9.jpg" alt="Some image" />
+                    <h3 class="grid__item-title">Auto-color and light</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/1.jpg" alt="Some image" />
+                    <h3 class="grid__item-title">Natural saturation effects</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/2.jpg" alt="Some image" />
+                    <h3 class="grid__item-title">Auto-color and light</h3>
+                </a>
+            </li>
+            <li class="grid__item">
+                <a class="grid__link" href="#">
+                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/3.jpg" alt="Some image" />
+                    <h3 class="grid__item-title">That special blur</h3>
+                </a>
+            </li>-->
+        </ul>
+        <button class="button button--load" aria-label="Load more images">
+            <svg class="polaroid" width="100%" height="100%" viewBox="0 0 220 243" preserveAspectRatio="xMidYMid meet">
+                <rect class="polaroid__base" x="0" y="0" width="220" height="243" rx="5"></rect>
+                <rect class="polaroid__inner" x="16" y="20" width="189" height="149"></rect>
+                <g class="polaroid__loader">
+                    <circle cx="61.5" cy="94.5" r="17.5"></circle>
+                    <circle cx="110.5" cy="94.5" r="17.5"></circle>
+                    <circle cx="159.5" cy="94.5" r="17.5"></circle>
+                </g>
+            </svg>
+            <span class="button__text">Load more</span>
+        </button>
+    </section>
+    <div class="device">
+        <div class="device__screen"></div>
+    </div>
+    <button id="showgrid" class="button button--view" aria-label="Show me more">
+        <svg width="100%" height="100%" viewBox="0 0 310 177" preserveAspectRatio="xMidYMid meet">
+            <path fill="#FFFFFF" d="M159.875,174.481L306.945,27.41c2.93-2.929,2.93-7.678,0-10.606L292.803,2.661c-1.406-1.407-3.314-2.197-5.303-2.197c-1.989,0-3.896,0.79-5.303,2.197L154.572,130.287L26.946,2.661c-1.406-1.407-3.314-2.197-5.303-2.197c-1.989,0-3.897,0.79-5.303,2.197L2.197,16.804C0.733,18.269,0,20.188,0,22.107s0.732,3.839,2.197,5.303l147.071,147.071C152.197,177.411,156.945,177.411,159.875,174.481L159.875,174.481z" />
+        </svg>
+    </button>
+
+    <hr style=" padding-bottom: 50px"/>
+    <!-- Related demos -->
+
+    <div th:replace="~{commons/commons.html::buttombar}"></div>
+</div><!-- /view -->
+
+<script src="js/classie.js" th:src="@{/dist/js/photo/classie.js}"></script>
+<script src="js/dynamics.min.js" th:src="@{/dist/js/photo/dynamics.min.js}"></script>
+<script src="js/imagesloaded.pkgd.min.js" th:src="@{/dist/js/photo/imagesloaded.pkgd.min.js}"></script>
+<script src="js/main.js" th:src="@{/dist/js/photo/main.js}"></script>
+
+<script th:src="@{/dist/js/jquery.min.js}"></script>
+<script th:src="@{/dist/js/bootstrap.js}"></script>
+</body>
+</html>

@@ -38,7 +38,13 @@ public class ArticleController {
     DateUtil dateUtil;
 
     @GetMapping("/toWritePage")
-    public String toWritePage() {
+    public String toWritePage(HttpServletRequest request) {
+        //获取当前登录用户信息
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        //如果用户未登录
+        if (admin == null) {
+            return "redirect:/unAuthorized";
+        }
         return "article/write";
     }
 
