@@ -271,6 +271,7 @@
     </div>-->
     <div th:replace="~{commons/commons.html::buttombar}"></div>
     <input type="hidden" th:if="${unAuthorized != null}" th:value="${unAuthorized}" id="unAuthorized">
+    <input type="hidden" th:if="${updUserMsg != null}" th:value="${updUserMsg}" id="updUserMsg">
 
 </div>
 
@@ -280,6 +281,7 @@
 <!-- 没用到 -->
 <script th:inline="javascript">
     let unAuthorized = $('#unAuthorized') ;
+    let updUserMsg = $('#updUserMsg') ;
     $(document).ready(function () {
         $.ajax({
             url: "/findAllNewsArticle",
@@ -298,6 +300,9 @@
 
     if (typeof(unAuthorized.val()) !== "undefined") {
         alert(unAuthorized.val());
+    }
+    if (typeof(updUserMsg.val()) !== "undefined") {
+        alert(updUserMsg.val());
     }
 
 </script>

@@ -13,5 +13,14 @@
 </head>
 <body>
 this is 500error page!
+
+<input type="hidden" th:if="${updUserMsg != null}" th:value="${updUserMsg}" id="updUserMsg">
+
+<script>
+    let updUserMsg = $('#updUserMsg') ;
+    if (typeof(updUserMsg.val()) !== "undefined") {
+        alert(updUserMsg.val());
+    }
+</script>
 </body>
 </html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youxin.alumni_management.mapper.UserMapper">
+
+    <update id="updUserBySelf" parameterType="user">
+        update user set nickName=#{nickName}, gender=#{gender}, birth=#{birth}, age=#{age}, studentNumber=#{studentNumber}, major=#{major},
+                        grade=#{grade}, bedroomNumber=#{bedroomNumber}, occupation=#{occupation}, occupationGroup=#{occupationGroup},
+                        region=#{region}, company=#{company}, number=#{number}, email=#{email}, personalProfile=#{personalProfile}
+        where userId=#{userId}
+    </update>
+
+</mapper>

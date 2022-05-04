@@ -1,0 +1,264 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/5/4
+  Time: 14:24
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- 使用X-UA-Compatible来设置IE浏览器兼容模式，最新的渲染模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--
+        viewport表示用户是否可以缩放页面;width指定视区的逻辑宽度;
+        device-width指示视区宽度应为设备的屏幕宽度;
+        initial-scale指令用于设置web页面的初始缩放比例;
+        initial-scale=1则将显示未经缩放的web文档
+     -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人信息修改</title>
+    <!-- 网页图标引入 -->
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" >
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.css}">
+
+
+    <link href="css/fileinput.min.css" rel="stylesheet" th:href="@{/dist/css/user/fileinput.min.css}">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" th:href="@{/dist/css/user/bootstrap-datetimepicker.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/dist/css/user/font-awesome.min.css}">
+<!--    <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">-->
+    <link href="form_builder/animate.min.css" rel="stylesheet" th:href="@{/dist/css/user/animate.min.css}">
+    <link href="form_builder/summernote.css" rel="stylesheet" th:href="@{/dist/css/user/summernote.css}">
+
+    <link href="form_builder/style.min862f.css" rel="stylesheet" th:href="@{/dist/css/user/style.min862f.css}">
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/dist/css/user/index.css}">
+
+
+    <script src="javascript/distpicker.data.min.js" th:src="@{/dist/js/user/distpicker.data.min.js}"></script>
+    <script th:src="@{/dist/js/jquery.min.js}"></script>
+    <script th:src="@{/dist/js/bootstrap.js}"></script>
+
+    <script src="javascript/fileinput.min.js" th:src="@{/dist/js/user/fileinput.min.js}"></script>
+    <script src="javascript/bootstrap-datetimepicker.min.js" th:src="@{/dist/js/user/bootstrap-datetimepicker.min.js}"></script>
+    <script src="javascript/distpicker.min.js" th:src="@{/dist/js/user/distpicker.min.js}"></script>
+    <script src="javascript/bootstrap-datetimepicker.zh-CN.js" th:src="@{/dist/js/user/bootstrap-datetimepicker.zh-CN.js}"></script>
+    <script src="javascript/zh.js" th:src="@{/dist/js/user/zh.js}"></script>
+    <script src="js/jquery-ui.min.js" th:src="@{/dist/js/user/jquery-ui.min.js}"></script>
+    <script src="form_builder/beautifyhtml.js" th:src="@{/dist/js/user/beautifyhtml.js}"></script>
+    <script src="javascript/index.js" th:src="@{/dist/js/user/index.js}"></script>
+</head>
+<body>
+<div th:replace="~{commons/commons.html::topbar}"></div>
+
+<div style="padding-top: 3%; padding-left: 5%; padding-right: 5%; padding-bottom: 48%">
+    <div class="row-fluid">
+        <div class="col-sm-12"  style="text-align: center; padding-bottom: 50px">
+            <h1>个人中心<small style="font-size: 15px; color: #0e9aef">填写更多信息让我们了解你.</small></h1>
+
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <form class="form-horizontal" th:action="@{/user/update}" th:method="POST">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="nickName">昵称：</label>
+                <div class="col-sm-9" >
+                    <input name="nickName" type="text" class="form-control" placeholder="请输入你的昵称" id="nickName" th:value="${user.getNickName()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">性别：</label>
+                <div class="col-sm-9">
+                    <label class="radio-inline">
+                        <input type="radio" value="男" name="gender" th:checked="${user.getGender() == '男'}">男</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="gender" value="女" th:checked="${user.getGender() == '女'}">女</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="birth">出生日期：</label>
+                <div class="col-sm-9">
+                    <input id="birth" name="birth" readonly="" class="form-control form_datetime" type="text" style="border: 1px solid #e5e6e7;" th:value="${user.getBirth()}" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="studentNumber">学号：</label>
+                <div class="col-sm-9">
+                    <input id="studentNumber" name="studentNumber" type="text" class="form-control" placeholder="请输入学号" th:value="${user.getStudentNumber()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="major">专业：</label>
+                <div class="col-sm-9">
+                    <input id="major" name="major" type="text" class="form-control" placeholder="请输入所学专业" th:value="${user.getMajor()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="grade">年级：</label>
+                <div class="col-sm-9">
+                    <input id="grade" name="grade" type="text" class="form-control" placeholder="请输入年级" th:value="${user.getGrade()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="bedroomNumber">寝室号：</label>
+                <div class="col-sm-9">
+                    <input id="bedroomNumber" name="bedroomNumber" type="text" class="form-control" placeholder="请输入寝室号" th:value="${user.getBedroomNumber()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="occupation">现从事职业：</label>
+                <div class="col-sm-9">
+                    <input id="occupation" name="occupation" type="text" class="form-control" placeholder="请输入现任职业" th:value="${user.getOccupation()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="company">单位名称：</label>
+                <div class="col-sm-9">
+                    <input id="company" name="company" type="text" class="form-control" placeholder="请输入你的单位名称" th:value="${user.getCompany()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="occupationGroup">职业类别：</label>
+                <div class="col-sm-9">
+                    <select class="form-control" name="occupationGroup" id="occupationGroup">
+                        <option th:selected="${user.getOccupationGroup() == ''}">--选择你的职业类别--</option>
+                        <option th:selected="${user.getOccupationGroup() == '国家机关、事业单位'}">国家机关、事业单位</option>
+                        <option th:selected="${user.getOccupationGroup() == '专业技术人员'}">专业技术人员</option>
+                        <option th:selected="${user.getOccupationGroup() == '办事人员和有关人员'}">办事人员和有关人员</option>
+                        <option th:selected="${user.getOccupationGroup() == '社会生产服务和生活服务人员'}">社会生产服务和生活服务人员</option>
+                        <option th:selected="${user.getOccupationGroup() == '农、林、牧、渔业生产及辅助人员'}">农、林、牧、渔业生产及辅助人员</option>
+                        <option th:selected="${user.getOccupationGroup() == '生产、运输设备操作人员及有关人员'}">生产、运输设备操作人员及有关人员</option>
+                        <option th:selected="${user.getOccupationGroup() == '军人'}">军人</option>
+                        <option th:selected="${user.getOccupationGroup() == '学生'}">学生</option>
+                        <option th:selected="${user.getOccupationGroup() == '其他'}">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">现属地区：</label>
+                <div class="col-sm-9 form-inline">
+<!--                    <form class="form-inline">-->
+                        <div class="distpicker">
+                            <div class="form-group" style="margin:0; padding-right:10px;">
+                                <label class="sr-only" for="province10">Province</label>
+                                <select class="form-control" id="province10" name="province"></select>
+                            </div>
+                            <div class="form-group" style="margin:0; padding-right:10px;">
+                                <label class="sr-only" for="city10">City</label>
+                                <select class="form-control" id="city10" name="city"></select>
+                            </div>
+                            <div class="form-group" style="margin:0; padding-right:10px;">
+                                <label class="sr-only" for="district10">District</label>
+                                <select class="form-control" id="district10" name="district"></select>
+                            </div>
+                        </div>
+<!--                    </form>-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="number">电话号码：</label>
+                <div class="col-sm-9">
+                    <input id="number" name="number" type="text" class="form-control" placeholder="请输入你的电话" th:value="${user.getNumber()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="email">邮箱：</label>
+                <div class="col-sm-9">
+                    <input id="email" name="email" type="text" class="form-control" placeholder="请输入你的邮箱" th:value="${user.getEmail()}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="personalProfile">个人简介：</label>
+                <div class="col-sm-9">
+                    <textarea id="personalProfile" name="personalProfile" class="form-control" placeholder="这个人很懒，什么也没有留下" style="height: 200px" th:text="${user.getPersonalProfile()}"></textarea>
+                </div>
+            </div>
+
+            <div class="col-sm-offset-3 col-sm-6" style="text-align: center; margin-top: 20px">
+                <button type="submit" class="btn btn-lg btn-primary">修改</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr style=" padding-bottom: 50px"/>
+
+<div th:replace="~{commons/commons.html::buttombar}"></div>
+
+
+<script>
+    //自定义表单开始
+    $(document).ready(function() {
+            //时间初始化
+            $(".form_datetime").datetimepicker({
+                language: 'zh-CN', //日期
+                format: "yyyy-mm-dd hh:ii",
+                initialDate: new Date(), //初始化当前日期
+                autoclose: true, //选中自动关闭
+                todayBtn: true //显示今日按钮
+            });
+            //上传初始化
+            $('.uploadfile').fileinput({
+                language: 'zh'
+            });
+            //省市区初始化
+            $('.distpicker').distpicker({
+                province: '省份名',
+                city: '城市名',
+                district: '区名',
+                autoSelect: true,
+                placeholder: false
+            });
+
+    });
+
+    var setup_draggable = function() {
+        $(".draggable").draggable({
+            appendTo: "body",
+            helper: "clone"
+        });
+        $(".droppable").droppable({
+            accept: ".draggable",
+            helper: "clone",
+            hoverClass: "droppable-active",
+            drop: function(event, ui) {
+                $(".empty-form").remove();
+                var $orig = $(ui.draggable);
+                if (!$(ui.draggable).hasClass("dropped")) {
+                    $(tableList($orig.attr("id"))).appendTo(this);
+                    //时间初始化
+                    $(".form_datetime").datetimepicker({
+                        language: 'zh-CN', //日期
+                        format: "yyyy-mm-dd hh:ii",
+                        initialDate: new Date(), //初始化当前日期
+                        autoclose: true, //选中自动关闭
+                        todayBtn: true //显示今日按钮
+                    });
+                    //上传初始化
+                    $('.uploadfile').fileinput({
+                        language: 'zh'
+                    });
+                    //省市区初始化
+                    $('.distpicker').distpicker({
+                        province: '省份名',
+                        city: '城市名',
+                        district: '区名',
+                        autoSelect: true,
+                        placeholder: false
+                    });
+                } else {
+                    if ($(this)[0] != $orig.parent()[0]) {
+                        var $el = $orig.clone().appendTo(this);
+                        $orig.remove()
+                    }
+                }
+            }
+        }).sortable()
+
+    };
+</script>
+
+
+</body>
+</html>
