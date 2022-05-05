@@ -1,11 +1,11 @@
 package com.youxin.alumni_management.controller;
 
-import com.youxin.alumni_management.pojo.Admin;
-import com.youxin.alumni_management.pojo.NewsArticle;
-import com.youxin.alumni_management.pojo.RegisterUser;
-import com.youxin.alumni_management.pojo.User;
+import com.youxin.alumni_management.pojo.*;
+import com.youxin.alumni_management.service.AlumniHelpService;
 import com.youxin.alumni_management.service.ArticleService;
+import com.youxin.alumni_management.service.ForumService;
 import com.youxin.alumni_management.service.RegisterUserService;
+import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -31,15 +31,18 @@ import java.util.List;
  * @date 2022-02-08 22:49
  */
 @Controller
+@RequiredArgsConstructor
 public class LoginController {
 
     Logger logger = Logger.getLogger(this.getClass());
 
-    @Autowired
-    RegisterUserService registerUserService;
+    private final RegisterUserService registerUserService;
 
-    @Autowired
-    ArticleService articleService;
+    private final ArticleService articleService;
+
+    private final AlumniHelpService alumniHelpService;
+
+    private final ForumService forumService;
 
     @GetMapping("/toindex1")
     public String toIndex_1() {
@@ -99,7 +102,14 @@ public class LoginController {
         request.setAttribute("user",user);
         //获取所有文章
         List<NewsArticle> newsArticleList = articleService.findAllNewsArticle();
+        List<NewsArticle> top3Article = articleService.findTop3Article();
+        List<AlumniHelp> top2AlumniHelp = alumniHelpService.findTop2AlumniHelp();
+        List<Forum> top8Forum = forumService.findTop8Forum();
         model.addAttribute("newsArticleList", newsArticleList);
+        model.addAttribute("top2Article", top3Article.subList(0,2));
+        model.addAttribute("lastArticle", top3Article.get(2));
+        model.addAttribute("top2AlumniHelp", top2AlumniHelp);
+        model.addAttribute("top8Forum", top8Forum);
         return "index";
     }
 
@@ -170,14 +180,18 @@ public class LoginController {
     public String toDashboard(Model model, HttpServletRequest request){
         //获取当前用户
         Admin admin = (Admin) request.getSession().getAttribute("admin");
+        //如果用户未登录
+        if (admin == null) {
+            return "redirect:/unAuthorized";
+        }
         model.addAttribute("admin",admin);
         //如果当前用户已经登录
-        if (admin != null) {
-            //获取注册用户信息
-            List<RegisterUser> allRegisteringUser = registerUserService.findAllRegisterUser(admin.getDepartmentId());
-            //将当前登陆管理员所管理的注册用户信息存入model
-            model.addAttribute("allRegisteringUser", allRegisteringUser);
-        }
+
+        //获取注册用户信息
+        List<RegisterUser> allRegisteringUser = registerUserService.findAllRegisterUser(admin.getDepartmentId());
+        //将当前登陆管理员所管理的注册用户信息存入model
+        model.addAttribute("allRegisteringUser", allRegisteringUser);
+
         return "back_management/dashboard";
     }
 

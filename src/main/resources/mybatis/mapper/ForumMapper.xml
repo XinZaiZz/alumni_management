@@ -39,4 +39,8 @@
         select * from forum where forumId = #{forumId}
     </select>
 
+    <select id="findTop8Forum" resultType="forum">
+        select forumId, forumTitle from forum limit 8;
+    </select>
+
 </mapper>

@@ -18,4 +18,8 @@
         from news_article where newArticleId = #{newArticleId};
     </select>
 
+    <select id="findTop3Article" resultType="newsArticle">
+        select * from news_article where newImageName != 'news_default.png' limit 3;
+    </select>
+
 </mapper>

@@ -53,18 +53,29 @@
                     </li>
                 </ol>
                 <div class="carousel-inner" style="height: 570px">
-                    <div class="item">
-                        <img alt="" th:src="@{/img/Rotation_1.jpg}" />
+                    <div class="item" th:each="article : ${top2Article}" >
+                        <img alt="" th:src="@{/newsArticle/} + ${article.getNewImageName()}" style="width: 1113px; height: 570px"/>
                         <div class="carousel-caption">
-                            <h4>
-                                First Thumbnail label
-                            </h4>
-                            <p>
-                                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                            </p>
+                            <h2 th:text="${article.getNewArticleTitle()}">
+
+                            </h2>
+                            <a th:text="${article.getNewArticleTabloid()}" th:href="@{/article/show/} + ${article.getNewArticleId}" style="color: white">
+
+                            </a>
                         </div>
                     </div>
-                    <div class="item">
+                    <div class="item active">
+                        <img alt="" th:src="@{/newsArticle/} + ${lastArticle.getNewImageName()}" style="width: 1113px; height: 570px"/>
+                        <div class="carousel-caption">
+                            <h2 th:text="${lastArticle.getNewArticleTitle()}">
+
+                            </h2>
+                            <a th:text="${lastArticle.getNewArticleTabloid()}" th:href="@{/article/show/} + ${lastArticle.getNewArticleId}" style="color: white">
+
+                            </a>
+                        </div>
+                    </div>
+                    <!--<div class="item">
                         <img alt="" th:src="@{/img/Rotation_2.jpg}" />
                         <div class="carousel-caption">
                             <h4>
@@ -85,7 +96,7 @@
                                 Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
                             </p>
                         </div>
-                    </div>
+                    </div>-->
                 </div> <a class="left carousel-control" href="#carousel-794671" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-794671" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
         </div>
@@ -123,85 +134,58 @@
     </div>
     <div class="row clearfix">
         <div class="col-md-2 column">
+<!--            <h3>大家都在聊:</h3>-->
             <ul>
-                <li>
-                    Lorem ipsum dolor sit amet
-                </li>
-                <li>
-                    Consectetur adipiscing elit
-                </li>
-                <li>
-                    Integer molestie lorem at massa
-                </li>
-                <li>
-                    Facilisis in pretium nisl aliquet
-                </li>
-                <li>
-                    Nulla volutpat aliquam velit
-                </li>
-                <li>
-                    Faucibus porta lacus fringilla vel
-                </li>
-                <li>
-                    Aenean sit amet erat nunc
-                </li>
-                <li>
-                    Eget porttitor lorem
+                <li th:each="forum : ${top8Forum}">
+                    <a th:href="@{/forum/show/} + ${forum.getForumId}" th:text="${forum.getForumTitle()}" style="color: black"></a>
                 </li>
             </ul>
         </div>
         <div class="col-md-8 column">
             <tr th:each="newsArticle:${newsArticleList}" id="article">
                 <div class="my-solid">
-                    <td>
-                        <h2 th:text="${newsArticle.getNewArticleTitle}">
+                    <div class="media">
+                        <div class="media-left media-middle" style="position: relative; top: 12px">
+                            <a th:href="@{/article/show/} + ${newsArticle.getNewArticleId}">
+                                <img class="media-object" th:src="@{/newsArticle/} + ${newsArticle.getNewImageName()}" src="..." alt="..." style="height: 80px; width: 88px">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <td>
+                                <h2 th:text="${newsArticle.getNewArticleTitle}">
 
-                        </h2>
-                    </td>
-                    <td>
-                        <p th:text="${newsArticle.getNewArticleTabloid}">
+                                </h2>
+                            </td>
+                            <td>
+                                <p th:text="${newsArticle.getNewArticleTabloid}">
 
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <a class="btn" th:href="@{/article/show/} + ${newsArticle.getNewArticleId}">阅读全文 »</a>
-                        </p>
-                    </td>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn" th:href="@{/article/show/} + ${newsArticle.getNewArticleId}">阅读全文 »</a>
+                                </p>
+                            </td>
+                        </div>
+                    </div>
                 </div>
 
             </tr>
         </div>
         <div class="col-md-2 column">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" th:each="alumniHelp : ${top2AlumniHelp}">
                     <div class="thumbnail">
-                        <img alt="300x200" th:src="@{/img/Rotation_1.jpg}"/>
+                        <img alt="300x200" th:src="@{/helpPhotos/} + ${alumniHelp.getHelpHeadImage()}"/>
                         <div class="caption">
-                            <h3>
-                                Thumbnail label
+                            <h3 th:text="${alumniHelp.getHelpTitle()}">
+
                             </h3>
-                            <p>
-                                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                            <p th:text="${alumniHelp.getHelpTabloid()}">
+
                             </p>
                             <p>
-                                <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="thumbnail">
-                        <img alt="300x200" th:src="@{/img/Rotation_2.jpg}" />
-                        <div class="caption">
-                            <h3>
-                                Thumbnail label
-                            </h3>
-                            <p>
-                                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                            </p>
-                            <p>
-                                <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+                                <a class="btn btn-primary" th:href="@{/help/alumniHelp/show/} + ${alumniHelp.getHelpId}">查看</a>
                             </p>
                         </div>
                     </div>

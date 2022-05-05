@@ -19,4 +19,6 @@ public interface AlumniHelpMapper {
     int insAlumniHelp(AlumniHelp alumniHelp);
 
     AlumniHelp selAlumniHelpById(Integer helpId);
+
+    List<AlumniHelp> findTop2AlumniHelp();
 }

@@ -34,4 +34,9 @@ public class AlumniHelpServiceImpl implements AlumniHelpService {
     public AlumniHelp selAlumniHelpById(Integer helpId) {
         return alumniHelpMapper.selAlumniHelpById(helpId);
     }
+
+    @Override
+    public List<AlumniHelp> findTop2AlumniHelp() {
+        return alumniHelpMapper.findTop2AlumniHelp();
+    }
 }

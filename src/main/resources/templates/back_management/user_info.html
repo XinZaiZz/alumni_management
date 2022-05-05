@@ -1,0 +1,262 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/5/6
+  Time: 2:28
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>攀枝花学院校友后台管理系统</title>
+    <link rel="stylesheet" href="css/custom.css" th:href="@{/dist/css/back/style.css}">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" th:href="@{/backadmin/bootstrap/css/bootstrap.min.css}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" th:href="@{/backadmin/font-awesome/css/font-awesome.min.css}">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css" th:href="@{/backadmin/css/fontastic.css}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet" th:href="@{/backadmin/css/style.default.css}">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css" th:href="@{/backadmin/css/custom.css}">
+
+</head>
+
+<body>
+<!-- 如果传过来存在没有用户认证信息-->
+<!--<div th:if="${session.unAuthorized == null}" >
+    <script>
+        alert("用户未认证，请登录!");
+        window.location.href="/toAdminLogin";
+    </script>
+</div>-->
+
+<div class="page">
+    <div th:replace="~{/commons/backcommons.html::topbar}"></div>
+    <div class="page-content d-flex align-items-stretch">
+        <!-- side bar -->
+        <div th:replace="~{/commons/backcommons::sidebar(active = 'main.html')}"></div>
+        <!-- 具体内容 -->
+        <div class="content-inner">
+            <!-- Page Header-->
+            <header class="page-header">
+                <div class="container-fluid">
+                    <h2 class="no-margin-bottom">查看用户信息</h2>
+                </div>
+            </header>
+
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-holder container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html" th:href="@{/toDashboard}">Home</a></li>
+                    <li class="breadcrumb-item active">查看用户信息</li>
+                </ul>
+            </div>
+            <!-- 传递参数给组件 -->
+            <section class="tables">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" id="closeCard3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                                    </div>
+                                </div>
+                                <div class="card-header d-flex align-items-center">
+                                    <h3 class="h4">本学院校友用户名单</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="content">
+                                        <!--搜索输入框及查询、重置按钮-->
+                                        <div class="container content_width">
+                                            <div class="person_search">
+                                                <div class="search_input">
+                                                    <div class="input-group mb-3">
+                                                        <span>姓名：</span>
+                                                        <input id="Ktext" type="text" class="form-control" placeholder="请输入姓名">
+                                                    </div>
+                                                </div>
+                                                <div class="search_input">
+                                                    <button class="btn btn-primary search_btn" type="button" id="search_btn">查询</button>
+                                                    <button class="btn btn-primary search_btn" type="button" id="back_btn">重置</button>
+                                                </div>
+                                            </div>
+                                            <div class="line"></div>
+                                        </div>
+                                        <!--添加按钮及bootstrap的模态框-->
+                                        <div class="export">
+                                            <button id="new_add" type="button" class="btn btn-primary btn-sm" onclick="addUser()">
+                                                <img src="img/add_two.png" th:src="@{/dist/img/add_two.png}">
+                                                <span>添加</span>
+                                            </button>
+                                            <div class="modal fade" id="addModal">
+                                                <div class="modal-dialog modal-lg modal_position">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">添加</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table id="xztb" class="table">
+                                                                <!--新修改弹窗的样式-->
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td class="tb_bg"><label><font style="font-size: 14px; color: red;">*</font>用户名</label>
+                                                                    </td>
+                                                                    <td><input class="form-control" type="text" placeholder="请输入姓名"  name="userName" required></td>
+                                                                    <td class="tb_bg"><label><font style="font-size: 14px; color: red;">*</font>密码</label>
+                                                                    </td>
+                                                                    <td><input class="form-control" type="password" placeholder="请输入密码"  required name="password"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="tb_bg"><label><font style="font-size: 14px; color: red;">*</font>用户昵称</label>
+                                                                    </td>
+                                                                    <td><input class="form-control" type="text" placeholder="请输入用户昵称"  required></td>
+                                                                    <td class="tb_bg"><label>用户学院</label></td>
+                                                                    <td>
+                                                                        <select class="form-control select_down" style="font-size: 13px; color: #666;" >
+                                                                            <option>1001</option>
+                                                                            <option>1002</option>
+                                                                            <option>1003</option>
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                                            <button id="add_btn" type="button" class="btn btn-secondary">确定</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 编辑模态框 -->
+                                            <div class="modal fade" id="updModal">
+                                                <div class="modal-dialog modal-lg modal_position">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">修改</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table id="updUser" class="table">
+                                                                <!--新修改弹窗的样式-->
+                                                                <tbody>
+                                                                <input type="hidden" id="upd-userId">
+                                                                <tr>
+                                                                    <td class="tb_bg"><label for="upd-username"><font style="font-size: 14px; color: red;">*</font>用户名</label>
+                                                                    </td>
+                                                                    <td><input class="userName" type="text" placeholder="请输入姓名" id="upd-username" name="userName" required></td>
+                                                                    <td class="tb_bg"><label for="upd-password"><font style="font-size: 14px; color: red;">*</font>密码</label>
+                                                                    </td>
+                                                                    <td><input type="password" placeholder="请输入密码" id="upd-password" name="password" required></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="tb_bg"><label for="upd-nickName"><font style="font-size: 14px; color: red;">*</font>用户昵称</label>
+                                                                    </td>
+                                                                    <td><input type="text" placeholder="请输入用户昵称" id="upd-nickName" required></td>
+                                                                    <td class="tb_bg"><label for="upd-departmentId"><font style="font-size: 14px; color: red;">*</font>用户学院</label></td>
+                                                                    <td>
+                                                                        <select class="form-control select_down" style="font-size: 13px; color: #666;" id="upd-departmentId">
+                                                                            <option>1001</option>
+                                                                            <option>1002</option>
+                                                                            <option>1003</option>
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                                            <button id="upd_btn" type="button" class="btn btn-secondary">确定</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 编辑 -->
+                                        </div>
+                                        <!--表格列表-->
+                                        <table id="tb" class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>用户id</th>
+                                                <th>用户名</th>
+                                                <th>用户密码</th>
+                                                <th>用户昵称</th>
+                                                <th>用户学院id</th>
+                                                <th>操作</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody id="show_tbody">
+                                            <tr th:each="user : ${allUser}">
+                                                <td th:text="${user.getUserId()}"></td>
+                                                <td th:text="${user.getUserName()}"></td>
+                                                <td>******</td>
+                                                <td th:text="${user.getNickName()}"></td>
+                                                <td th:text="${user.getDepartmentId()}"></td>
+                                                <td>
+                                                    <a href="#" class="edit" data-toggle="modal" onclick="toUpd()" id="toUpd">编辑</a>
+                                                    <a href="#" class="del" data-toggle="modal" data-target="#delModel">删除</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div th:replace="~{/commons/backcommons::footerbar}"></div>
+        </div>
+    </div>
+</div>
+<!-- JavaScript files-->
+<script src="vendor/jquery/jquery.min.js" th:src="@{/backadmin/jquery/jquery.min.js}"></script>
+<script src="vendor/popper.js/umd/popper.min.js" th:src="@{/backadmin/popper.js/umd/popper.min.js}"> </script>
+<script src="vendor/bootstrap/js/bootstrap.min.js" th:src="@{/backadmin/bootstrap/js/bootstrap.min.js}"></script>
+<script src="vendor/jquery.cookie/jquery.cookie.js" th:src="@{/backadmin/jquery.cookie/jquery.cookie.js}"> </script>
+<script src="vendor/jquery-validation/jquery.validate.min.js" th:src="@{/backadmin/jquery-validation/jquery.validate.min.js}"></script>
+<script src="js/charts-home.js" th:src="@{/dist/js/back/bootbox.min.js}"></script>
+<script src="js/charts-home.js" th:src="@{/dist/js/back/mejs.js}"></script>
+<!-- 涉及到图标操作js操作的script -->
+<script th:src="@{/backadmin/js/front.js}"></script>
+
+<script>
+    function toUpd() {
+        $('#updModal').modal('show');
+        let $td = $('#toUpd').parent().parent().children();
+        let userId = $td.eq(0).text();
+        let userName = $td.eq(1).text();
+        let password = $td.eq(2).text();
+        let userNickName = $td.eq(3).text();
+        let departmentId = $td.eq(4).text();
+        $('#upd-userId').val(userId);
+        $('#upd-username').val(userName);
+        $('#upd-password').val(password);
+        $('#upd-nickName').val(userNickName);
+        $('#upd-departmentId').val(departmentId);
+    }
+
+    function addUser() {
+        $('#addModal').modal('show');
+    }
+</script>
+
+</body>
+
+</html>

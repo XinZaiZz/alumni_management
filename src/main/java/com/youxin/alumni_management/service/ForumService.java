@@ -14,4 +14,6 @@ public interface ForumService {
 
     //根据文章id查询文章
     Forum findForumById(Integer forumId);
+
+    List<Forum> findTop8Forum();
 }

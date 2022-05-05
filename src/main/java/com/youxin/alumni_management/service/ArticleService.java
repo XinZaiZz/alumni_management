@@ -11,4 +11,6 @@ public interface ArticleService {
     List<NewsArticle> findAllNewsArticle();
 
     NewsArticle findArticleById(Integer newArticleId);
+
+    List<NewsArticle> findTop3Article();
 }

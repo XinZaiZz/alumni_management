@@ -16,4 +16,7 @@ public interface ForumMapper {
 
     //根据文章id查询论坛内容
     Forum findForumById(Integer forumId);
+
+    //查询前8条讨论标题
+    List<Forum> findTop8Forum();
 }

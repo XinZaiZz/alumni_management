@@ -16,4 +16,7 @@ public interface ArticleMapper {
 
     //通过Id查找新闻文章
     NewsArticle findArticleById(Integer newArticleId);
+
+    //查找前三个封面图存在的新闻
+    List<NewsArticle> findTop3Article();
 }

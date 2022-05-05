@@ -3,6 +3,7 @@ package com.youxin.alumni_management.service.impl;
 import com.youxin.alumni_management.mapper.ArticleMapper;
 import com.youxin.alumni_management.pojo.NewsArticle;
 import com.youxin.alumni_management.service.ArticleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,11 @@ import java.util.List;
  * @date 2022-03-27 17:35
  */
 @Service
+@RequiredArgsConstructor
 public class ArticleServiceImpl implements ArticleService {
 
-    @Autowired
-    ArticleMapper articleMapper;
+
+    private final ArticleMapper articleMapper;
 
     @Override
     public int insNewsArticle(NewsArticle newsArticle) {
@@ -33,5 +35,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public NewsArticle findArticleById(Integer newArticleId) {
         return articleMapper.findArticleById(newArticleId);
+    }
+
+    @Override
+    public List<NewsArticle> findTop3Article() {
+        return articleMapper.findTop3Article();
     }
 }

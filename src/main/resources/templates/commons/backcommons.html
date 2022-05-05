@@ -172,15 +172,15 @@
     <div class="sidebar-header d-flex align-items-center">
         <div class="avatar"><img src="img/avatar-1.jpg" th:src="@{/backadmin/img/avatar-1.jpg}" alt="..." class="img-fluid rounded-circle"></div>
         <div class="title">
-            <h1 class="h4">[[${admin.getNickName}]]</h1>
+            <h1 class="h4">[[${session.admin.getNickName}]]</h1>
             <p>Web Designer</p>
         </div>
     </div>
     <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
     <ul class="list-unstyled">
-        <li class="active"><a href="index.html" th:href="@{/toDashboard}"> <i class="icon-home"></i>Home </a></li>
-        <li><a href="tables.html"> <i class="icon-grid"></i>Tables </a></li>
-        <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>Charts </a></li>
+        <li class="active"><a href="index.html" th:href="@{/toDashboard}" > <i class="icon-home"></i>主页 </a></li>
+        <li><a href="tables.html" th:href="@{/toUserInfoPage}"> <i class="icon-grid"></i>用户基本信息 </a></li>
+        <li><a href="charts.html" th:href="@{/toHomePage}"> <i class="fa fa-bar-chart"></i>Charts </a></li>
         <li><a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li>
         <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>
             <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
