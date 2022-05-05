@@ -27,7 +27,7 @@
     <link rel="stylesheet" th:href="@{/dist/css/jquery.horizontalmenu.css}">
 </head>
 <body>
-<div th:replace="~{commons/commons.html::topbar}"></div>
+<div th:replace="~{commons/commons.html::topbar(active = 'alumniHelp')}"></div>
 
 <div style="padding-top: 3%; padding-left: 5%; padding-right: 5%; padding-bottom: 3%">
     <div class="ah-tab-wrapper">
@@ -43,30 +43,40 @@
         <div class="ah-tab-content" data-ah-tab-active="true">
             <tr th:each="alumniHelp:${alumniHelps}" id="article">
                 <div class="my-solid">
-                    <td>
-                        <div>
-                            <p></p>
-                            <span style="font-size: 30px" th:text="${alumniHelp.getHelpTitle()}"></span>
-                            <span class="my-nickname" style="position: absolute; right: 6%; width: 100%">
-                                <strong>发布学院 : </strong>
-                                <span th:text="${alumniHelp.getDepartment.getDepartmentName}"></span>
-                            </span>
+                    <div class="media">
+                        <div class="media-left media-middle" style="position: relative; top: 12px">
+                            <a th:href="@{/help/alumniHelp/show/} + ${alumniHelp.getHelpId}">
+                                <img class="media-object" th:src="@{/helpPhotos/} + ${alumniHelp.getHelpHeadImage()}" src="..." alt="..." style="height: 80px; width: 88px">
+                            </a>
                         </div>
-                    </td>
-                    <td>
-                        <p th:text="${alumniHelp.getHelpTabloid()}"></p>
-                    </td>
-                    <td>
-                        <div>
-                            <p>
-                                <a class="btn" th:href="@{/help/alumniHelp/show/} + ${alumniHelp.getHelpId}">查看详情 »</a>
-                                <span class="my-date" style="position: absolute; right: 9%">
-                                    <strong>发布时间 : </strong>
-                                    <span th:text="${alumniHelp.getHelpDate()}" ></span>
-                                </span>
-                            </p>
+                        <div class="media-body">
+                            <td>
+                                <div>
+                                    <p></p>
+                                    <span style="font-size: 30px" th:text="${alumniHelp.getHelpTitle()}"></span>
+                                    <span class="my-nickname" style="position: absolute; right: 6%; width: 100%">
+                                        <strong>发布学院 : </strong>
+                                        <span th:text="${alumniHelp.getDepartment.getDepartmentName}"></span>
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <p th:text="${alumniHelp.getHelpTabloid()}"></p>
+                            </td>
+
+                            <td>
+                                <div>
+                                    <p>
+                                        <a class="btn" th:href="@{/help/alumniHelp/show/} + ${alumniHelp.getHelpId}">查看详情 »</a>
+                                        <span class="my-date" style="position: absolute; right: 9%">
+                                            <strong>发布时间 : </strong>
+                                            <span th:text="${alumniHelp.getHelpDate()}" ></span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </td>
                         </div>
-                    </td>
+                    </div>
                 </div>
             </tr>
         </div>

@@ -46,5 +46,4 @@ public class Activity {
     //活动所属学院信息
     private Department department;
 
-
 }

@@ -39,4 +39,7 @@ public class NewsArticle {
 
     //发布时间
     private String newArticleDate;
+
+    //新闻封面图
+    private String newImageName;
 }

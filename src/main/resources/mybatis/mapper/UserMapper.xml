@@ -8,7 +8,11 @@
         update user set nickName=#{nickName}, gender=#{gender}, birth=#{birth}, age=#{age}, studentNumber=#{studentNumber}, major=#{major},
                         grade=#{grade}, bedroomNumber=#{bedroomNumber}, occupation=#{occupation}, occupationGroup=#{occupationGroup},
                         region=#{region}, company=#{company}, number=#{number}, email=#{email}, personalProfile=#{personalProfile}
-        where userId=#{userId}
+        where userId=#{userId};
+    </update>
+
+    <update id="updUserPasswordBySelf" parameterType="String">
+        update user set password = #{newPassword} where password = #{oldPassword};
     </update>
 
 </mapper>

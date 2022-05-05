@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
     public int updUserBySelf(User user) {
         return userMapper.updUserBySelf(user);
     }
+
+    @Override
+    public int updUserPasswordBySelf(String oldPassword, String newPassword) {
+        return userMapper.updUserPasswordBySelf(oldPassword, newPassword);
+    }
 }

@@ -21,14 +21,16 @@
     <title>欢迎来到攀枝花学院校友管理</title>
     <!-- 网页图标引入 -->
     <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" >
-    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.css}">
+
     <link rel="stylesheet" th:href="@{/dist/css/my.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/calender/calender.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.css}">
 </head>
 <body>
 <div class="container-fluid">
     <div class="row clearfix" style="padding-top: 3%; padding-left: 5%; padding-right: 5%; padding-bottom: 3%">
 
-        <div class="col-md-2 column">
+        <div class="col-md-2 column" style="position: relative; margin-top: 100px">
 
             <img alt="140x140" src="http://cdn.ibootstrap.cn/lorempixel.com/140/140/default.jpg" class="img-circle" th:src="@{/img/logo.jpg}" style="width: 140px; height: 140px; position: relative; left: 25%"/>
 
@@ -39,90 +41,8 @@
             </div>
         </div>
         <div class="col-md-8 column">
-            <!--<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">Brand</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="#">新闻发布</a>
-                        </li>
-                        <li>
-                            <a href="#">校友活动</a>
-                        </li>
-                        <li>
-                            <a href="#">校友论坛</a>
-                        </li>
-                        <li>
-                            <a href="#">校友帮扶</a>
-                        </li>
-                        <li>
-                            <a href="#">校友相册墙</a>
-                        </li>
-                        <li>
-                            <a href="#">校友风采展示</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">Action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a href="#">Something else here</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">Separated link</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">One more separated link</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    &lt;!&ndash;<form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div> <button type="submit" class="btn btn-default">Submit</button>
-                    </form>&ndash;&gt;
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" th:href="@{/toLogin}">登录/注册</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">个人</a>
-                                </li>
-                                <li>
-                                    <a href="#">登出</a>
-                                </li>
-                                <li>
-                                    <a href="#">Something else here</a>
-                                </li>
-                                <li class="divider">
-                                </li>
-                                <li>
-                                    <a href="#">Separated link</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-            </nav>-->
             <!-- 头部导航栏 -->
-            <div th:replace="~{commons/commons.html::topbar}"></div>
+            <div th:replace="~{commons/commons.html::topbar(active = 'news')}"></div>
             <div class="carousel slide" id="carousel-794671">
                 <ol class="carousel-indicators">
                     <li data-slide-to="0" data-target="#carousel-794671">
@@ -132,7 +52,7 @@
                     <li data-slide-to="2" data-target="#carousel-794671" class="active">
                     </li>
                 </ol>
-                <div class="carousel-inner" style="height: 500px">
+                <div class="carousel-inner" style="height: 570px">
                     <div class="item">
                         <img alt="" th:src="@{/img/Rotation_1.jpg}" />
                         <div class="carousel-caption">
@@ -170,11 +90,36 @@
             </div>
         </div>
         <div class="col-md-2 column">
-            <a type="button" class="btn btn-lg btn-success">
-                <span>按钮</span>
-            </a>
+            <div style="text-align: center; position: absolute; top: 50px">
+                <h3 id="calenderTitle">
+                    <b>校园日历</b><small>自律攀大人</small>
+                </h3>
+            </div>
+            <div id="CalendarMain">
+                <div id="title"> <a class="selectBtn month" href="javascript:" onClick="CalendarHandler.CalculateLastMonthDays();"><</a><a class="selectBtn selectYear" href="javascript:" onClick="CalendarHandler.CreateSelectYear(CalendarHandler.showYearStart);">2014年</a><a class="selectBtn selectMonth" onClick="CalendarHandler.CreateSelectMonth()">6月</a> <a class="selectBtn nextMonth" href="javascript:" onClick="CalendarHandler.CalculateNextMonthDays();">></a><a class="selectBtn currentDay" href="javascript:" onClick="CalendarHandler.CreateCurrentCalendar(0,0,0);">今天</a></div>
+                <div id="context">
+                    <div class="week">
+                        <h3> 一 </h3>
+                        <h3> 二 </h3>
+                        <h3> 三 </h3>
+                        <h3> 四 </h3>
+                        <h3> 五 </h3>
+                        <h3> 六 </h3>
+                        <h3 style="position: relative; bottom: 5px"> 日 </h3>
+                    </div>
+                    <div id="center">
+                        <div id="centerMain">
+                            <div id="selectYearDiv"></div>
+                            <div id="centerCalendarMain">
+                                <div id="Container"></div>
+                            </div>
+                            <div id="selectMonthDiv"></div>
+                        </div>
+                    </div>
+                    <div id="foots"><a id="footNow">19:14:34</a></div>
+                </div>
+            </div>
         </div>
-
     </div>
     <div class="row clearfix">
         <div class="col-md-2 column">
@@ -264,6 +209,8 @@
             </div>
         </div>
     </div>
+
+
     <!--<div class="row clearfix">
         <div class="col-md-12 column">
             <address> <strong>Twitter, Inc.</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br /> <abbr title="Phone">P:</abbr> (123) 456-7890</address>
@@ -276,8 +223,9 @@
 </div>
 
 
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="static/js/jquery-3.5.0.min.js" th:src="@{/dist/js/jquery-3.5.0.min.js}"></script>
 <script th:src="@{/dist/js/bootstrap.js}"></script>
+<script th:src="@{/dist/js/calender/calender.js}"></script>
 <!-- 没用到 -->
 <script th:inline="javascript">
     let unAuthorized = $('#unAuthorized') ;
@@ -304,6 +252,7 @@
     if (typeof(updUserMsg.val()) !== "undefined") {
         alert(updUserMsg.val());
     }
+
 
 </script>
 </body>

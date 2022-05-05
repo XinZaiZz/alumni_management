@@ -11,4 +11,6 @@ import com.youxin.alumni_management.pojo.User;
 public interface UserService {
 
     int updUserBySelf(User user);
+
+    int updUserPasswordBySelf(String oldPassword, String newPassword);
 }

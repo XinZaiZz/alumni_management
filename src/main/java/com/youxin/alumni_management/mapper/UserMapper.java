@@ -15,4 +15,6 @@ public interface UserMapper {
     //用户自己修改用户基本信息
     int updUserBySelf(User user);
 
+    int updUserPasswordBySelf(String oldPassword, String newPassword);
+
 }

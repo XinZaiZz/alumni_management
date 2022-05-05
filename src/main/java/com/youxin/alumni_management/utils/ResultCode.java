@@ -5,6 +5,7 @@ public enum ResultCode {
     SUCCESS(1, "成功"),
     FAIL(0, "失败"),
 //    用户错误
+    USER_PWD_ERROR(4002, "用户旧密码错误"),
     USER_NOT_EXIST(4003, "用户不存在"),
     USER_HAS_EXISTED(4004, "用户已经存在"),
     USER_INFO_ERROR(4005, "当前用户错误"),
