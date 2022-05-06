@@ -41,7 +41,7 @@
     <div th:replace="~{/commons/backcommons.html::topbar}"></div>
     <div class="page-content d-flex align-items-stretch">
         <!-- side bar -->
-        <div th:replace="~{/commons/backcommons::sidebar(active = 'main.html')}"></div>
+        <div th:replace="~{/commons/backcommons::sidebar(active = 'user_info.html')}"></div>
         <!-- 具体内容 -->
         <div class="content-inner">
             <!-- Page Header-->
@@ -80,12 +80,12 @@
                                             <div class="person_search">
                                                 <div class="search_input">
                                                     <div class="input-group mb-3">
-                                                        <span>姓名：</span>
-                                                        <input id="Ktext" type="text" class="form-control" placeholder="请输入姓名">
+                                                        <span>用户名：</span>
+                                                        <input id="Ktext" type="text" class="form-control" placeholder="请输入用户名">
                                                     </div>
                                                 </div>
                                                 <div class="search_input">
-                                                    <button class="btn btn-primary search_btn" type="button" id="search_btn">查询</button>
+                                                    <button class="btn btn-primary search_btn" type="button" id="user_search_btn">查询</button>
                                                     <button class="btn btn-primary search_btn" type="button" id="back_btn">重置</button>
                                                 </div>
                                             </div>
@@ -100,42 +100,44 @@
                                             <div class="modal fade" id="addModal">
                                                 <div class="modal-dialog modal-lg modal_position">
                                                     <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">添加</h4>
-                                                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <table id="xztb" class="table">
-                                                                <!--新修改弹窗的样式-->
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td class="tb_bg"><label><font style="font-size: 14px; color: red;">*</font>用户名</label>
-                                                                    </td>
-                                                                    <td><input class="form-control" type="text" placeholder="请输入姓名"  name="userName" required></td>
-                                                                    <td class="tb_bg"><label><font style="font-size: 14px; color: red;">*</font>密码</label>
-                                                                    </td>
-                                                                    <td><input class="form-control" type="password" placeholder="请输入密码"  required name="password"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="tb_bg"><label><font style="font-size: 14px; color: red;">*</font>用户昵称</label>
-                                                                    </td>
-                                                                    <td><input class="form-control" type="text" placeholder="请输入用户昵称"  required></td>
-                                                                    <td class="tb_bg"><label>用户学院</label></td>
-                                                                    <td>
-                                                                        <select class="form-control select_down" style="font-size: 13px; color: #666;" >
-                                                                            <option>1001</option>
-                                                                            <option>1002</option>
-                                                                            <option>1003</option>
-                                                                        </select>
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                                            <button id="add_btn" type="button" class="btn btn-secondary">确定</button>
-                                                        </div>
+                                                        <form th:method="POST" th:action="@{/insUserByAdmin}">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">添加</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <table id="xztb" class="table">
+                                                                    <!--新修改弹窗的样式-->
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td class="tb_bg"><label><font style="font-size: 14px; color: red;">*</font>用户名</label>
+                                                                        </td>
+                                                                        <td><input class="form-control" type="text" placeholder="请输入姓名"  name="userName" required></td>
+                                                                        <td class="tb_bg"><label><font style="font-size: 14px; color: red;">*</font>密码</label>
+                                                                        </td>
+                                                                        <td><input class="form-control" type="password" placeholder="请输入密码"  required name="password"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="tb_bg"><label><font style="font-size: 14px; color: red;">*</font>用户昵称</label>
+                                                                        </td>
+                                                                        <td><input name="nickName" class="form-control" type="text" placeholder="请输入用户昵称"  required></td>
+                                                                        <td class="tb_bg"><label>用户学院</label></td>
+                                                                        <td>
+                                                                            <select name="departmentId" class="form-control select_down" style="font-size: 13px; color: #666;" >
+                                                                                <option>1001</option>
+                                                                                <option>1002</option>
+                                                                                <option>1003</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                                                <button id="add_btn" type="submit" class="btn btn-secondary">确定</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,47 +146,73 @@
                                             <div class="modal fade" id="updModal">
                                                 <div class="modal-dialog modal-lg modal_position">
                                                     <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">修改</h4>
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <table id="updUser" class="table">
-                                                                <!--新修改弹窗的样式-->
-                                                                <tbody>
-                                                                <input type="hidden" id="upd-userId">
-                                                                <tr>
-                                                                    <td class="tb_bg"><label for="upd-username"><font style="font-size: 14px; color: red;">*</font>用户名</label>
-                                                                    </td>
-                                                                    <td><input class="userName" type="text" placeholder="请输入姓名" id="upd-username" name="userName" required></td>
-                                                                    <td class="tb_bg"><label for="upd-password"><font style="font-size: 14px; color: red;">*</font>密码</label>
-                                                                    </td>
-                                                                    <td><input type="password" placeholder="请输入密码" id="upd-password" name="password" required></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="tb_bg"><label for="upd-nickName"><font style="font-size: 14px; color: red;">*</font>用户昵称</label>
-                                                                    </td>
-                                                                    <td><input type="text" placeholder="请输入用户昵称" id="upd-nickName" required></td>
-                                                                    <td class="tb_bg"><label for="upd-departmentId"><font style="font-size: 14px; color: red;">*</font>用户学院</label></td>
-                                                                    <td>
-                                                                        <select class="form-control select_down" style="font-size: 13px; color: #666;" id="upd-departmentId">
-                                                                            <option>1001</option>
-                                                                            <option>1002</option>
-                                                                            <option>1003</option>
-                                                                        </select>
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                                            <button id="upd_btn" type="button" class="btn btn-secondary">确定</button>
-                                                        </div>
+                                                        <form method="post" th:action="@{/updUserByAdmin}">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">修改</h4>
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <table id="updUser" class="table">
+                                                                    <!--新修改弹窗的样式-->
+                                                                    <tbody>
+                                                                    <input type="hidden" id="upd-userId" name="userId">
+                                                                    <tr>
+                                                                        <td class="tb_bg"><label for="upd-username"><font style="font-size: 14px; color: red;">*</font>用户名</label>
+                                                                        </td>
+                                                                        <td><input class="userName" type="text" placeholder="请输入姓名" id="upd-username" name="userName" required></td>
+                                                                        <td class="tb_bg"><label for="upd-password"><font style="font-size: 14px; color: red;">*</font>密码</label>
+                                                                        </td>
+                                                                        <td><input type="password" placeholder="请输入密码" id="upd-password" name="password" required></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="tb_bg"><label for="upd-nickName"><font style="font-size: 14px; color: red;">*</font>用户昵称</label>
+                                                                        </td>
+                                                                        <td><input name="nickName" type="text" placeholder="请输入用户昵称" id="upd-nickName" required></td>
+                                                                        <td class="tb_bg"><label for="upd-departmentId"><font style="font-size: 14px; color: red;">*</font>用户学院</label></td>
+                                                                        <td>
+                                                                            <select name="departmentId" class="form-control select_down" style="font-size: 13px; color: #666;" id="upd-departmentId">
+                                                                                <option>1001</option>
+                                                                                <option>1002</option>
+                                                                                <option>1003</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                                                <button id="upd_btn" type="submit" class="btn btn-secondary">确定</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- 编辑 -->
+
+                                            <!-- 删除模态框 -->
+                                            <div class="modal fade" id="delModal">
+                                                <div class="modal-dialog modal-lg modal_position">
+                                                    <div class="modal-content">
+                                                        <form th:method="POST" th:action="@{/delUserByAdmin}">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">删除</h4>
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <input id="del-userId" type="hidden" name="userId">
+                                                                <h2>确认删除用户？</h2>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                                                <button id="del_btn" type="submit" class="btn btn-secondary">确定</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!--表格列表-->
                                         <table id="tb" class="table">
@@ -203,12 +231,13 @@
                                             <tr th:each="user : ${allUser}">
                                                 <td th:text="${user.getUserId()}"></td>
                                                 <td th:text="${user.getUserName()}"></td>
+                                                <input type="hidden" th:value="${user.getPassword}">
                                                 <td>******</td>
                                                 <td th:text="${user.getNickName()}"></td>
                                                 <td th:text="${user.getDepartmentId()}"></td>
                                                 <td>
-                                                    <a href="#" class="edit" data-toggle="modal" onclick="toUpd()" id="toUpd">编辑</a>
-                                                    <a href="#" class="del" data-toggle="modal" data-target="#delModel">删除</a>
+                                                    <a href="#" class="edit" data-toggle="modal" onclick="toUpd(this)" id="toUpd">编辑</a>
+                                                    <a href="#" class="del" data-toggle="modal" onclick="delUser(this)">删除</a>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -237,14 +266,14 @@
 <script th:src="@{/backadmin/js/front.js}"></script>
 
 <script>
-    function toUpd() {
+    function toUpd(e) {
         $('#updModal').modal('show');
-        let $td = $('#toUpd').parent().parent().children();
+        let $td = $(e).parent().parent().children();
         let userId = $td.eq(0).text();
         let userName = $td.eq(1).text();
-        let password = $td.eq(2).text();
-        let userNickName = $td.eq(3).text();
-        let departmentId = $td.eq(4).text();
+        let password = $td.eq(2).val();
+        let userNickName = $td.eq(4).text();
+        let departmentId = $td.eq(5).text();
         $('#upd-userId').val(userId);
         $('#upd-username').val(userName);
         $('#upd-password').val(password);
@@ -254,6 +283,13 @@
 
     function addUser() {
         $('#addModal').modal('show');
+    }
+
+    function delUser(e) {
+        $('#delModal').modal('show');
+        let $td = $(e).parent().parent().children();
+        let userId = $td.eq(0).text();
+        $('#del-userId').val(userId);
     }
 </script>
 

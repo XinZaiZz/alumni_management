@@ -67,7 +67,7 @@ public class AlumniPhotoController {
         alumniPhoto.setPhotoContent(request.getParameter("articleContent"));
         alumniPhoto.setPhotoHTMLContent(request.getParameter("articleHtmlContent"));
         alumniPhoto.setPhotoTitle(request.getParameter("articleTitle"));
-        alumniPhoto.setPhotoDate(dateUtil.getSystemDate());
+        alumniPhoto.setPhotoDate(dateUtil.getSystemDateToString());
         //插入记录
         int data = -1;
         //当上传图片不为空时才进行上传操作

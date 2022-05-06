@@ -35,4 +35,7 @@ public class Admin {
 
     //管理员权限
     private String perms;
+
+    //学院信息
+    private Department department;
 }

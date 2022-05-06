@@ -45,4 +45,7 @@ public class Forum {
 
     //文章评论
     private String comment;
+
+    //所属学院
+    private Department department;
 }

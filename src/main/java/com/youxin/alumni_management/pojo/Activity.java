@@ -43,6 +43,9 @@ public class Activity {
     //活动文章名称
     private String activityFileName;
 
+    //发布用户信息
+    private User user;
+
     //活动所属学院信息
     private Department department;
 

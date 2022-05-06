@@ -32,8 +32,8 @@
             <div class="navbar-holder d-flex align-items-center justify-content-between">
                 <!-- Navbar Header-->
                 <div class="navbar-header">
-                    <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
-                    <div class="brand-text d-none d-lg-inline-block"><span>Bootstrap </span><strong>Dashboard</strong></div>
+                    <!-- Navbar Brand --><a href="index.html" th:href="@{/toIndex}" class="navbar-brand d-none d-sm-inline-block">
+                    <div class="brand-text d-none d-lg-inline-block"><span>用户 </span><strong>首页</strong></div>
                     <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div></a>
                     <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
                 </div>
@@ -178,10 +178,14 @@
     </div>
     <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
     <ul class="list-unstyled">
-        <li class="active"><a href="index.html" th:href="@{/toDashboard}" > <i class="icon-home"></i>主页 </a></li>
-        <li><a href="tables.html" th:href="@{/toUserInfoPage}"> <i class="icon-grid"></i>用户基本信息 </a></li>
-        <li><a href="charts.html" th:href="@{/toHomePage}"> <i class="fa fa-bar-chart"></i>Charts </a></li>
-        <li><a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li>
+        <li th:class="${active == 'main.html' ? 'active' : ''}"><a href="index.html" th:href="@{/toDashboard}" > <i class="icon-home"></i>主页 </a></li>
+        <li th:class="${active == 'user_info.html' ? 'active' : ''}"><a href="tables.html" th:href="@{/toUserInfoPage}"> <i class="icon-grid"></i>用户基本信息 </a></li>
+        <li th:class="${active == 'chart_management.html' ? 'active' : ''}"><a href="charts.html" th:href="@{/toHomePage}"> <i class="fa fa-bar-chart"></i>Charts </a></li>
+        <li th:class="${active == 'news_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toNewsManagementPage}"> <i class="icon-padnote"></i>新闻文章管理 </a></li>
+        <li th:class="${active == 'activity_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toArtivityManagementPage}"> <i class="icon-paper-airplane"></i>校友活动文章管理 </a></li>
+        <li th:class="${active == 'forum_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toForumManagementPage}"> <i class="icon-check"></i>校友论坛文章管理 </a></li>
+        <li th:class="${active == 'alumniHelp_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toAlumniHelpManagementPage}"> <i class="icon-bill"></i>校友帮扶文章管理 </a></li>
+        <li th:class="${active == 'alumniPhoto_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toAlumniPhotoManagementPage}"> <i class="icon-bill"></i>校友风采展示文章管理 </a></li>
         <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>
             <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="#">Page</a></li>

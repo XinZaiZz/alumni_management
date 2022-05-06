@@ -3,8 +3,167 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.youxin.alumni_management.mapper.BackManagementMapper">
+    <resultMap id="ForumMap" type="Forum">
+        <!-- column是查询结果的列名, property是对应实体类中的属性名 -->
+        <id column="forumId" jdbcType="INTEGER" property="forumId"/>
+        <result column="userId" jdbcType="INTEGER" property="userId"/>
+        <result column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+        <result column="forumContent" jdbcType="VARCHAR" property="forumContent"/>
+        <result column="forumHTMLContent" jdbcType="VARCHAR" property="forumHTMLContent"/>
+        <result column="forumTitle" jdbcType="VARCHAR" property="forumTitle"/>
+        <result column="forumTabloid" jdbcType="VARCHAR" property="forumTabloid"/>
+        <result column="forumDate" jdbcType="TIMESTAMP" property="forumDate"/>
+        <!-- 多表查询时连接user属性段 -->
+        <association property="user" javaType="User" >
+            <id column="userId" jdbcType="INTEGER" property="userId"/>
+            <!-- 不需要的字段可以注释掉 -->
+            <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        </association>
+        <association property="department" javaType="Department" >
+            <id column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+            <!-- 不需要的字段可以注释掉 -->
+            <result column="departmentName" jdbcType="VARCHAR" property="departmentName"/>
+        </association>
+    </resultMap>
+    <resultMap id="ActivityMap" type="Activity">
+        <!-- column是查询结果的列名, property是对应实体类中的属性名 -->
+        <id column="activityId" jdbcType="INTEGER" property="activityId"/>
+        <result column="userId" jdbcType="INTEGER" property="userId"/>
+        <result column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+        <result column="activityContent" jdbcType="VARCHAR" property="activityContent"/>
+        <result column="activityHTMLContent" jdbcType="VARCHAR" property="activityHTMLContent"/>
+        <result column="activityTitle" jdbcType="VARCHAR" property="activityTitle"/>
+        <result column="activityTabloid" jdbcType="VARCHAR" property="activityTabloid"/>
+        <result column="activityDate" jdbcType="TIMESTAMP" property="activityDate"/>
+        <result column="activityFileName" jdbcType="VARCHAR" property="activityFileName"/>
+        <!-- 多表查询时连接user属性段 -->
+        <association property="user" javaType="User" >
+            <id column="userId" jdbcType="INTEGER" property="userId"/>
+            <!-- 不需要的字段可以注释掉 -->
+
+            <result column="userName" jdbcType="VARCHAR" property="userName"/>
+
+        </association>
+        <association property="department" javaType="Department" >
+            <id column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+            <!-- 不需要的字段可以注释掉 -->
+
+            <result column="departmentName" jdbcType="VARCHAR" property="departmentName"/>
+
+        </association>
+    </resultMap>
+
+    <resultMap id="AlumniHelpMap" type="AlumniHelp">
+        <!-- column是查询结果的列名, property是对应实体类中的属性名 -->
+        <id column="helpId" jdbcType="INTEGER" property="helpId"/>
+        <result column="adminId" jdbcType="INTEGER" property="adminId"/>
+        <result column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+        <result column="helpContent" jdbcType="VARCHAR" property="helpContent"/>
+        <result column="helpHTMLContent" jdbcType="VARCHAR" property="helpHTMLContent"/>
+        <result column="helpTitle" jdbcType="VARCHAR" property="helpTitle"/>
+        <result column="helpTabloid" jdbcType="VARCHAR" property="helpTabloid"/>
+        <result column="helpDate" jdbcType="TIMESTAMP" property="helpDate"/>
+        <result column="helpFileName" jdbcType="VARCHAR" property="helpFileName"/>
+        <result column="helpHeadImage" jdbcType="VARCHAR" property="helpHeadImage"/>
+        <!-- 多表查询时连接user属性段 -->
+        <association property="admin" javaType="Admin" >
+            <id column="adminId" jdbcType="INTEGER" property="adminId"/>
+            <!-- 不需要的字段可以注释掉 -->
+            <result column="adminName" jdbcType="VARCHAR" property="adminName"/>
+        </association>
+        <association property="department" javaType="Department" >
+            <id column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+            <!-- 不需要的字段可以注释掉 -->
+            <result column="departmentName" jdbcType="VARCHAR" property="departmentName"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="AlumniPhotoMap" type="AlumniPhoto">
+        <!-- column是查询结果的列名, property是对应实体类中的属性名 -->
+        <id column="photoId" jdbcType="INTEGER" property="photoId"/>
+        <result column="adminId" jdbcType="INTEGER" property="adminId"/>
+        <result column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+        <result column="photoContent" jdbcType="VARCHAR" property="photoContent"/>
+        <result column="photoHTMLContent" jdbcType="VARCHAR" property="photoHTMLContent"/>
+        <result column="photoTitle" jdbcType="VARCHAR" property="photoTitle"/>
+        <result column="photoDate" jdbcType="TIMESTAMP" property="photoDate"/>
+        <result column="photoImageName" jdbcType="VARCHAR" property="photoImageName"/>
+        <!-- 多表查询时连接user属性段 -->
+        <association property="admin" javaType="Admin" >
+            <id column="adminId" jdbcType="INTEGER" property="adminId"/>
+            <!-- 不需要的字段可以注释掉 -->
+            <result column="adminName" jdbcType="VARCHAR" property="adminName"/>
+        </association>
+        <association property="department" javaType="Department" >
+            <id column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+            <!-- 不需要的字段可以注释掉 -->
+            <result column="departmentName" jdbcType="VARCHAR" property="departmentName"/>
+        </association>
+    </resultMap>
     <select id="findAllUserByAdminDepartmentId" parameterType="int" resultType="user">
-        select userId, userName, password, nickName, departmentId from user where departmentId = #{departmentId};
+        select userId, userName, password, nickName, departmentId from user where departmentId = #{departmentId} order by userId desc;
     </select>
 
+    <insert id="insUserByAdmin" parameterType="user">
+        insert into user (userName, password, departmentId, nickName)
+        values (#{userName}, #{password}, #{departmentId}, #{nickName});
+    </insert>
+
+    <update id="updUserByAdmin" parameterType="user">
+        update user set userName = #{userName}, password = #{password}, departmentId = #{departmentId}, nickName = #{nickName}
+        where userId = #{userId};
+    </update>
+
+    <delete id="delUserByAdmin" parameterType="int">
+        delete from user where userId = #{userId};
+    </delete>
+
+    <select id="findAllNewsArticleByAdminId" resultType="newsArticle">
+        select * from news_article where adminId = #{adminId} order by newArticleDate desc;
+    </select>
+
+    <delete id="delNewsArticleByNewArticleId" parameterType="int">
+        delete from news_article where newArticleId = #{newArticleId};
+    </delete>
+
+    <select id="findAllActivityByAdminDepartmentId" parameterType="int" resultMap="ActivityMap">
+        select * from activity join user join department on department.departmentId = user.departmentId
+        on user.userId = activity.userId where activity.departmentId = #{departmentId} order by activityDate desc;
+    </select>
+
+    <delete id="delActivityByActivityId" parameterType="int">
+        delete from activity where activityId = #{activityId};
+    </delete>
+
+    <select id="findAllForumByAdminDepartmentId" parameterType="int" resultMap="ForumMap">
+        select * from forum join user join department on department.departmentId = user.departmentId
+        on user.userId = forum.userId where forum.departmentId = #{departmentId} order by forumDate desc
+    </select>
+
+    <delete id="delForumByForumId" parameterType="int">
+        delete from forum where forumId = #{forumId};
+    </delete>
+
+    <select id="findAllAlumniHelpByAdminId" resultMap="AlumniHelpMap" parameterType="int">
+        select * from alumni_help join admin join department on department.departmentId = admin.departmentId
+        on admin.adminId = alumni_help.adminId where alumni_help.adminId = #{adminId};
+    </select>
+
+    <delete id="delAlumniHelpByAlumniHelpId" parameterType="int">
+        delete from alumni_help where helpId = #{helpId};
+    </delete>
+
+    <select id="findAllAlumniPhotoByAdminDepartmentId" parameterType="int" resultMap="AlumniPhotoMap">
+        select * from alumni_photo join admin join department on department.departmentId = admin.departmentId
+        on admin.adminId = alumni_photo.adminId where alumni_photo.departmentId = #{departmentId} order by photoDate desc;
+    </select>
+
+    <delete id="delAlumniPhotoByPhotoId" parameterType="int">
+        delete from alumni_photo where photoId = #{photoId};
+    </delete>
+
+    <update id="updAlumniPhoto" parameterType="alumniPhoto">
+        update alumni_photo set photoTitle = #{photoTitle}, photoDate = #{photoDate}, photoImageName = #{photoImageName}
+        where photoId = #{photoId};
+    </update>
 </mapper>

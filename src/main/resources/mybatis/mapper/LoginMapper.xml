@@ -3,12 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.youxin.alumni_management.mapper.LoginMapper">
+    <resultMap id="AdminMap" type="Admin">
+        <!-- column是查询结果的列名, property是对应实体类中的属性名 -->
+        <id column="adminId" jdbcType="INTEGER" property="adminId"/>
+        <result column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+        <result column="adminName" jdbcType="VARCHAR" property="adminName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="perms" jdbcType="TIMESTAMP" property="perms"/>
+        <!-- 多表查询时连接user属性段 -->
+        <association property="department" javaType="Department">
+            <id column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+            <!-- 不需要的字段可以注释掉 -->
+            <result column="departmentName" jdbcType="VARCHAR" property="departmentName"/>
+        </association>
+    </resultMap>
 
     <select id="findUserByName" resultType="User" parameterType="String">
         select * from user where userName = #{userName}
     </select>
 
-    <select id="findAdminByName" resultType="Admin" parameterType="String">
-        select * from admin where adminName = #{adminName}
+    <select id="findAdminByName" resultMap="AdminMap" parameterType="String">
+        select * from admin join department on admin.departmentId = department.departmentId where adminName = #{adminName}
     </select>
 </mapper>

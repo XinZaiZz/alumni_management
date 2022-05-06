@@ -47,4 +47,7 @@ public class AlumniHelp {
 
     //所属学院类
     private Department department;
+
+    //发布管理员信息
+    private Admin admin;
 }
