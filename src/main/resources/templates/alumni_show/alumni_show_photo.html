@@ -43,7 +43,7 @@
         <ul class="grid">
             <li class="grid__item" th:each="alumniPhoto : ${alumniPhotos}">
                 <a class="grid__link" href="#" th:href="@{/toAlumniShowPage/} + ${alumniPhoto.getPhotoId}">
-                    <img class="grid__img" src="/photos/1.jpg" th:src="@{/photos/} + ${alumniPhoto.getPhotoImageName}" alt="Some image" />
+                    <img class="grid__img" src="/photos/1.jpg" th:src="@{/photos/} + ${alumniPhoto.getPhotoImageName}" alt="Some image" style="width: 361px;height: 263px"/>
                     <h3 class="grid__item-title" th:text="${alumniPhoto.getPhotoTitle}">Natural saturation effects</h3>
                 </a>
             </li>

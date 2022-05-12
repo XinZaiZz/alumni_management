@@ -3,6 +3,8 @@ package com.youxin.alumni_management.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.youxin.alumni_management.pojo.Admin;
 import com.youxin.alumni_management.pojo.RegisterUser;
+import com.youxin.alumni_management.pojo.User;
+import com.youxin.alumni_management.service.BackManagementService;
 import com.youxin.alumni_management.service.RegisterUserService;
 import com.youxin.alumni_management.utils.Result;
 import com.youxin.alumni_management.utils.ResultCode;
@@ -53,16 +55,27 @@ public class RegisterUserController {
     }
 
     @GetMapping("/admin/register/Pass-Or-UnPass/{registerId}/{status}")
-    public String registerUserPass(@PathVariable("registerId") Integer registerId, @PathVariable("status") Integer status, HttpServletRequest request) {
+    public String registerUserPass(@PathVariable("registerId") Integer registerId, @PathVariable("status") Integer status) {
         //修改用户在注册用户表中的状态
         int data = -1;
         //1为设置为通过，2为未通过
         data = registerUserService.updUserStatus(registerId, status);
-        if (data > 0) {
-            //修改成功
-            List<RegisterUser> allRegisteringUser = registerUserService.findAllRegisterUser(((Admin) request.getSession().getAttribute("admin")).getDepartmentId());
-            return "redirect:/toDashboard";
-
+        if (status == 1) {
+            List<RegisterUser> allAlreadyPassRegisterUser = registerUserService.findAllAlreadyPassRegisterUser();
+            for (RegisterUser registerUser : allAlreadyPassRegisterUser) {
+                User user = new User();
+                user.setUserName(registerUser.getUsername());
+                user.setPassword(registerUser.getPassword());
+                user.setNickName(registerUser.getNickName());
+                user.setDepartmentId(registerUser.getDepartmentId());
+                user.setGender(registerUser.getGender());
+                user.setEmail(registerUser.getEmail());
+                int i = registerUserService.insPassUser(user);
+                if (i > 0) {
+                    return "redirect:/toDashboard";
+                }
+                else return "500";
+            }
         }
         //修改失败返回到500错误页面
         return "500";

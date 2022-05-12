@@ -24,7 +24,7 @@
 
 
     <select id="selAllActivity" resultMap="ActivityMap">
-        select * from activity join department on activity.departmentId = department.departmentId where 0 = 0 order by activityDate desc
+        select * from activity join department on activity.departmentId = department.departmentId where status = 2 order by activityDate desc
     </select>
 
     <insert id="insActivity" parameterType="activity">

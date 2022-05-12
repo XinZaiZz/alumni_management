@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -50,13 +51,27 @@ public class BackManagementController {
     }
 
     @GetMapping("/toHomePage")
-    public String toHomePage(HttpServletRequest request) {
+    public String toHomePage(HttpServletRequest request, Model model) {
         //获取当前登录用户信息
         Admin admin = (Admin) request.getSession().getAttribute("admin");
         //如果用户未登录
         if (admin == null) {
             return "redirect:/unAuthorized";
         }
+        int userCount = backManagementService.selCountUser(admin.getDepartmentId());
+        int maleCount = backManagementService.selCountMale(admin.getDepartmentId());
+        List<Map<String, Object>> occupationGroups = backManagementService.countByOccupationGroup(admin.getDepartmentId());
+        List<Map<String, Object>> majorGroups = backManagementService.countByMajorGroup(admin.getDepartmentId());
+        List<Map<String, Object>> gradeGroups = backManagementService.countByGrade(admin.getDepartmentId());
+        List<Map<String, Object>> ageGroups = backManagementService.countByAge(admin.getDepartmentId());
+        List<Map<String, Object>> instructorNameGroups = backManagementService.countByInstructorName(admin.getDepartmentId());
+        model.addAttribute("userCount", userCount);
+        model.addAttribute("maleCount", maleCount);
+        model.addAttribute("occupationGroups", occupationGroups);
+        model.addAttribute("majorGroups", majorGroups);
+        model.addAttribute("gradeGroups", gradeGroups);
+        model.addAttribute("ageGroups", ageGroups);
+        model.addAttribute("instructorNameGroups", instructorNameGroups);
         return "back_management/home";
     }
 
@@ -69,7 +84,12 @@ public class BackManagementController {
             return "redirect:/unAuthorized";
         }
         List<User> allUser = backManagementService.findAllUserByAdminDepartmentId(admin.getDepartmentId());
+        int userCount = backManagementService.selCountUser(admin.getDepartmentId());
+        int maleCount = backManagementService.selCountMale(admin.getDepartmentId());
+
         if (allUser != null) {
+            model.addAttribute("userCount", userCount);
+            model.addAttribute("maleCount", maleCount);
             model.addAttribute("allUser", allUser);
             return "back_management/user_info";
         }else
@@ -145,8 +165,8 @@ public class BackManagementController {
         return "500";
     }
 
-    @GetMapping("/toArtivityManagementPage")
-    public String toArtivityManagementPage(HttpServletRequest request, Model model) {
+    @GetMapping("/toActivityManagementPage")
+    public String toActivityManagementPage(HttpServletRequest request, Model model) {
         //获取当前登录用户信息
         Admin admin = (Admin) request.getSession().getAttribute("admin");
         //如果用户未登录
@@ -154,7 +174,6 @@ public class BackManagementController {
             return "redirect:/unAuthorized";
         }
         List<Activity> allActivity = backManagementService.findAllActivityByAdminDepartmentId(admin.getDepartmentId());
-        System.out.println(allActivity);
         if (allActivity != null) {
             model.addAttribute("allActivity", allActivity);
             return "back_management/activity_management";
@@ -170,6 +189,73 @@ public class BackManagementController {
             //删除成功
             return "redirect:/toArtivityManagementPage";
         }
+        return "500";
+    }
+
+    @GetMapping("/toActivityExamineManagementPage")
+    public String toActivityExamineManagementPage(HttpServletRequest request, Model model) {
+        //获取当前登录用户信息
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        //如果用户未登录
+        if (admin == null) {
+            return "redirect:/unAuthorized";
+        }
+        List<Activity> allExamineActivity = backManagementService.findAllExamineActivityByAdminDepartmentId(admin.getDepartmentId());
+        if (allExamineActivity != null) {
+            model.addAttribute("allExamineActivity", allExamineActivity);
+            return "back_management/activity_examine_management";
+        }
+        return "500";
+    }
+
+    @GetMapping("/examineActivity/Pass-Or-UnPass/{activityId}/{status}")
+    public String passOrUnPassActivity(@PathVariable("activityId") Integer activityId, @PathVariable("status")Integer status, HttpServletRequest request) {
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        //修改活动表中的状态
+        int data = -1;
+        //1为设置为通过，3为未通过
+        data = backManagementService.updActivityStatus(activityId, status);
+        if (data > 0) {
+
+            if (admin.getDepartmentId() == 1000) {
+                return "redirect:/toActivityExamineAdminManagementPage";
+            }
+            //修改成功
+            return "redirect:/toActivityExamineManagementPage";
+
+        }
+        //修改失败返回到500错误页面
+        return "500";
+    }
+
+    @GetMapping("/toActivityExamineAdminManagementPage")
+    public String toActivityExamineAdminManagementPage(HttpServletRequest request, Model model) {
+        //获取当前登录用户信息
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        //如果用户未登录
+        if (admin == null) {
+            return "redirect:/unAuthorized";
+        }
+        List<Activity> allPZHUAdminActivity = backManagementService.findAllExamineActivityByPZHUAdmin();
+        if (allPZHUAdminActivity != null) {
+            model.addAttribute("allPZHUAdminActivity", allPZHUAdminActivity);
+            return "back_management/activity_admin_examine_management";
+        }
+        return "500";
+    }
+
+    @GetMapping("/examineActivityByPZHUAdmin/Pass-Or-UnPass/{activityId}/{status}")
+    public String passOrUnPassByPZHUAdminActivity(@PathVariable("activityId") Integer activityId, @PathVariable("status")Integer status) {
+        //修改活动表中的状态
+        int data = -1;
+        //2为发布，3为未通过
+        data = backManagementService.updActivityStatus(activityId, status);
+        if (data > 0) {
+            //修改成功
+            return "redirect:/toActivityExamineAdminManagementPage";
+
+        }
+        //修改失败返回到500错误页面
         return "500";
     }
 
@@ -222,7 +308,7 @@ public class BackManagementController {
         int helpId = Integer.parseInt(request.getParameter("helpId"));
         int data = -1;
         if ((data = backManagementService.delAlumniHelpByHelpId(helpId)) > 0) {
-            return "redirect:/toForumManagementPage";
+            return "redirect:/toAlumniHelpManagementPage";
         }
         return "500";
     }

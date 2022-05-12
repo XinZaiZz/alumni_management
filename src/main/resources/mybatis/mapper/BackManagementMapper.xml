@@ -101,7 +101,7 @@
         </association>
     </resultMap>
     <select id="findAllUserByAdminDepartmentId" parameterType="int" resultType="user">
-        select userId, userName, password, nickName, departmentId from user where departmentId = #{departmentId} order by userId desc;
+        select userId, userName, password, nickName, departmentId, gender from user where departmentId = #{departmentId} order by userId desc;
     </select>
 
     <insert id="insUserByAdmin" parameterType="user">
@@ -126,9 +126,23 @@
         delete from news_article where newArticleId = #{newArticleId};
     </delete>
 
+    <select id="findAllExamineActivityByAdminDepartmentId" parameterType="int" resultMap="ActivityMap">
+        select * from activity join user join department on department.departmentId = user.departmentId
+        on user.userId = activity.userId where activity.departmentId = #{departmentId} and status = 0 or status = 3 order by activityDate desc;
+    </select>
+
+    <select id="findAllExamineActivityByPZHUAdmin" resultMap="ActivityMap">
+        select * from activity join user join department on department.departmentId = user.departmentId
+        on user.userId = activity.userId where status = 1 order by activityDate desc;
+    </select>
+
+    <update id="updActivityStatus" parameterType="int">
+        update activity set status = #{status} where activityId = #{activityId};
+    </update>
+
     <select id="findAllActivityByAdminDepartmentId" parameterType="int" resultMap="ActivityMap">
         select * from activity join user join department on department.departmentId = user.departmentId
-        on user.userId = activity.userId where activity.departmentId = #{departmentId} order by activityDate desc;
+        on user.userId = activity.userId where activity.departmentId = #{departmentId} and status = 2 order by activityDate desc;
     </select>
 
     <delete id="delActivityByActivityId" parameterType="int">
@@ -166,4 +180,47 @@
         update alumni_photo set photoTitle = #{photoTitle}, photoDate = #{photoDate}, photoImageName = #{photoImageName}
         where photoId = #{photoId};
     </update>
+
+    <select id="selUserCount" parameterType="int" resultType="int">
+        select count(*) from user where departmentId = #{departmentId};
+    </select>
+
+    <select id="selMaleCount" parameterType="int" resultType="int">
+        select count(*) from user where gender = '男' and departmentId = #{departmentId};
+    </select>
+
+    <select id="countByOccupationGroup" resultType="map" parameterType="int">
+        SELECT occupationGroup, count(*) occupationGroupCount FROM user where departmentId = #{departmentId} GROUP BY occupationGroup;
+    </select>
+
+    <select id="countByMajorGroup" resultType="map" parameterType="int">
+        SELECT major, count(*) majorUserCount FROM `user` where departmentId = #{departmentId} GROUP BY major;
+    </select>
+
+    <select id="countByGrade" parameterType="int" resultType="map">
+        SELECT grade, count(*) gradeUserCount FROM `user` where departmentId = #{departmentId} GROUP BY grade;
+    </select>
+
+    <select id="countByAge" parameterType="int" resultType="map">
+        SELECT
+            CASE
+                WHEN age IS NULL THEN '未知'
+                WHEN age >= 0 and age &lt; 20 THEN '1-19'
+                WHEN age >= 20 and age &lt; 40 THEN '20-39'
+                WHEN age >= 40 and age &lt; 60 THEN '40-59'
+                WHEN age >= 60 THEN '60以上'
+            END
+        as ageGroup,COUNT(*) as ageGroupCount from `user` where departmentId = #{departmentId} GROUP BY
+            CASE
+                WHEN age IS NULL THEN '未知'
+                WHEN age >= 0 and age &lt; 20 THEN '1-19'
+                WHEN age >= 20 and age &lt; 40 THEN '20-39'
+                WHEN age >= 40 and age &lt; 60 THEN '40-59'
+                WHEN age >= 60 THEN '60以上'
+            END
+    </select>
+
+    <select id="countByInstructorName" parameterType="int" resultType="map">
+        SELECT instructorName, COUNT(*) instructorNameCount FROM `user` where departmentId = #{departmentId} GROUP BY instructorName
+    </select>
 </mapper>

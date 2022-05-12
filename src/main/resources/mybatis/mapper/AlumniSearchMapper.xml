@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youxin.alumni_management.mapper.AlumniSearchMapper">
+
+    <resultMap id="userMap" type="User">
+        <!-- column是查询结果的列名, property是对应实体类中的属性名 -->
+        <id column="userId" jdbcType="INTEGER" property="userId"/>
+        <result column="userName" jdbcType="VARCHAR" property="userName"/>
+        <result column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="grade" jdbcType="INTEGER" property="grade"/>
+        <result column="studentNumber" jdbcType="BIGINT" property="studentNumber"/>
+        <result column="major" jdbcType="VARCHAR" property="major"/>
+        <result column="instructorName" jdbcType="VARCHAR" property="instructorName"/>
+        <!-- 多表查询时连接user属性段 -->
+        <association property="department" javaType="Department" >
+            <id column="departmentId" jdbcType="INTEGER" property="departmentId"/>
+            <!-- 不需要的字段可以注释掉 -->
+            <result column="departmentName" jdbcType="VARCHAR" property="departmentName"/>
+        </association>
+    </resultMap>
+
+    <select id="findUsersByUserName" resultMap="userMap" parameterType="String">
+        select *
+        from user join department on department.departmentId = user.departmentId
+        where userName like "%"#{userName}"%";
+    </select>
+
+    <select id="findUsersByNickName" resultMap="userMap" parameterType="String">
+        select * from user join department on department.departmentId = user.departmentId
+        where nickName like "%"#{nickName}"%"
+    </select>
+
+    <select id="findUsersByGrade" resultMap="userMap" parameterType="String">
+        select * from user join department on department.departmentId = user.departmentId
+        where grade like "%"#{grade}"%"
+    </select>
+
+    <select id="findUsersByMajor" resultType="user" parameterType="String">
+        select * from user join department on department.departmentId = user.departmentId
+        where major like "%"#{major}"%"
+    </select>
+
+    <select id="findUsersByStudentNumber" resultMap="userMap" parameterType="long">
+        select * from user join department on department.departmentId = user.departmentId
+        where studentNumber like "%"#{studentNumber}"%"
+    </select>
+
+    <select id="findUsersByBedroom" resultMap="userMap" parameterType="String">
+        select * from user join department on department.departmentId = user.departmentId
+        where bedroomNumber like "%"#{bedroomNumber}"%"
+    </select>
+
+    <select id="findUsersByInstructorName" resultMap="userMap" parameterType="String">
+        select * from user join department on department.departmentId = user.departmentId
+        where instructorName like "%"#{instructorName}"%"
+    </select>
+
+    <select id="findUsersByEmail" resultMap="userMap" parameterType="String">
+        select * from user join department on department.departmentId = user.departmentId
+        where email like "%"#{email}"%"
+    </select>
+
+</mapper>

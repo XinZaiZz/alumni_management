@@ -43,6 +43,9 @@ public class Activity {
     //活动文章名称
     private String activityFileName;
 
+    //审核状态
+    private Integer status;
+
     //发布用户信息
     private User user;
 

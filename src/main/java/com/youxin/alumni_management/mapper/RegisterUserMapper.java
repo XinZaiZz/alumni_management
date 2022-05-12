@@ -2,6 +2,7 @@ package com.youxin.alumni_management.mapper;
 
 
 import com.youxin.alumni_management.pojo.RegisterUser;
+import com.youxin.alumni_management.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,4 +18,10 @@ public interface RegisterUserMapper {
 
     //用户注册
     int insRegisterUser(RegisterUser registerUser);
+
+    //查询已经通过的注册用户信息
+    List<RegisterUser> findAllAlreadyPassRegisterUser();
+
+    //插入用户到user表中
+    int insPassUser(User user);
 }

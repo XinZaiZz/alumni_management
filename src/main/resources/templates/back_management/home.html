@@ -36,14 +36,15 @@
             <!-- Page Header-->
             <header class="page-header">
                 <div class="container-fluid">
-                    <h2 class="no-margin-bottom">主页</h2>
+                    <h2 class="no-margin-bottom">校友统计</h2>
                 </div>
             </header>
 
             <!-- Breadcrumb-->
             <div class="breadcrumb-holder container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item active">Home</li>
+                    <li class="breadcrumb-item"><a href="index.html" th:href="@{/toDashboard}">Home</a></li>
+                    <li class="breadcrumb-item active">校友统计</li>
                 </ul>
             </div>
             <!-- 传递参数给组件 -->
@@ -54,16 +55,201 @@
                             <div class="card">
                                 <div class="card-close">
                                     <div class="dropdown">
-                                        <button type="button" id="closeCard3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
                                         <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
-                                    <h3 class="h4">学院校友男女比例</h3>
+                                    <h3 class="h4" th:text="${session.admin.getDepartment().getDepartmentName()} + '校友性别统计'"></h3>
                                 </div>
-                                <div class="card-body">
-                                    <canvas id="pieChartExample"></canvas>
+
+                                <!--表格列表-->
+                                <table id="tb" class="table">
+                                    <thead>
+                                    <tr>
+                                        <th th:text="${session.admin.getDepartment().getDepartmentName() } + '总人数'"></th>
+                                        <th>男性用户</th>
+                                        <th>女性用户</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="show_tbody">
+                                    <tr>
+                                        <td th:text="${userCount}"></td>
+                                        <td th:text="${maleCount}"></td>
+                                        <td th:text="${userCount - maleCount} ">******</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                                    </div>
                                 </div>
+                                <div class="card-header d-flex align-items-center">
+                                    <h3 class="h4" th:text="${session.admin.getDepartment().getDepartmentName()} + '校友职业类型统计'">学院校友职业类别统计</h3>
+                                </div>
+
+                                <!--表格列表-->
+                                <table class="table">
+                                    <thead>
+                                    <tr >
+                                        <th>职业类型</th>
+                                        <th>该职业类型人数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="entries ,occupationGroup : ${occupationGroups}">
+                                        <td th:text="${entries['occupationGroup']}"></td>
+                                        <td th:text="${entries['occupationGroupCount']}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 传递参数给组件 -->
+            <section class="tables">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                                    </div>
+                                </div>
+                                <div class="card-header d-flex align-items-center">
+                                    <h3 class="h4" th:text="${session.admin.getDepartment().getDepartmentName()} + '校友专业统计'">学院校友专业分布</h3>
+                                </div>
+
+                                <!--表格列表-->
+                                <table class="table">
+                                    <thead>
+                                    <tr >
+                                        <th>专业名称</th>
+                                        <th>该专业人数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="entries ,majorGroup : ${majorGroups}">
+                                        <td th:text="${entries['major']}"></td>
+                                        <td th:text="${entries['majorUserCount']}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                                    </div>
+                                </div>
+                                <div class="card-header d-flex align-items-center">
+                                    <h3 class="h4" th:text="${session.admin.getDepartment().getDepartmentName()} + '校友年级统计'">学院校友年级分布</h3>
+                                </div>
+
+                                <!--表格列表-->
+                                <table class="table">
+                                    <thead>
+                                    <tr >
+                                        <th>年级</th>
+                                        <th>该年级人数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="entries ,gradeGroup : ${gradeGroups}">
+                                        <td th:text="${entries['grade']}"></td>
+                                        <td th:text="${entries['gradeUserCount']}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 传递参数给组件 -->
+            <section class="tables">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                                    </div>
+                                </div>
+                                <div class="card-header d-flex align-items-center">
+                                    <h3 class="h4" th:text="${session.admin.getDepartment().getDepartmentName()} + '校友年龄段统计'">学院校友年龄分布</h3>
+                                </div>
+
+                                <!--表格列表-->
+                                <table class="table">
+                                    <thead>
+                                    <tr >
+                                        <th>年龄段</th>
+                                        <th>该年龄段人数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="entries ,ageGroup : ${ageGroups}">
+                                        <td th:text="${entries['ageGroup']}"></td>
+                                        <td th:text="${entries['ageGroupCount']}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div aria-labelledby="closeCard3" class="dropdown-menu dropdown-menu-right has-shadow"><a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a><a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a></div>
+                                    </div>
+                                </div>
+                                <div class="card-header d-flex align-items-center">
+                                    <h3 class="h4" th:text="${session.admin.getDepartment().getDepartmentName()} + '校友辅导员统计'">学院校友辅导员姓名分布</h3>
+                                </div>
+
+                                <!--表格列表-->
+                                <table class="table">
+                                    <thead>
+                                    <tr >
+                                        <th>辅导员</th>
+                                        <th>该辅导员人数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="entries ,instructorNameGroup : ${instructorNameGroups}">
+                                        <td th:text="${entries['instructorName']}"></td>
+                                        <td th:text="${entries['instructorNameCount']}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>

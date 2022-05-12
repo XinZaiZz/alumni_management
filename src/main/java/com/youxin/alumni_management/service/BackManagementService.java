@@ -3,6 +3,7 @@ package com.youxin.alumni_management.service;
 import com.youxin.alumni_management.pojo.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author youxin
@@ -25,6 +26,12 @@ public interface BackManagementService {
 
     List<Activity> findAllActivityByAdminDepartmentId(Integer departmentId);
 
+    List<Activity> findAllExamineActivityByAdminDepartmentId(Integer departmentId);
+
+    List<Activity> findAllExamineActivityByPZHUAdmin();
+
+    int updActivityStatus(Integer activityId, Integer status);
+
     int delActivityByActivityId(Integer activityId);
 
     List<Forum> findAllForumByAdminDepartmentId(Integer departmentId);
@@ -43,4 +50,18 @@ public interface BackManagementService {
 
     //更新校友展示文章基本信息
     int updAlumniPhoto(AlumniPhoto alumniPhoto);
+
+    int selCountUser(Integer departmentId);
+
+    int selCountMale(Integer departmentId);
+
+    List<Map<String, Object>> countByOccupationGroup(Integer departmentId);
+
+    List<Map<String, Object>> countByMajorGroup(Integer departmentId);
+
+    List<Map<String, Object>> countByGrade(Integer departmentId);
+
+    List<Map<String, Object>> countByAge(Integer departmentId);
+
+    List<Map<String, Object>> countByInstructorName(Integer departmentId);
 }

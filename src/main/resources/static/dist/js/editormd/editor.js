@@ -426,7 +426,7 @@
         let imageFileType = uploadImageVal.substring(uploadImageVal.lastIndexOf('.') + 1).toLowerCase();
         // alert(imageFileType);
         //判断封面图片只能够为img或者png格式
-        if (imageFileType === 'img' || imageFileType === 'png') {
+        if (imageFileType === 'jpg' || imageFileType === 'png') {
             let formData = new FormData();
             formData.append("articleTitle", articleTitle.val());
             formData.append("articleContent", articleContent.val());
@@ -472,7 +472,7 @@
             }, 3000);
         }
         else {
-            alert("图片上传格式只支持img或者png格式哦！")
+            alert("图片上传格式只支持jpg或者png格式哦！")
         }
     });
 
@@ -486,7 +486,7 @@
         let imageFileType = uploadImageVal.substring(uploadImageVal.lastIndexOf('.') + 1).toLowerCase();
         // alert(imageFileType);
         //判断封面图片只能够为img或者png格式
-        if (imageFileType === 'img' || imageFileType === 'png' || typeof(uploadImage[0].files[0]) === "undefined") {
+        if (imageFileType === 'jpg' || imageFileType === 'png' || typeof(uploadImage[0].files[0]) === "undefined") {
             let formData = new FormData();
             formData.append("articleTitle", articleTitle.val());
             formData.append("articleContent", articleContent.val());
@@ -532,7 +532,7 @@
             }, 3000);
         }
         else {
-            alert("图片上传格式只支持img或者png格式哦！")
+            alert("图片上传格式只支持jpg或者png格式哦！")
         }
     });
 

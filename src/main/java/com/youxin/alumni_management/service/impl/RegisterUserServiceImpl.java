@@ -2,6 +2,7 @@ package com.youxin.alumni_management.service.impl;
 
 import com.youxin.alumni_management.mapper.RegisterUserMapper;
 import com.youxin.alumni_management.pojo.RegisterUser;
+import com.youxin.alumni_management.pojo.User;
 import com.youxin.alumni_management.service.RegisterUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,15 @@ public class RegisterUserServiceImpl implements RegisterUserService {
     @Override
     public int insRegisterUser(RegisterUser registerUser) {
         return registerUserMapper.insRegisterUser(registerUser);
+    }
+
+    @Override
+    public List<RegisterUser> findAllAlreadyPassRegisterUser() {
+        return registerUserMapper.findAllAlreadyPassRegisterUser();
+    }
+
+    @Override
+    public int insPassUser(User user) {
+        return registerUserMapper.insPassUser(user);
     }
 }

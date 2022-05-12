@@ -47,7 +47,7 @@ public class User {
     private String major;
 
     //年级
-    private String grade;
+    private Integer grade;
 
     //寝室号
     private String bedroomNumber;
@@ -72,5 +72,11 @@ public class User {
 
     //个人简介
     private String personalProfile;
+
+    //辅导员姓名
+    private String instructorName;
+
+    //学院信息
+    private Department department;
 
 }

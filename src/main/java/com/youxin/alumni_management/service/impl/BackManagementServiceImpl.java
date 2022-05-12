@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author youxin
@@ -56,6 +57,21 @@ public class BackManagementServiceImpl implements BackManagementService {
     }
 
     @Override
+    public List<Activity> findAllExamineActivityByAdminDepartmentId(Integer departmentId) {
+        return backManagementMapper.findAllExamineActivityByAdminDepartmentId(departmentId);
+    }
+
+    @Override
+    public List<Activity> findAllExamineActivityByPZHUAdmin() {
+        return backManagementMapper.findAllExamineActivityByPZHUAdmin();
+    }
+
+    @Override
+    public int updActivityStatus(Integer activityId, Integer status) {
+        return backManagementMapper.updActivityStatus(activityId, status);
+    }
+
+    @Override
     public int delActivityByActivityId(Integer activityId) {
         return backManagementMapper.delActivityByActivityId(activityId);
     }
@@ -94,4 +110,41 @@ public class BackManagementServiceImpl implements BackManagementService {
     public int updAlumniPhoto(AlumniPhoto alumniPhoto) {
         return backManagementMapper.updAlumniPhoto(alumniPhoto);
     }
+
+    @Override
+    public int selCountUser(Integer departmentId) {
+        return backManagementMapper.selUserCount(departmentId);
+    }
+
+    @Override
+    public int selCountMale(Integer departmentId) {
+        return backManagementMapper.selMaleCount(departmentId);
+    }
+
+    @Override
+    public List<Map<String, Object>> countByOccupationGroup(Integer departmentId) {
+        return backManagementMapper.countByOccupationGroup(departmentId);
+    }
+
+    @Override
+    public List<Map<String, Object>> countByMajorGroup(Integer departmentId) {
+        return backManagementMapper.countByMajorGroup(departmentId);
+    }
+
+    @Override
+    public List<Map<String, Object>> countByGrade(Integer departmentId) {
+        return backManagementMapper.countByGrade(departmentId);
+    }
+
+    @Override
+    public List<Map<String, Object>> countByAge(Integer departmentId) {
+        return backManagementMapper.countByAge(departmentId);
+    }
+
+    @Override
+    public List<Map<String, Object>> countByInstructorName(Integer departmentId) {
+        return backManagementMapper.countByInstructorName(departmentId);
+    }
+
+
 }

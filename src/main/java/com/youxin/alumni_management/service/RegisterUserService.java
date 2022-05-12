@@ -1,6 +1,7 @@
 package com.youxin.alumni_management.service;
 
 import com.youxin.alumni_management.pojo.RegisterUser;
+import com.youxin.alumni_management.pojo.User;
 
 import java.util.List;
 
@@ -17,4 +18,8 @@ public interface RegisterUserService {
     int updUserStatus(Integer registerId, Integer status);
 
     int insRegisterUser(RegisterUser registerUser);
+
+    List<RegisterUser> findAllAlreadyPassRegisterUser();
+
+    int insPassUser(User user);
 }

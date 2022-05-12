@@ -1,9 +1,11 @@
 package com.youxin.alumni_management.mapper;
 
 import com.youxin.alumni_management.pojo.*;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author youxin
@@ -32,6 +34,15 @@ public interface BackManagementMapper {
     //管理员删除新闻文章
     int delNewsArticleByNewArticleId(Integer newArticleId);
 
+    //查询申请中和申请未通过的所有活动文章
+    List<Activity> findAllExamineActivityByAdminDepartmentId(Integer departmentId);
+
+    //查询二级学院已经通过但还没有发布的活动文章
+    List<Activity> findAllExamineActivityByPZHUAdmin();
+
+    //改变活动文章状态
+    int updActivityStatus(Integer activityId, Integer status);
+
     //查询管理员所属学院的活动文章
     List<Activity> findAllActivityByAdminDepartmentId(Integer departmentId);
 
@@ -58,4 +69,30 @@ public interface BackManagementMapper {
 
     //更新校友展示文章基本信息
     int updAlumniPhoto(AlumniPhoto alumniPhoto);
+
+    //查询所属学院人数
+    int selUserCount(Integer departmentId);
+
+    //查询学院男性人数
+    int selMaleCount(Integer departmentId);
+
+    //查询职业类别和人数
+    @MapKey("occupationGroupCount")
+    List<Map<String, Object>> countByOccupationGroup(Integer departmentId);
+
+    //查询专业类别和人数
+    @MapKey("majorUserCount")
+    List<Map<String, Object>> countByMajorGroup(Integer departmentId);
+
+    //查询学院年级人数分布
+    @MapKey("majorUserCount")
+    List<Map<String, Object>> countByGrade(Integer departmentId);
+
+    //查询所属学院各年龄段人数
+    @MapKey("ageGroup")
+    List<Map<String, Object>> countByAge(Integer departmentId);
+
+    //根据辅导员姓名分组学院人数
+    @MapKey("")
+    List<Map<String, Object>> countByInstructorName(Integer departmentId);
 }

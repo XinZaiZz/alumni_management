@@ -47,7 +47,7 @@
             <!-- Page Header-->
             <header class="page-header">
                 <div class="container-fluid">
-                    <h2 class="no-margin-bottom">查看用户信息</h2>
+                    <h2 class="no-margin-bottom">用户信息</h2>
                 </div>
             </header>
 
@@ -55,9 +55,68 @@
             <div class="breadcrumb-holder container-fluid">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html" th:href="@{/toDashboard}">Home</a></li>
-                    <li class="breadcrumb-item active">查看用户信息</li>
+                    <li class="breadcrumb-item active">用户信息</li>
                 </ul>
             </div>
+
+
+            <!-- Dashboard Counts Section-->
+            <section class="dashboard-counts no-padding-bottom">
+                <div class="container-fluid">
+                    <div class="row bg-white has-shadow">
+                        <!-- Item -->
+                        <div class="col-xl-4 col-sm-12">
+                            <div class="item d-flex align-items-center">
+                                <div class="icon bg-violet"><i class="icon-user"></i></div>
+                                <div class="title"><span>学院<br>总人数</span>
+                                    <div class="progress">
+                                        <div role="progressbar" style="width: 100%; height: 4px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                                    </div>
+                                </div>
+                                <div class="number"><strong th:text="${userCount}"></strong></div>
+                            </div>
+                        </div>
+                        <!-- Item -->
+                        <div class="col-xl-4 col-sm-12">
+                            <div class="item d-flex align-items-center">
+                                <div class="icon bg-red"><i class="icon-padnote"></i></div>
+                                <div class="title"><span>男性<br>注册校友</span>
+                                    <div class="progress">
+                                        <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="50" th:style="'width:' + ${#numbers.formatDecimal(maleCount / (userCount * 1.00) * 100,1,'COMMA',0,'POINT')} + '%'" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                                    </div>
+                                </div>
+                                <div class="number"><strong th:text="${maleCount}"></strong></div>
+                            </div>
+                        </div>
+                        <!-- Item -->
+                        <div class="col-xl-4 col-sm-12 ">
+                            <div class="item d-flex align-items-center">
+                                <div class="icon bg-green"><i class="icon-bill"></i></div>
+                                <div class="title"><span>女性<br>注册校友</span>
+                                    <div class="progress">
+                                        <div role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green" th:style="'width:' + ${#numbers.formatDecimal((userCount - maleCount) / (userCount * 1.00) * 100,1,'COMMA',0,'POINT')} + '%'"></div>
+                                    </div>
+                                </div>
+                                <div class="number"><strong th:text="${userCount - maleCount}"></strong></div>
+                            </div>
+                        </div>
+                        <!--&lt;!&ndash; Item &ndash;&gt;
+                        <div class="col-xl-3 col-sm-6">
+                            <div class="item d-flex align-items-center">
+                                <div class="icon bg-orange"><i class="icon-check"></i></div>
+                                <div class="title"><span>Open<br>Cases</span>
+                                    <div class="progress">
+                                        <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
+                                    </div>
+                                </div>
+                                <div class="number"><strong>50</strong></div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </section>
+
+
             <!-- 传递参数给组件 -->
             <section class="tables">
                 <div class="container-fluid">
@@ -71,7 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
-                                    <h3 class="h4">本学院校友用户名单</h3>
+                                    <h3 class="h4" th:text="${session.admin.getDepartment().getDepartmentName()} + '校友用户名单'"></h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="content">
@@ -214,6 +273,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <!--表格列表-->
                                         <table id="tb" class="table">
                                             <thead>
@@ -222,6 +282,7 @@
                                                 <th>用户名</th>
                                                 <th>用户密码</th>
                                                 <th>用户昵称</th>
+                                                <th>用户性别</th>
                                                 <th>用户学院id</th>
                                                 <th>操作</th>
 
@@ -234,6 +295,7 @@
                                                 <input type="hidden" th:value="${user.getPassword}">
                                                 <td>******</td>
                                                 <td th:text="${user.getNickName()}"></td>
+                                                <td th:text="${user.getGender()}"></td>
                                                 <td th:text="${user.getDepartmentId()}"></td>
                                                 <td>
                                                     <a href="#" class="edit" data-toggle="modal" onclick="toUpd(this)" id="toUpd">编辑</a>

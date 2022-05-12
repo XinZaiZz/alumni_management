@@ -72,7 +72,7 @@ $(document).ready(function () {
             for (let i = 0; i < data.data.length; i++) {
                 let oLi = document.createElement("li");
                 // let oDate = new Date();
-                console.log(data.data[i].commentUserImgUri)
+                // console.log(data.data[i].commentUserImgUri)
                 oLi.innerHTML = "<div class=\"userPic\"><img src=\"" + data.data[i].commentUserImgUri + "\"></div>\
                              <div class=\"content\">\
                                 <div class=\"userName\"><a href=\"javascript:;\">" + data.data[i].commentNickName + "</a>:</div>\

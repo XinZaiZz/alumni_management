@@ -72,7 +72,7 @@ public class UserController {
         user.setAge((request.getParameter("birth").equals("")) ? 0 : (cal.get(Calendar.YEAR) - Integer.parseInt(request.getParameter("birth").substring(0, 4))));
         user.setStudentNumber(((request.getParameter("studentNumber").equals("")) || (request.getParameter("number").equals("0"))) ? 0 : Long.parseLong(request.getParameter("studentNumber")));
         user.setMajor(request.getParameter("major"));
-        user.setGrade(request.getParameter("grade"));
+        user.setGrade(Integer.parseInt(request.getParameter("grade")));
         user.setBedroomNumber(request.getParameter("bedroomNumber"));
         user.setOccupation(request.getParameter("occupation"));
         user.setCompany(request.getParameter("company"));
@@ -87,7 +87,7 @@ public class UserController {
         //修改成功
         if (data > 0) {
             request.setAttribute("updUserMsg", "修改成功！返回首页");
-            return "index";
+            return "redirect:/toIndex";
         }
         request.setAttribute("updUserMsg", "修改失败！检查网络或者联系管理员试试哦QAQ");
         return "500";

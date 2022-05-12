@@ -19,4 +19,13 @@
         values (#{username}, #{password}, #{nickName}, #{gender}, #{departmentId}, #{email})
     </insert>
 
+    <select id="findAllAlreadyPassRegisterUser" resultType="registerUser">
+        select * from register_user where status=1;
+    </select>
+
+    <insert id="insPassUser" parameterType="user">
+        insert user(userName, password, nickName, gender, departmentId, email)
+        values (#{userName}, #{password}, #{nickName}, #{gender}, #{departmentId}, #{email})
+    </insert>
+
 </mapper>

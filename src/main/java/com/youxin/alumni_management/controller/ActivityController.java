@@ -115,7 +115,7 @@ public class ActivityController {
                 data = activityService.insActivity(activity);
                 if (data > 0) {
                     mapStatus.put("status", 1);
-                    mapStatus.put("message", "发布成功哦\\\\*^o^*//");
+                    mapStatus.put("message", "发布成功哦\\\\*^o^*//，静静等待管理员审核吧！");
                 } else {
                     //插入失败
                     mapStatus.put("status", 0);
