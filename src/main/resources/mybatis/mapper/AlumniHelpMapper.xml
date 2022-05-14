@@ -26,7 +26,7 @@
         select *
         from alumni_help
                  join department on department.departmentId = alumni_help.departmentId
-        where 0 = 0 order by helpDate desc;
+        where status = 1 order by helpDate desc;
     </select>
 
     <insert id="insAlumniHelp" parameterType="alumniHelp">
@@ -43,6 +43,6 @@
         select *
         from alumni_help
                  join department on department.departmentId = alumni_help.departmentId
-        where helpHeadImage != 'default.png' limit 2;
+        where status = 1 and helpHeadImage != 'default.png' limit 2;
     </select>
 </mapper>

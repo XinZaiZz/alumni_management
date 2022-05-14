@@ -119,12 +119,20 @@
     </delete>
 
     <select id="findAllNewsArticleByAdminId" resultType="newsArticle">
-        select * from news_article where adminId = #{adminId} order by newArticleDate desc;
+        select * from news_article where adminId = #{adminId} and status = 1 order by newArticleDate desc;
     </select>
 
     <delete id="delNewsArticleByNewArticleId" parameterType="int">
         delete from news_article where newArticleId = #{newArticleId};
     </delete>
+
+    <select id="findAllExamineNewArticles" resultType="newsArticle">
+        select * from news_article where status = 0 order by newArticleDate desc;
+    </select>
+
+    <update id="updNewsArticleStatus" parameterType="int">
+        update news_article set status = #{status} where newArticleId = #{newArticleId};
+    </update>
 
     <select id="findAllExamineActivityByAdminDepartmentId" parameterType="int" resultMap="ActivityMap">
         select * from activity join user join department on department.departmentId = user.departmentId
@@ -167,6 +175,15 @@
         delete from alumni_help where helpId = #{helpId};
     </delete>
 
+    <select id="findAllExamineAlumniHelp" resultMap="AlumniHelpMap">
+        select  * from alumni_help join admin join department on department.departmentId = admin.departmentId
+        on admin.adminId = alumni_help.adminId where status = 0;
+    </select>
+
+    <update id="updAlumniHelpStatus" parameterType="int">
+        update alumni_help set status = #{status} where helpId = #{helpId};
+    </update>
+
     <select id="findAllAlumniPhotoByAdminDepartmentId" parameterType="int" resultMap="AlumniPhotoMap">
         select * from alumni_photo join admin join department on department.departmentId = admin.departmentId
         on admin.adminId = alumni_photo.adminId where alumni_photo.departmentId = #{departmentId} order by photoDate desc;
@@ -179,6 +196,15 @@
     <update id="updAlumniPhoto" parameterType="alumniPhoto">
         update alumni_photo set photoTitle = #{photoTitle}, photoDate = #{photoDate}, photoImageName = #{photoImageName}
         where photoId = #{photoId};
+    </update>
+
+    <select id="findAllExamineAlumniPhoto" resultMap="AlumniPhotoMap">
+        select * from alumni_photo join admin join department on department.departmentId = admin.departmentId
+        on admin.adminId = alumni_photo.adminId where status = 0 order by photoDate desc;
+    </select>
+
+    <update id="updAlumniPhotoStatus" parameterType="int">
+        update alumni_photo set status = #{status} where photoId = #{photoId};
     </update>
 
     <select id="selUserCount" parameterType="int" resultType="int">

@@ -18,92 +18,128 @@
         initial-scale=1则将显示未经缩放的web文档
      -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>校友帮扶发布</title>
+    <title>攀枝花学院校友后台管理系统</title>
+
     <!-- 网页图标引入 -->
     <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" >
-    <link rel="stylesheet" th:href="@{/dist/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/dist/css/editormd/editor.css}">
     <link rel="stylesheet" th:href="@{/dist/css/editormd/editormd.min.css}">
+
+    <link rel="stylesheet" href="css/custom.css" th:href="@{/dist/css/back/style.css}">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" th:href="@{/backadmin/bootstrap/css/bootstrap.min.css}">
+    <!-- Font Awesome CSS-->
+    <!--    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" th:href="@{/backadmin/font-awesome/css/font-awesome.min.css}">-->
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css" th:href="@{/backadmin/css/fontastic.css}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet" th:href="@{/backadmin/css/style.default.css}">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css" th:href="@{/backadmin/css/custom.css}">
 
 
 </head>
 <body>
-<div th:replace="~{commons/commons.html::topbar(active = 'alumniHelp')}"></div>
+<div class="page">
+    <div th:replace="~{/commons/backcommons.html::topbar}"></div>
+    <div class="page-content d-flex align-items-stretch">
+        <!-- side bar -->
+        <div th:replace="~{/commons/backcommons::sidebar(active = 'alumniHelp_write.html')}"></div>
+        <!-- 具体内容 -->
+        <div class="content-inner">
+            <!-- Page Header-->
+            <header class="page-header">
+                <div class="container-fluid">
+                    <h2 class="no-margin-bottom">帮扶管理</h2>
+                </div>
+            </header>
+
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-holder container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html" th:href="@{/toDashboard}">Home</a></li>
+                    <li class="breadcrumb-item active">校友帮扶发布</li>
+                </ul>
+            </div>
 
 
-<div id="writeArticle" style="padding-top: 3%; padding-left: 5%; padding-right: 5%; padding-bottom: 3%">
-    <div class="zhy-editor">
-        <div class="zhy-editor-input">
-            <input id="zhy-editor-title" type="text" placeholder="输入文章标题">
-            <button type="button" class="publishForumBtn btn btn-success" style="position: relative;left: 20px" data-toggle="modal" data-target="#myModal">发布帮扶文章</button>
+            <div id="writeArticle" style="padding-top: 3%; padding-left: 5%; padding-right: 5%; padding-bottom: 3%">
+                <div class="zhy-editor">
+                    <div class="zhy-editor-input">
+                        <input id="zhy-editor-title" type="text" placeholder="输入文章标题" style="border: 1px solid lightskyblue">
+                        <button type="button" class="publishForumBtn btn btn-success" style="position: relative;left: 20px" data-toggle="modal" data-target="#myModal">发布帮扶文章</button>
+                    </div>
+                </div>
+                <div class="zhy-editor-writing">
+                    <!--MarkDown的id标志 -->
+                    <div id="my-editormd">
+                        <!-- 书写与实时显示的textarea -->
+                        <textarea id="my-editormd-markdown-doc" name="my-editormd-markdown-doc" style="display:none;"></textarea>
+                        <!-- 用于后端获取md稳当内容，Java中：request.getParameter("my-editormd-html-code")。 -->
+                        <textarea id="my-editormd-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
+                    </div>
+                    <!--        <form>-->
+
+
+                    <!--        </form>-->
+                </div>
+
+                <div class="notice-box notice-box-title">
+                    <span> 文章标题不能为空</span>
+                </div>
+                <div class="notice-box notice-box-content">
+                    <span> 文章內容不能为空</span>
+                </div>
+            </div>
+
+            <!-- 模态框 -->
+            <div class="modal fade bs-example-modal-lg" id="myModal">
+                <div class="modal-dialog modal-lg modal_position">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">添加封面图和附件</h4>
+                            <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-1 column ">
+                                </div>
+                                <div class="form-group col-md-10 column">
+                                    <div class="col-md-6 column " >
+                                        <label for="uploadFile">帮扶文件上传（非必选） <span style="color: red">*</span></label>
+                                        <input type="file" id="uploadFile">
+                                        <p class="help-block">在这里选择你想上传的文件.</p>
+                                    </div>
+                                    <div class="col-md-6 column ">
+                                        <label for="uploadImage">封面图上传（非必选） <span style="color: red">*</span></label>
+                                        <input type="file" id="uploadImage">
+                                        <p class="help-block">在这里选择你想上传的图片.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 column ">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <!--<button type="button" class="surePublishBtn btn btn-primary" onclick="window.location.href = '/toIndex'">发布博客</button>-->
+                            <button type="button" class="surePublishAlumniHelpBtn btn btn-primary">发布</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div th:replace="~{/commons/backcommons::footerbar}"></div>
         </div>
-    </div>
-    <div class="zhy-editor-writing">
-        <!--MarkDown的id标志 -->
-        <div id="my-editormd">
-            <!-- 书写与实时显示的textarea -->
-            <textarea id="my-editormd-markdown-doc" name="my-editormd-markdown-doc" style="display:none;"></textarea>
-            <!-- 用于后端获取md稳当内容，Java中：request.getParameter("my-editormd-html-code")。 -->
-            <textarea id="my-editormd-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
-        </div>
-        <!--        <form>-->
-
-
-        <!--        </form>-->
-    </div>
-
-    <div class="notice-box notice-box-title">
-        <span> 文章标题不能为空</span>
-    </div>
-    <div class="notice-box notice-box-content">
-        <span> 文章內容不能为空</span>
     </div>
 </div>
 
-<!-- 模态框 -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="myModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">发布帮扶文章</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-1 column ">
-                    </div>
-                    <div class="form-group col-md-10 column">
-                        <div class="col-md-6 column ">
-                            <label for="uploadFile">帮扶文件上传（非必选） <span style="color: red">*</span></label>
-                            <input type="file" id="uploadFile">
-                            <p class="help-block">在这里选择你想上传的文件.</p>
-                        </div>
-                        <div class="col-md-6 column ">
-                            <label for="uploadImage">封面图上传（非必选） <span style="color: red">*</span></label>
-                            <input type="file" id="uploadImage">
-                            <p class="help-block">在这里选择你想上传的图片.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-1 column ">
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <!--<button type="button" class="surePublishBtn btn btn-primary" onclick="window.location.href = '/toIndex'">发布博客</button>-->
-                <button type="button" class="surePublishAlumniHelpBtn btn btn-primary">发布</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
 <script th:src="@{/dist/js/jquery.min.js}"></script>
-<script th:src="@{/dist/js/bootstrap.js}"></script>
 <script th:src="@{/dist/js/editormd/editor.js}"></script>
 <script th:src="@{/dist/js/editormd/editormd.js}"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js" th:src="@{/backadmin/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>

@@ -21,20 +21,21 @@
 
 </head>
 <body>
+<div th:replace="~{commons/commons.html::topbar(active = 'alumniSearch')}"></div>
 <section class="htmleaf-container">
   <form onsubmit="submitFn(this, event);">
 
     <div class="search-wrapper">
       <div style="display: inline-block" id="main" >
         <select id="basic-usage-demo">
-          <option value="">用户名</option>
-          <option>昵称</option>
-          <option>年级</option>
-          <option>学号</option>
-          <option>专业</option>
-          <option>寝室号</option>
-          <option>辅导员</option>
-          <option>电子邮箱</option>
+          <option value="userName" selected>用户名</option>
+          <option value="nickName">昵称</option>
+          <option value="grade">年级</option>
+          <option value="studentNumber">学号</option>
+          <option value="major">专业</option>
+          <option value="bedroomNumber">寝室号</option>
+          <option value="instructorName">辅导员</option>
+          <option value="email">电子邮箱</option>
         </select>
       </div>
       <div class="input-holder" style="display: inline-block">
@@ -90,6 +91,7 @@
 
   let table = $('#resultTable');
   function submitFn(obj, evt){
+    let selectValue = $('#basic-usage-demo').val();
     value = $(obj).find('.search-input').val().trim();
 
     _html = "您搜索的内容为: ";
@@ -97,10 +99,12 @@
       _html = "您还没有输入任何搜索信息 :D";
     }
     else{
+      // alert("选择为" + selectValue.val())
       _html += "<b>" + value + "</b>";
       $.ajax({
         type: "GET",
-        url: "/searchUsersByUserName/" + value,
+        url: "/searchUsersByUserName/" + selectValue + "/" + value,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "json",
         async: false,
         success: function (data) {
@@ -108,7 +112,7 @@
           if (data.data != null && data.data.length > 0) {
             // console.log(data.data[0].instructorName)
 
-            let code = '<table class="table table-bordered" style="color: black">';
+            let code = '<h3 style="color: #9FEE00">为您搜索到：</h3><table class="table table-bordered" style="color: black">';
             code += '<tr class="info">' +
                     '<th class="center">用户名</th>' +
                     '<th class="center">昵称</th>' +
@@ -130,7 +134,7 @@
                       '<td>' + data.data[i].major + '</td>' +
                       '<td>' + data.data[i].instructorName + '</td>' +
                       '<td>' + data.data[i].department.departmentName + '</td>' +
-                      '<td><a href="search_know_more/' + data.data[i].userId + '"' + '>' + '了解更多' + '</a></td>' +
+                      '<td><a href="search_detail/' + data.data[i].userId + '"' + '>' + '了解更多' + '</a></td>' +
                       '</tr>'
             }
             table.html(code + '</table>')

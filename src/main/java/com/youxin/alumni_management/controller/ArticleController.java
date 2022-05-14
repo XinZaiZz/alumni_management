@@ -8,6 +8,8 @@ import com.youxin.alumni_management.pojo.NewsArticle;
 import com.youxin.alumni_management.service.ArticleService;
 import com.youxin.alumni_management.utils.BuildArticleTabloidUtil;
 import com.youxin.alumni_management.utils.DateUtil;
+import lombok.SneakyThrows;
+import org.apache.commons.io.FileUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +18,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author youxin
@@ -48,9 +53,10 @@ public class ArticleController {
         return "article/write";
     }
 
-    @PostMapping("/publishArticle/newsArticle")
+    @PostMapping("/publishArticle")
     @ResponseBody
-    public String publishNewsArticle(HttpServletRequest request, NewsArticle newsArticle) {
+    @SneakyThrows
+    public String publishNewsArticle(MultipartFile uploadImage, HttpServletRequest request, NewsArticle newsArticle) {
         //获得文章html代码并生成摘要
         BuildArticleTabloidUtil buildArticleTabloidUtil = new BuildArticleTabloidUtil();
         String articleHtmlContent = buildArticleTabloidUtil.buildArticleTabloid(request.getParameter("articleHtmlContent"));
@@ -67,22 +73,43 @@ public class ArticleController {
         //用dateUtil工具类设置系统时间
         newsArticle.setNewArticleDate(dateUtil.getSystemDateToString());
 //        System.out.println(newsArticle);
-        HashMap<String, Integer> mapStatus = new HashMap<>();
+        HashMap<String, Object> mapStatus = new HashMap<>();
         //插入状态
         int data = -1;
-        //如果保存成功
-        if ((data = articleService.insNewsArticle(newsArticle)) > 0) {
-            //清空状态map
-            mapStatus.clear();
-            //状态：1成功
-            mapStatus.put("status", 1);
+
+        //当上传图片不为空时才进行上传操作
+        if (uploadImage != null) {
+            //获取文件名
+            String imageFilename = uploadImage.getOriginalFilename();
+            //获取文件格式
+            assert imageFilename != null;
+            //获取文件名
+            String prefix = imageFilename.substring(0, imageFilename.lastIndexOf("."));
+            //获取文件类型
+            String suffix = imageFilename.substring(imageFilename.lastIndexOf("."));
+            //模拟存储路径
+            String realPath = "F:/Test/newsArticle images";
+            String uuid = UUID.randomUUID().toString();
+            //服务器保存路径为files目录下的uuid加suffix
+            String filePath = realPath + "/" + prefix + uuid + suffix;
+//                    System.out.println(filePath);
+            //如果封面图不为空，则将封面图路径设置到alumniHelp对象中
+            newsArticle.setNewImageName(prefix + uuid + suffix);
+            //保存文件
+            FileUtils.copyInputStreamToFile(uploadImage.getInputStream(), new File(filePath));
         }else {
-            //清空状态map
-            mapStatus.clear();
-            //状态：0失败
-            mapStatus.put("status", 0);
+            //为空则置为空
+            newsArticle.setNewImageName("");
         }
-        //将map对象转化为json对象并返回
+        data = articleService.insNewsArticle(newsArticle);
+        if (data > 0) {
+            mapStatus.put("status", 1);
+            mapStatus.put("message", "发布成功哦\\\\*^o^*//");
+        } else {
+            //插入失败
+            mapStatus.put("status", 0);
+            mapStatus.put("message", "发布失败，客官检查网络或者联系管理员解决哦๐·°(৹˃̵﹏˂̵৹)°·๐");
+        }
         return JSON.toJSONString(mapStatus);
     }
 

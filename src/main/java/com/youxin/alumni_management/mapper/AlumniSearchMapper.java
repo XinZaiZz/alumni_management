@@ -21,7 +21,7 @@ public interface AlumniSearchMapper {
     List<User> findUsersByNickName(String nickName);
 
     //根据年级查询
-    List<User> findUsersByGrade(String grade);
+    List<User> findUsersByGrade(Integer grade);
 
     //根据专业查询
     List<User> findUsersByMajor(String major);
@@ -37,4 +37,7 @@ public interface AlumniSearchMapper {
 
     //根据电子邮箱查询
     List<User> findUsersByEmail(String email);
+
+    //根据用户id查询用户信息
+    User findUserDetailByUserId(Integer userId);
 }

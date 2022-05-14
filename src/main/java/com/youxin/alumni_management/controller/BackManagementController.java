@@ -165,6 +165,38 @@ public class BackManagementController {
         return "500";
     }
 
+    @GetMapping("/toExamineNewsManagementPage")
+    public String toExamineNewsManagementPage(HttpServletRequest request, Model model) {
+        //获取当前登录用户信息
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        //如果用户不是学校管理员
+        if (admin == null || admin.getDepartmentId() != 1000) {
+            return "redirect:/unAuthorized";
+        }
+        List<NewsArticle> allExamineNewsArticle = backManagementService.findAllExamineNewArticles();
+        if (allExamineNewsArticle != null) {
+            model.addAttribute("allExamineNewsArticle", allExamineNewsArticle);
+            return "back_management/news_admin_examine_management";
+        }else
+            return "500";
+    }
+
+    @GetMapping("/examineNewsArticle/Pass-Or-UnPass/{newArticleId}/{status}")
+    public String PassOrUnPassExamineNewsArticle(@PathVariable("newArticleId")Integer newArticleId, @PathVariable("status")Integer status)  {
+        //修改新闻表中的状态
+        int data = -1;
+        //1为设置为通过，2为未通过
+        data = backManagementService.updNewsArticleStatus(newArticleId, status);
+        if (data > 0) {
+
+            //修改成功
+            return "redirect:/toExamineNewsManagementPage";
+
+        }
+        //修改失败返回到500错误页面
+        return "500";
+    }
+
     @GetMapping("/toActivityManagementPage")
     public String toActivityManagementPage(HttpServletRequest request, Model model) {
         //获取当前登录用户信息
@@ -217,7 +249,7 @@ public class BackManagementController {
         data = backManagementService.updActivityStatus(activityId, status);
         if (data > 0) {
 
-            if (admin.getDepartmentId() == 1000) {
+            if (admin == null || admin.getDepartmentId() == 1000) {
                 return "redirect:/toActivityExamineAdminManagementPage";
             }
             //修改成功
@@ -313,6 +345,38 @@ public class BackManagementController {
         return "500";
     }
 
+    @GetMapping("/toExamineAlumniHelpPage")
+    public String toExamineAlumniHelpPage(HttpServletRequest request, Model model) {
+        //获取当前登录用户信息
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        //如果用户不是学校管理员
+        if (admin == null || admin.getDepartmentId() != 1000) {
+            return "redirect:/unAuthorized";
+        }
+        List<AlumniHelp> allExamineAlumniHelp = backManagementService.findAllExamineAlumniHelp();
+        if (allExamineAlumniHelp != null) {
+            model.addAttribute("allExamineAlumniHelp", allExamineAlumniHelp);
+            return "back_management/help_admin_examine_management";
+        }else
+            return "500";
+    }
+
+    @GetMapping("/examineAlumniHelp/Pass-Or-UnPass/{helpId}/{status}")
+    public String PassOrUnPassExamineAlumniHelp(@PathVariable("helpId")Integer helpId, @PathVariable("status")Integer status)  {
+        //修改新闻表中的状态
+        int data = -1;
+        //1为设置为通过，2为未通过
+        data = backManagementService.updAlumniHelpStatus(helpId, status);
+        if (data > 0) {
+
+            //修改成功
+            return "redirect:/toExamineAlumniHelpPage";
+
+        }
+        //修改失败返回到500错误页面
+        return "500";
+    }
+
     @GetMapping("/toAlumniPhotoManagementPage")
     public String toAlumniPhotoManagementPage(HttpServletRequest request, Model model) {
         //获取当前登录用户信息
@@ -350,6 +414,38 @@ public class BackManagementController {
         if ((data = backManagementService.updAlumniPhoto(alumniPhoto)) > 0) {
             return "redirect:/toAlumniPhotoManagementPage";
         }
+        return "500";
+    }
+
+    @GetMapping("/toExamineAlumniPhotoPage")
+    public String toExamineAlumniPhotoPage(HttpServletRequest request, Model model) {
+        //获取当前登录用户信息
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        //如果用户不是学校管理员
+        if (admin == null || admin.getDepartmentId() != 1000) {
+            return "redirect:/unAuthorized";
+        }
+        List<AlumniPhoto> allExamineAlumniPhoto = backManagementService.findAllExamineAlumniPhoto();
+        if (allExamineAlumniPhoto != null) {
+            model.addAttribute("allExamineAlumniPhoto", allExamineAlumniPhoto);
+            return "back_management/photo_admin_examine_management";
+        }else
+            return "500";
+    }
+
+    @GetMapping("/examineAlumniPhoto/Pass-Or-UnPass/{photoId}/{status}")
+    public String PassOrUnPassExamineAlumniPhoto(@PathVariable("photoId")Integer photoId, @PathVariable("status")Integer status)  {
+        //修改新闻表中的状态
+        int data = -1;
+        //1为设置为通过，2为未通过
+        data = backManagementService.updAlumniPhotoStatus(photoId, status);
+        if (data > 0) {
+
+            //修改成功
+            return "redirect:/toExamineAlumniPhotoPage";
+
+        }
+        //修改失败返回到500错误页面
         return "500";
     }
 

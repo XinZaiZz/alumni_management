@@ -123,6 +123,11 @@
             <version>2.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <!--全局移除spring-boot-starter-logging 和 log4j2冲突-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

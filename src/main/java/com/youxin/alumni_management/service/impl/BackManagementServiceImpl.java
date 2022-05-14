@@ -52,6 +52,16 @@ public class BackManagementServiceImpl implements BackManagementService {
     }
 
     @Override
+    public List<NewsArticle> findAllExamineNewArticles() {
+        return backManagementMapper.findAllExamineNewArticles();
+    }
+
+    @Override
+    public int updNewsArticleStatus(Integer newArticleId, Integer status) {
+        return backManagementMapper.updNewsArticleStatus(newArticleId, status);
+    }
+
+    @Override
     public List<Activity> findAllActivityByAdminDepartmentId(Integer departmentId) {
         return backManagementMapper.findAllActivityByAdminDepartmentId(departmentId);
     }
@@ -97,6 +107,16 @@ public class BackManagementServiceImpl implements BackManagementService {
     }
 
     @Override
+    public List<AlumniHelp> findAllExamineAlumniHelp() {
+        return backManagementMapper.findAllExamineAlumniHelp();
+    }
+
+    @Override
+    public int updAlumniHelpStatus(Integer helpId, Integer status) {
+        return backManagementMapper.updAlumniHelpStatus(helpId, status);
+    }
+
+    @Override
     public List<AlumniPhoto> findAllAlumniPhotoByAdminDepartmentId(Integer departmentId) {
         return backManagementMapper.findAllAlumniPhotoByAdminDepartmentId(departmentId);
     }
@@ -109,6 +129,16 @@ public class BackManagementServiceImpl implements BackManagementService {
     @Override
     public int updAlumniPhoto(AlumniPhoto alumniPhoto) {
         return backManagementMapper.updAlumniPhoto(alumniPhoto);
+    }
+
+    @Override
+    public List<AlumniPhoto> findAllExamineAlumniPhoto() {
+        return backManagementMapper.findAllExamineAlumniPhoto();
+    }
+
+    @Override
+    public int updAlumniPhotoStatus(Integer photoId, Integer status) {
+        return backManagementMapper.updAlumniPhotoStatus(photoId, status);
     }
 
     @Override

@@ -24,6 +24,10 @@ public interface BackManagementService {
 
     int delNewsArticleByNewArticleId(Integer newArticleId);
 
+    List<NewsArticle> findAllExamineNewArticles();
+
+    int updNewsArticleStatus(Integer newArticleId, Integer status);
+
     List<Activity> findAllActivityByAdminDepartmentId(Integer departmentId);
 
     List<Activity> findAllExamineActivityByAdminDepartmentId(Integer departmentId);
@@ -42,6 +46,10 @@ public interface BackManagementService {
 
     int delAlumniHelpByHelpId(Integer helpId);
 
+    List<AlumniHelp> findAllExamineAlumniHelp();
+
+    int updAlumniHelpStatus(Integer helpId, Integer status);
+
     //获取管理员学院所有校友展示文章
     List<AlumniPhoto> findAllAlumniPhotoByAdminDepartmentId(Integer departmentId);
 
@@ -50,6 +58,10 @@ public interface BackManagementService {
 
     //更新校友展示文章基本信息
     int updAlumniPhoto(AlumniPhoto alumniPhoto);
+
+    List<AlumniPhoto> findAllExamineAlumniPhoto();
+
+    int updAlumniPhotoStatus(Integer photoId, Integer status);
 
     int selCountUser(Integer departmentId);
 

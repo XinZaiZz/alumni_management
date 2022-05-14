@@ -18,7 +18,7 @@
 
     <select id="findAllAlumniPhotos" resultType="alumniPhoto">
         select *
-        from alumni_photo
+        from alumni_photo where status = 1
         order by photoDate desc;
     </select>
 
@@ -28,13 +28,13 @@
     </insert>
 
     <select id="findTop12AlumniPhotos" resultType="alumniPhoto">
-        select * from alumni_photo order by photoDate desc LIMIT 12;
+        select * from alumni_photo where status = 1 order by photoDate desc LIMIT 12;
     </select>
 
     <select id="findOtherAlumniPhotos" resultType="alumniPhoto">
         select *
         from alumni_photo
-        where 1 = 1 order by photoDate desc limit 12, count(photoId);
+        where status = 1 order by photoDate desc limit 12, count(photoId);
     </select>
 
     <select id="findAlumniPhotoById" resultType="alumniPhoto">
@@ -42,7 +42,7 @@
     </select>
 
     <insert id="insAlumniPhotoNoImage" parameterType="alumniPhoto">
-        insert into alumni_photo(adminId, departmentId, photoContent, photoHTMLContent, photoTitle, photoDate)
-        values (#{adminId}, #{departmentId}, #{photoContent}, #{photoHTMLContent}, #{photoTitle}, #{photoDate});
+        insert into alumni_photo(adminId, departmentId, photoContent, photoHTMLContent, photoTitle, photoDate, photoImageName)
+        values (#{adminId}, #{departmentId}, #{photoContent}, #{photoHTMLContent}, #{photoTitle}, #{photoDate}, #{photoImageName});
     </insert>
 </mapper>

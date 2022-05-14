@@ -11,9 +11,19 @@
         <result column="departmentId" jdbcType="INTEGER" property="departmentId"/>
         <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
         <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="birth" jdbcType="DATE" property="birth"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
         <result column="grade" jdbcType="INTEGER" property="grade"/>
         <result column="studentNumber" jdbcType="BIGINT" property="studentNumber"/>
         <result column="major" jdbcType="VARCHAR" property="major"/>
+        <result column="bedroomNumber" jdbcType="VARCHAR" property="bedroomNumber"/>
+        <result column="occupation" jdbcType="VARCHAR" property="occupation"/>
+        <result column="occupationGroup" jdbcType="VARCHAR" property="occupationGroup"/>
+        <result column="region" jdbcType="VARCHAR" property="region"/>
+        <result column="company" jdbcType="VARCHAR" property="company"/>
+        <result column="number" jdbcType="BIGINT" property="number"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="personalProfile" jdbcType="VARCHAR" property="personalProfile"/>
         <result column="instructorName" jdbcType="VARCHAR" property="instructorName"/>
         <!-- 多表查询时连接user属性段 -->
         <association property="department" javaType="Department" >
@@ -34,9 +44,9 @@
         where nickName like "%"#{nickName}"%"
     </select>
 
-    <select id="findUsersByGrade" resultMap="userMap" parameterType="String">
+    <select id="findUsersByGrade" resultMap="userMap" parameterType="int">
         select * from user join department on department.departmentId = user.departmentId
-        where grade like "%"#{grade}"%"
+        where cast(grade as CHAR) like CONCAT(CONCAT("%", #{grade}, "%"));
     </select>
 
     <select id="findUsersByMajor" resultType="user" parameterType="String">
@@ -46,7 +56,7 @@
 
     <select id="findUsersByStudentNumber" resultMap="userMap" parameterType="long">
         select * from user join department on department.departmentId = user.departmentId
-        where studentNumber like "%"#{studentNumber}"%"
+        where cast(studentNumber as CHAR) like CONCAT(CONCAT("%", #{studentNumber}, "%"));
     </select>
 
     <select id="findUsersByBedroom" resultMap="userMap" parameterType="String">
@@ -62,6 +72,11 @@
     <select id="findUsersByEmail" resultMap="userMap" parameterType="String">
         select * from user join department on department.departmentId = user.departmentId
         where email like "%"#{email}"%"
+    </select>
+    
+    <select id="findUserDetailByUserId" parameterType="int" resultMap="userMap">
+        select * from user join department on department.departmentId = user.departmentId
+        where userId = #{userId}
     </select>
 
 </mapper>

@@ -1,8 +1,8 @@
 <!--
   Created by IntelliJ IDEA.
   User: youxin
-  Date: 2022/5/8
-  Time: 11:24
+  Date: 2022/5/15
+  Time: 1:37
   To change this template use File | Settings | File Templates.
 -->
 <!DOCTYPE html>
@@ -33,13 +33,13 @@
     <div th:replace="~{/commons/backcommons.html::topbar}"></div>
     <div class="page-content d-flex align-items-stretch">
         <!-- side bar -->
-        <div th:replace="~{/commons/backcommons::sidebar(active = 'activity_examine.html')}"></div>
+        <div th:replace="~{/commons/backcommons::sidebar(active = 'alumniPhoto_examine.html')}"></div>
         <!-- 具体内容 -->
         <div class="content-inner">
             <!-- Page Header-->
             <header class="page-header">
                 <div class="container-fluid">
-                    <h2 class="no-margin-bottom">活动管理</h2>
+                    <h2 class="no-margin-bottom">校友风采管理</h2>
                 </div>
             </header>
 
@@ -47,7 +47,7 @@
             <div class="breadcrumb-holder container-fluid">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html" th:href="@{/toDashboard}">Home</a></li>
-                    <li class="breadcrumb-item active">申请活动文章管理</li>
+                    <li class="breadcrumb-item active">校友风采展示申请管理</li>
                 </ul>
             </div>
             <!-- 传递参数给组件 -->
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                                 <div class="card-header d-flex align-items-center">
-                                    <h3 class="h4" th:text="${session.admin.getDepartment().getDepartmentName()} + 申请活动文章列表"></h3>
+                                    <h3 class="h4" th:text="${session.admin.getDepartment().getDepartmentName()} + 校友风采发布申请列表"></h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="content">
@@ -72,7 +72,7 @@
                                             <div class="person_search">
                                                 <div class="search_input">
                                                     <div class="input-group mb-3">
-                                                        <span>文章标题：</span>
+                                                        <span>风采展示标题：</span>
                                                         <input id="Ktext" type="text" class="form-control" placeholder="请输入文章标题">
                                                     </div>
                                                 </div>
@@ -89,28 +89,26 @@
                                         <table id="tb" class="table">
                                             <thead>
                                             <tr>
-                                                <th>活动文章id</th>
-                                                <th>发布用户</th>
-                                                <th>活动所属学院</th>
-                                                <th>活动文章标题</th>
-                                                <th>活动文章简略</th>
-                                                <th>活动附加文件</th>
-                                                <th>活动文章发布日期</th>
+                                                <th>风采展示id</th>
+                                                <th>发布管理员</th>
+                                                <th>风采展示学院</th>
+                                                <th>风采展示标题</th>
+                                                <th>风采展示封面图</th>
+                                                <th>风采展示发布日期</th>
                                                 <th>操作</th>
                                             </tr>
                                             </thead>
                                             <tbody id="show_tbody">
-                                            <tr th:each="activity : ${allExamineActivity}">
-                                                <td th:text="${activity.getActivityId()}">1</td>
-                                                <td th:text="${activity.getUser().getUserName()}">Mark</td>
-                                                <td th:text="${activity.getDepartment().getDepartmentName()}">Otto</td>
-                                                <td th:text="${activity.getActivityTitle()}">@mdo</td>
-                                                <td th:text="${activity.getActivityTabloid()}">@mdo</td>
-                                                <td th:text="${activity.getActivityFileName()}">@mdo</td>
-                                                <td th:text="${activity.getActivityDate()}">@mdo</td>
+                                            <tr th:each="examineAlumniPhoto : ${allExamineAlumniPhoto}">
+                                                <td th:text="${examineAlumniPhoto.getPhotoId()}">1</td>
+                                                <td th:text="${examineAlumniPhoto.getAdmin().getAdminName()}">Mark</td>
+                                                <td th:text="${examineAlumniPhoto.getDepartment().getDepartmentName()}">Otto</td>
+                                                <td th:text="${examineAlumniPhoto.getPhotoTitle()}">@mdo</td>
+                                                <td th:text="${examineAlumniPhoto.getPhotoImageName()}">@mdo</td>
+                                                <td th:text="${examineAlumniPhoto.getPhotoDate()}">@mdo</td>
                                                 <td>
-                                                    <a href="#" class="pass" th:href="@{/examineActivity/Pass-Or-UnPass/} + ${activity.getActivityId()} + '/1'">通过</a>
-                                                    <a href="#" class="un-pass" th:href="@{/examineActivity/Pass-Or-UnPass/} + ${activity.getActivityId() + '/3'}">未通过</a>
+                                                    <a href="#" class="pass" th:href="@{/examineAlumniPhoto/Pass-Or-UnPass/} + ${examineAlumniPhoto.getPhotoId()} + '/1'">通过</a>
+                                                    <a href="#" class="un-pass" th:href="@{/examineAlumniPhoto/Pass-Or-UnPass/} + ${examineAlumniPhoto.getPhotoId()} + '/2'">未通过</a>
                                                 </td>
                                             </tr>
                                             </tbody>

@@ -1,0 +1,611 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: youxin
+  Date: 2022/5/12
+  Time: 23:16
+  To change this template use File | Settings | File Templates.
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- META DATA -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- TITLE OF SITE -->
+    <title th:text="${userDetails.getNickName()} + '的主页'">Home</title>
+
+    <!-- Google Fonts-->
+<!--    <link rel="stylesheet" href="css/font.css" th:href="@{/dist/css/search/font.css}">-->
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.css" th:href="@{/dist/css/bootstrap.css}">
+
+    <!-- splitlayout.css -->
+    <link rel="stylesheet" href="css/splitlayout.css" th:href="@{/dist/css/search/splitlayout.css}">
+
+    <link rel="stylesheet" href="css/animations.css" th:href="@{/dist/css/search/animations.css}">
+
+    <!-- responsiveslides.css -->
+    <link rel="stylesheet" href="css/responsiveslides.css" th:href="@{/dist/css/search/responsiveslides.css}">
+
+    <!-- slick css -->
+    <link rel="stylesheet" href="css/slick.css" th:href="@{/dist/css/search/slick.css}">
+    <link rel="stylesheet" href="css/slick-theme.css" th:href="@{/dist/css/search/slick-theme.css}">
+
+    <!-- magnific-popup.css -->
+    <link rel="stylesheet" href="css/magnific-popup.css" th:href="@{/dist/css/search/magnific-popup.css}">
+
+    <!-- font-awesome.min.css -->
+    <link rel="stylesheet" href="css/font-awesome.min.css" th:href="@{/dist/css/search/font-awesome.min.css}">
+
+    <link rel="stylesheet" href="css/pe-icon-7-stroke.min.css" th:href="@{/dist/css/search/pe-icon-7-stroke.min.css}">
+
+    <!-- Main style css -->
+    <link rel="stylesheet" href="css/style.css" th:href="@{/dist/css/search/style.css}">
+
+    <!-- Responsive css -->
+    <link rel="stylesheet" href="css/responsive.css" th:href="@{/dist/css/search/responsive.css}">
+
+</head>
+
+<body>
+<div th:replace="~{commons/commons.html::topbar(active = 'alumniSearch')}"></div>
+
+<!--Start Preloader-->
+<div class="page-loader startLoad">
+    <div class="loader startLoad"></div>
+</div>
+<!--End Preloader-->
+
+<div id="splitlayout" class="splitlayout reset-layout close-right">
+    <div class="intro">
+
+        <!--Start Home-->
+        <div class="home_type full-height">
+            <div class="side side-left container" style="background-image: url(/img/admin-login/admin_login_bg.png);">
+                <div class="overlayer">
+                    <div id="particles-js"><canvas class="particles-js-canvas-el" width="499" height="878"></canvas></div>
+                    <div class="display-table">
+                        <div class="display-table-cell">
+                            <h1 class="fit__text">我<span id="typed"></span><span class="typed-cursor">|</span></h1>
+                            <div id="typed-strings">
+                                <span th:text="'是' + ${userDetails.getNickName()}">JOHN DOE</span>
+                                <span th:text="'从事' + ${userDetails.getOccupation()} + '职业'">DEVELOPER</span>
+                                <span th:text="'就读于' + ${userDetails.getDepartment().getDepartmentName()}">DEVELOPER</span>
+                                <span th:text="'在' + ${userDetails.getRegion()}">FROM UK</span>
+                            </div>
+
+                            <div class="more_info">
+
+                                <div class="item">
+                                    <span class="info-title">性别 : </span>
+                                    <span class="info-body" th:text="${userDetails.getGender()}">27 Years</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="info-title">年龄 : </span>
+                                    <span class="info-body" th:text="${userDetails.getAge()} + '  Years'">27 Years</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="info-title">出生日期 : </span>
+                                    <span class="info-body" th:text="${userDetails.getBirth()}">15-02-1991</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="info-title">现居 : </span>
+                                    <span class="info-body" th:text="${userDetails.getRegion()}">Front Street, Mexico Us</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="info-title">毕业于 : </span>
+                                    <span class="info-body" th:text="${userDetails.getDepartment().getDepartmentName()}">+0123 123 456 789</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="info-title">年级 : </span>
+                                    <span class="info-body" th:text="${userDetails.getGrade()}">Available</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="info-title">E-mail : </span>
+                                    <span class="info-body" th:text="${userDetails.getEmail()}">email@example.com</span>
+                                </div>
+
+                                <a href="#resume" class="goToSec">更多</a>
+                                <a href="#contact" class="goToSec">联系我</a>
+
+                            </div>
+                            <!--.more_info-->
+                        </div>
+                        <!--.display-table-cell-->
+                    </div>
+                    <!--.display-table-->
+
+                </div>
+                <!--.overlayer-->
+            </div>
+            <!--.side-->
+        </div>
+        <!--.home_type-->
+        <!--End Home-->
+
+        <!--Start Menu-->
+        <div class="mob-menu-overlay"></div>
+        <div class="mob-menu">
+            <div class="mob-menu-content">
+                <div class="float-left">
+                    <p class="menu-title" th:text="${userDetails.getNickName()}">Jone Doe</p>
+                </div>
+                <div class="float-right">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="side side-right">
+            <div class="intro-content">
+                <div class="profile">
+                    <img src="images/profile.jpg" th:src="@{/img/headphoto.jpg}" alt="profile">
+                </div>
+                <h1>
+                    <span th:text="${userDetails.getNickName()}">John Doe</span>
+                </h1>
+                <div class="menu">
+
+                    <!--Menu Items-->
+                    <ul class="list-unstyled menu_list" id="menu">
+                        <li>
+                            <a href="#home" class="active_item">主页</a>
+                        </li>
+                        <li>
+                            <a href="#about" class="">个人简介</a>
+                        </li>
+                        <li>
+                            <a href="#resume" class="">了解更多</a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="">联系我</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!--.menu-->
+            </div>
+            <!--.intro-content-->
+        </div>
+        <!--.side-->
+        <!--End Menu-->
+
+    </div>
+    <!-- /intro -->
+    <div class="page page-right full-height page-right-normal-height">
+        <div id="pt-main" class="pt-perspective page-inner">
+
+            <!--Start About Section-->
+            <section class="about padding-bottom-90 pt-page" id="about">
+                <div class="content">
+                    <img class="center-block" th:src="@{/img/search/me-1.jpg}" src="img/seach/me-1.jpg" alt="">
+                    <div class="container">
+                        <div class="more-about-me">
+                            <p class="margin-top-30" th:text="${userDetails.getPersonalProfile()}">I'm 24 years old creative web designer based in New York, specializing in User Interface Design and Development. I build clean, appealing, and functional interfaces which comply with the latest web standards.</p>
+                            <p class="margin-bottom-0">个人简介可以更好地展示自己，如果你也想帮助我们更加了解你，可以通过“主页-修改个人资料-个人简介”修改个人简介哦.&#128516;</p>
+                        </div>
+
+
+                    </div>
+                    <!--.container-->
+                </div>
+                <!--.content-->
+            </section>
+            <!--End About Section-->
+
+            <!--Start Resume Section-->
+            <section class="resume padding-bottom-90 pt-page" id="resume">
+                <div class="content">
+                    <div class="container">
+                        <div class="sec_title">
+                            <h2>详细信息</h2>
+                        </div>
+                        <div class="row">
+
+                            <!--Education-->
+                            <div class="col-md-4">
+                                <h3 class="subtitle">基本信息
+                                    <svg width="66px" height="8px" viewBox="0 0 66 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g class="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-147.000000, -464.000000)" opacity="0.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <g class="Header" stroke="#FFFFFF" stroke-width="3">
+                                                <path d="M149,466 C152.87377,466 152.87377,470 156.747541,470 C160.621311,470 160.621311,466 164.493293,466 C168.367064,466 168.367064,470 172.240834,470 C176.112816,470 176.112816,466 179.984798,466 C183.858569,466 183.858569,470 187.730551,470 C191.607898,470 191.607898,466 195.483457,466 C199.362593,466 199.362593,470 203.241728,470 C207.120864,470 207.120864,466 211,466"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </h3>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>用户名</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getUserName()}"></h4>
+<!--                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nibh et metus facilisis sollicitudin.</p>-->
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="date">
+                                        <span>用户昵称</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getNickName()}"></h4>
+                                        <!--                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum nibh et metus facilisis sollicitudin.</p>-->
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>性别</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getGender()}"></h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>出生日期</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getBirth()}">Master Degree</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>年龄</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getAge()}">Bachelor Degree</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--.col-md-6-->
+
+                            <!--Experience-->
+                            <div class="col-md-4 mobSmart-margin-top-40">
+                                <h3 class="subtitle">学生信息
+                                    <svg width="66px" height="8px" viewBox="0 0 66 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g class="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-147.000000, -464.000000)" opacity="0.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <g class="Header" stroke="#FFFFFF" stroke-width="3">
+                                                <path d="M149,466 C152.87377,466 152.87377,470 156.747541,470 C160.621311,470 160.621311,466 164.493293,466 C168.367064,466 168.367064,470 172.240834,470 C176.112816,470 176.112816,466 179.984798,466 C183.858569,466 183.858569,470 187.730551,470 C191.607898,470 191.607898,466 195.483457,466 C199.362593,466 199.362593,470 203.241728,470 C207.120864,470 207.120864,466 211,466"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </h3>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>学号</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getStudentNumber()}">Lead Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>二级学院</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getDepartment().getDepartmentName()}">Lead Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>年级</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getGrade()} + '级'">Senior Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>专业</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getMajor()}">Junior Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>寝室号</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getBedroomNumber()} + '室'">Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>辅导员</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getInstructorName()}">Web Developer</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--.col-md-6-->
+
+
+                            <!--Experience-->
+                            <div class="col-md-4 mobSmart-margin-top-40">
+                                <h3 class="subtitle">毕业信息
+                                    <svg width="66px" height="8px" viewBox="0 0 66 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g class="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-147.000000, -464.000000)" opacity="0.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <g class="Header" stroke="#FFFFFF" stroke-width="3">
+                                                <path d="M149,466 C152.87377,466 152.87377,470 156.747541,470 C160.621311,470 160.621311,466 164.493293,466 C168.367064,466 168.367064,470 172.240834,470 C176.112816,470 176.112816,466 179.984798,466 C183.858569,466 183.858569,470 187.730551,470 C191.607898,470 191.607898,466 195.483457,466 C199.362593,466 199.362593,470 203.241728,470 C207.120864,470 207.120864,466 211,466"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </h3>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>职业</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getOccupation()}">Lead Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>职业类别</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getOccupationGroup()} + '级'">Senior Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>公司名称</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getCompany()}">Junior Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>地区</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getRegion()} + '室'">Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>电话号码</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getNumber()}">Web Developer</h4>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="date">
+                                        <span>电子邮箱</span>
+                                    </div>
+                                    <div class="content">
+                                        <h4 th:text="${userDetails.getEmail()}">Web Developer</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--.col-md-6-->
+                        </div>
+                        <!--.row-->
+                    </div>
+                    <!--.container-->
+                </div>
+                <!--.content-->
+            </section>
+            <!--End Resume Section-->
+
+            <!--Start Contact Section-->
+            <section class="contact padding-bottom-90 pt-page pt-page-current active_sec" id="contact">
+                <div class="content">
+                    <div class="container">
+                        <div class="sec_title">
+                            <h2>联系我</h2>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <h3 class="subtitle">走得更近
+                                    <svg width="66px" height="8px" viewBox="0 0 66 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g class="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-147.000000, -464.000000)" opacity="0.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <g class="Header" stroke="#FFFFFF" stroke-width="3">
+                                                <path d="M149,466 C152.87377,466 152.87377,470 156.747541,470 C160.621311,470 160.621311,466 164.493293,466 C168.367064,466 168.367064,470 172.240834,470 C176.112816,470 176.112816,466 179.984798,466 C183.858569,466 183.858569,470 187.730551,470 C191.607898,470 191.607898,466 195.483457,466 C199.362593,466 199.362593,470 203.241728,470 C207.120864,470 207.120864,466 211,466"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </h3>
+                                <p>人生结交在始终，莫为升沉中路分。友情是人的一笔宝贵的财富，无论你走到哪都会伴随着你。友谊教会了我们如何相互依靠，相互帮助。</p>
+                                <div class="info">
+
+                                    <div class="item">
+                                        <span class="pe-7s-map-marker pe-3x pe-va icon"></span>
+                                        <div>
+                                            <span>找到我</span>
+                                            <p th:text="${userDetails.getRegion()}">New York, NY</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <span class="pe-7s-mail pe-3x pe-va icon"></span>
+                                        <div>
+                                            <span>邮箱</span>
+                                            <p>
+                                                <a href="mailto:your@example.com" th:href="'mailto:' + ${userDetails.getEmail()}" th:text="${userDetails.getEmail()}">Your@example.com</a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <span class="pe-7s-call pe-3x pe-va icon"></span>
+                                        <div>
+                                            <span>联系方式</span>
+                                            <p th:text="'(+86)' + ${userDetails.getNumber()}">+123 456 789</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <h3 class="subtitle">联系内容
+                                    <svg width="66px" height="8px" viewBox="0 0 66 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g class="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-147.000000, -464.000000)" opacity="0.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <g class="Header" stroke="#FFFFFF" stroke-width="3">
+                                                <path d="M149,466 C152.87377,466 152.87377,470 156.747541,470 C160.621311,470 160.621311,466 164.493293,466 C168.367064,466 168.367064,470 172.240834,470 C176.112816,470 176.112816,466 179.984798,466 C183.858569,466 183.858569,470 187.730551,470 C191.607898,470 191.607898,466 195.483457,466 C199.362593,466 199.362593,470 203.241728,470 C207.120864,470 207.120864,466 211,466"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </h3>
+                                <div class="contact_form">
+<!--                                    <form method="post">-->
+                                        <input id="sendTitle" placeholder="发送标题" name="title" type="text" class="form-control">
+                                        <input id="sendEmail" placeholder="你的邮箱" name="email" type="email" class="form-control">
+                                        <input id="sendToEmail" name="toEmail" th:value="${userDetails.getEmail()}" type="hidden" class="form-control">
+                                        <textarea id="sendMessage" placeholder="在此处输入想要发送的内容.可以使用html语句哦！" name="message" class="form-control"></textarea>
+                                        <button id="sendMsgBtn" class="button btn btn-lg btn-success btn-block">发送</button>
+                                        <!--Contact form message-->
+                                        <div class="msg_success">
+                                            <p>您的信息已经发出. 请等待回复!</p>
+                                        </div>
+                                        <div class="msg_error">
+                                            <p>网络问题.无法发出信息!</p>
+                                        </div>
+                                        <div class="msg_email_empty">
+                                            <p>该用户没有填写邮箱信息.无法发出信息!</p>
+                                        </div>
+                                        <!--End contact form message-->
+<!--                                    </form>-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--.container-->
+                </div>
+                <!--.content-->
+            </section>
+            <!--End Contact Section-->
+
+        </div>
+        <!--.page-inner-->
+    </div>
+    <!--.page-right-->
+</div>
+<!--.splitlayout-->
+
+
+
+<!--jquery.min.js-->
+<script src="js/jquery.min.js" th:src="@{/dist/js/jquery-3.5.0.min.js}"></script>
+
+<!--jquery.min.js-->
+<script src="js/jquery-migrate-1.2.1.min.js" th:src="@{/dist/js/search/jquery-migrate-1.2.1.min.js}"></script>
+
+<!--jquery.matchHeight-min.js-->
+<script src="js/jquery.matchHeight-min.js" th:src="@{/dist/js/search/jquery.matchHeight-min.js}"></script>
+
+<!--jquery.alterclass.js-->
+<script src="js/jquery.alterclass.js" th:src="@{/dist/js/search/jquery.alterclass.js}"></script>
+
+<!--bootstrap.min.js-->
+<script src="js/bootstrap.min.js" th:src="@{/dist/js/bootstrap.js}"></script>
+
+<!--particles.min.js-->
+<script src="js/particles.min.js" th:src="@{/dist/js/search/particles.min.js}"></script>
+
+<!--app.js-->
+<script src="js/app.js" th:src="@{/dist/js/search/app.js}"></script>
+
+<!--modernizr.custom.js-->
+<script src="js/modernizr.custom.js" th:src="@{/dist/js/search/modernizr.custom.js}"></script>
+
+<!--typed.min.js-->
+<script src="js/typed.min.js" th:src="@{/dist/js/search/typed.min.js}"></script>
+
+<!--responsiveslides.min.js-->
+<script src="js/responsiveslides.min.js" th:src="@{/dist/js/search/responsiveslides.min.js}"></script>
+
+<!--jquery.fittext.js-->
+<script src="js/jquery.fittext.js" th:src="@{/dist/js/search/jquery.fittext.js}"></script>
+
+<!--isotope.pkgd.min.js-->
+<script src="js/isotope.pkgd.min.js" th:src="@{/dist/js/search/isotope.pkgd.min.js}"></script>
+
+<!--jquery.magnific-popup.min.js-->
+<script src="js/jquery.magnific-popup.min.js" th:src="@{/dist/js/search/jquery.magnific-popup.min.js}"></script>
+
+<!-- Main script js -->
+<script src="js/custom.js" th:src="@{/dist/js/search/custom.js}"></script>
+
+<!-- 发送邮件 -->
+<script>
+    let sendMsgBtn = $('#sendMsgBtn');
+    let title = $('#sendTitle');
+    let email = $('#sendEmail');
+    let sendToEmail = $('#sendToEmail');
+    let message = $('#sendMessage');
+
+    sendMsgBtn.click(function () {
+        $.ajax( {
+            type: "POST",
+            url: "/sendEmail",
+            traditional: true,// 传数组
+            data: {
+                title : title.val(),
+                email : email.val(),
+                sendToEmail : sendToEmail.val(),
+                message : message.val()
+            },
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                console.log(data.code);
+                if (data.code === 1) {
+                    $('.msg_success').show();
+                }
+                if (data.code === 1002) {
+                    $('.msg_email_empty').show();
+                }
+                else {
+                    $('.msg_error').show();
+                }
+            },
+            error: function () {
+                alert("失败！");
+            }
+        })
+    })
+</script>
+
+</body>
+
+</html>

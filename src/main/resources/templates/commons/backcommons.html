@@ -8,16 +8,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<!-- 头部导航栏 -->
-<!--<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" th:fragment="topbar">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">[[${admin.getNickName}]]</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" th:href="@{/user/loginout}">登出</a>
-        </li>
-    </ul>
-</nav>-->
 
 <header class="header" th:fragment="topbar">
     <nav class="navbar">
@@ -42,59 +32,6 @@
                     <!-- Search-->
 <!--                    <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>-->
                     <!-- Notifications-->
-                    <!--<li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-red badge-corner">12</span></a>
-                        <ul aria-labelledby="notifications" class="dropdown-menu">
-                            <li><a rel="nofollow" href="#" class="dropdown-item">
-                                <div class="notification">
-                                    <div class="notification-content"><i class="fa fa-envelope bg-green"></i>You have 6 new messages </div>
-                                    <div class="notification-time"><small>4 minutes ago</small></div>
-                                </div></a></li>
-                            <li><a rel="nofollow" href="#" class="dropdown-item">
-                                <div class="notification">
-                                    <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
-                                    <div class="notification-time"><small>4 minutes ago</small></div>
-                                </div></a></li>
-                            <li><a rel="nofollow" href="#" class="dropdown-item">
-                                <div class="notification">
-                                    <div class="notification-content"><i class="fa fa-upload bg-orange"></i>Server Rebooted</div>
-                                    <div class="notification-time"><small>4 minutes ago</small></div>
-                                </div></a></li>
-                            <li><a rel="nofollow" href="#" class="dropdown-item">
-                                <div class="notification">
-                                    <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
-                                    <div class="notification-time"><small>10 minutes ago</small></div>
-                                </div></a></li>
-                            <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a></li>
-                        </ul>
-                    </li>-->
-                    <!-- Messages                        -->
-                    <!--<li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope-o"></i><span class="badge bg-orange badge-corner">10</span></a>
-                        <ul aria-labelledby="notifications" class="dropdown-menu">
-                            <li><a rel="nofollow" href="#" class="dropdown-item d-flex">
-                                <div class="msg-profile"> <img th:src="@{/backadmin/img/avatar-1.jpg}" alt="..." class="img-fluid rounded-circle"></div>
-                                <div class="msg-body">
-                                    <h3 class="h5">Jason Doe</h3><span>Sent You Message</span>
-                                </div></a></li>
-                            <li><a rel="nofollow" href="#" class="dropdown-item d-flex">
-                                <div class="msg-profile"> <img th:src="@{/backadmin/img/avatar-2.jpg}" alt="..." class="img-fluid rounded-circle"></div>
-                                <div class="msg-body">
-                                    <h3 class="h5">Frank Williams</h3><span>Sent You Message</span>
-                                </div></a></li>
-                            <li><a rel="nofollow" href="#" class="dropdown-item d-flex">
-                                <div class="msg-profile"> <img th:src="@{/backadmin/img/avatar-3.jpg}" alt="..." class="img-fluid rounded-circle"></div>
-                                <div class="msg-body">
-                                    <h3 class="h5">Ashley Wood</h3><span>Sent You Message</span>
-                                </div></a></li>
-                            <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages   </strong></a></li>
-                        </ul>
-                    </li>-->
-                    <!-- Languages dropdown    -->
-                    <!--<li class="nav-item dropdown"><a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src="img/flags/16/GB.png" th:src="@{/backadmin/img/flags/16/GB.png}" alt="English"><span class="d-none d-sm-inline-block">English</span></a>
-                        <ul aria-labelledby="languages" class="dropdown-menu">
-                            <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/DE.png" th:src="@{/backadmin/img/flags/16/DE.png}"alt="English" class="mr-2">German</a></li>
-                            <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/FR.png" th:src="@{/backadmin/img/flags/16/FR.png}" alt="English" class="mr-2">French                                         </a></li>
-                        </ul>
-                    </li>-->
                     <!-- Logout    -->
                     <li class="nav-item">
                         <a class="nav-link logout" th:href="@{/admin/logout}">
@@ -109,63 +46,6 @@
 </header>
 
 
-<!-- 侧边栏 -->
-<!--<nav class="col-md-2 d-none d-md-block bg-light sidebar" th:fragment="sidebar">
-    <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                    </svg>
-                    Dashboard <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item ">
-
-                <a th:class="${active=='main.html'?'nav-link active':'nav-link'}" th:href="@{/main}">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
-                        </path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    首页
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    Products
-                </a>
-            </li>
-            <li class="nav-item">
-                <a th:class="${active=='list.html'?'nav-link active':'nav-link'}" th:href="@{/emps}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                    员工管理
-                </a>
-            </li>
-            <li class="nav-item">
-                <a th:class="${active=='filelist.html'?'nav-link active':'nav-link'}" th:href="@{/showFileList}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
-                        <line x1="18" y1="20" x2="18" y2="10"></line>
-                        <line x1="12" y1="20" x2="12" y2="4"></line>
-                        <line x1="6" y1="20" x2="6" y2="14"></line>
-                    </svg>
-                    文件管理
-                </a>
-            </li>
-
-        </ul>
-
-
-    </div>
-</nav>-->
 
 <nav class="side-navbar" th:fragment="sidebar">
     <!-- Sidebar Header-->
@@ -181,31 +61,40 @@
         <li th:class="${active == 'main.html' ? 'active' : ''}"><a href="index.html" th:href="@{/toDashboard}" > <i class="icon-home"></i>主页 </a></li>
         <li th:class="${active == 'user_info.html' ? 'active' : ''}"><a href="tables.html" th:href="@{/toUserInfoPage}"> <i class="icon-grid"></i>用户基本信息 </a></li>
         <li th:class="${active == 'chart_management.html' ? 'active' : ''}"><a href="charts.html" th:href="@{/toHomePage}"> <i class="fa fa-bar-chart"></i>校友统计 </a></li>
-        <li th:class="${active == 'news_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toNewsManagementPage}"> <i class="icon-padnote"></i>新闻文章管理 </a></li>
         <li th:class="${active == 'forum_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toForumManagementPage}"> <i class="icon-check"></i>校友论坛文章管理 </a></li>
-        <li th:class="${active == 'alumniHelp_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toAlumniHelpManagementPage}"> <i class="icon-bill"></i>校友帮扶文章管理 </a></li>
-        <li th:class="${active == 'alumniPhoto_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toAlumniPhotoManagementPage}"> <i class="icon-bill"></i>校友风采展示文章管理 </a></li>
-        <li th:class="${active == 'activity_examine.html' || active == 'activity_management.html' ? 'active' : ''}"><a href="#activityDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>校友活动管理 </a>
+<!--        <li th:class="${active == 'news_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toNewsManagementPage}"> <i class="icon-padnote"></i>新闻文章管理 </a></li>-->
+        <li th:class="${active == 'news_examine.html' || active == 'news_management.html' || active == 'news_write.html' ? 'active' : ''}"><a href="#newsDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-padnote"></i>新闻管理 </a>
+            <ul id="newsDropdown" class="collapse list-unstyled ">
+                <li th:if="${session.admin.getDepartmentId() eq 1000}" th:class="${active == 'news_admin_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toExamineNewsManagementPage}">新闻审核</a></li>
+                <li th:class="${active == 'news_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toNewsManagementPage}">已发布新闻管理</a></li>
+                <li th:class="${active == 'news_write.html' ? 'active' : ''}"><a href="#" th:href="@{/toWritePage}">新闻发布</a></li>
+            </ul>
+        </li>
+
+<!--        <li th:class="${active == 'alumniHelp_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toAlumniHelpManagementPage}"> <i class="icon-bill"></i>校友帮扶文章管理 </a></li>-->
+        <li th:class="${active == 'alumniHelp_examine.html' || active == 'alumniHelp_management.html' || active == 'alumniHelp_write.html' ? 'active' : ''}"><a href="#helpDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-bill"></i>校友帮扶管理</a>
+            <ul id="helpDropdown" class="collapse list-unstyled ">
+                <li th:if="${session.admin.getDepartmentId() eq 1000}" th:class="${active == 'alumniHelp_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toExamineAlumniHelpPage}">帮扶信息审核</a></li>
+                <li th:class="${active == 'alumniHelp_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toAlumniHelpManagementPage}">已发布帮扶信息管理</a></li>
+                <li th:class="${active == 'alumniHelp_write.html' ? 'active' : ''}"><a href="#" th:href="@{/help/toAlumniHelpWritePage}">帮扶发布</a></li>
+            </ul>
+        </li>
+<!--        <li th:class="${active == 'alumniPhoto_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toAlumniPhotoManagementPage}"> <i class="icon-bill"></i>校友风采展示文章管理 </a></li>-->
+        <li th:class="${active == 'alumniPhoto_examine.html' || active == 'alumniPhoto_management.html' || active == 'alumniPhoto_write.html' ? 'active' : ''}"><a href="#photoDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-picture"></i>校友风采展示管理</a>
+            <ul id="photoDropdown" class="collapse list-unstyled ">
+                <li th:if="${session.admin.getDepartmentId() eq 1000}" th:class="${active == 'alumniPhoto_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toExamineAlumniPhotoPage}">风采展示信息审核</a></li>
+                <li th:class="${active == 'alumniPhoto_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toAlumniPhotoManagementPage}">已发布风采信息管理</a></li>
+                <li th:class="${active == 'alumniPhoto_write.html' ? 'active' : ''}"><a href="#" th:href="@{/toAlumniPhotoWritePage}">风采展示发布</a></li>
+            </ul>
+        </li>
+        <li th:class="${active == 'activity_examine.html' || active == 'activity_management.html' || active == 'activity_admin_examine.html' ? 'active' : ''}"><a href="#activityDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>校友活动管理 </a>
             <ul id="activityDropdown" class="collapse list-unstyled ">
                 <li th:if="${session.admin.getDepartmentId() eq 1000}" th:class="${active == 'activity_admin_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toActivityExamineAdminManagementPage}">总学院活动审核</a></li>
                 <li th:class="${active == 'activity_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toActivityExamineManagementPage}">活动审核</a></li>
                 <li th:class="${active == 'activity_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toActivityManagementPage}">已发布活动管理</a></li>
             </ul>
         </li>
-        <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>
-            <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
-                <li><a href="#">Page</a></li>
-            </ul>
-        </li>
-        <li><a href="login.html"> <i class="icon-interface-windows"></i>Login page </a></li>
-    </ul><span class="heading">Extras</span>
-    <ul class="list-unstyled">
-        <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
-        <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
-        <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
-        <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
+
     </ul>
 </nav>
 

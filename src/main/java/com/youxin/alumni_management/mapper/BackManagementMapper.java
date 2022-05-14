@@ -34,6 +34,12 @@ public interface BackManagementMapper {
     //管理员删除新闻文章
     int delNewsArticleByNewArticleId(Integer newArticleId);
 
+    //查询所有未发布的新闻
+    List<NewsArticle> findAllExamineNewArticles();
+
+    //修改新闻发布状态
+    int updNewsArticleStatus(Integer newArticleId, Integer status);
+
     //查询申请中和申请未通过的所有活动文章
     List<Activity> findAllExamineActivityByAdminDepartmentId(Integer departmentId);
 
@@ -61,6 +67,12 @@ public interface BackManagementMapper {
     //删除帮扶文章
     int delAlumniHelpByAlumniHelpId(Integer helpId);
 
+    //查询所有未发布的帮扶文章
+    List<AlumniHelp> findAllExamineAlumniHelp();
+
+    //改变帮扶发布状态
+    int updAlumniHelpStatus(Integer helpId, Integer status);
+
     //获取管理员学院所有校友展示文章
     List<AlumniPhoto> findAllAlumniPhotoByAdminDepartmentId(Integer departmentId);
 
@@ -69,6 +81,12 @@ public interface BackManagementMapper {
 
     //更新校友展示文章基本信息
     int updAlumniPhoto(AlumniPhoto alumniPhoto);
+
+    //查询未发布的校友风采
+    List<AlumniPhoto> findAllExamineAlumniPhoto();
+
+    //修改风采展示状态
+    int updAlumniPhotoStatus(Integer photoId, Integer status);
 
     //查询所属学院人数
     int selUserCount(Integer departmentId);

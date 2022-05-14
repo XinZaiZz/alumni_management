@@ -5,12 +5,12 @@
 <mapper namespace="com.youxin.alumni_management.mapper.ArticleMapper">
 
     <insert id="insNewsArticle" parameterType="NewsArticle" >
-        insert into news_article(adminId, departmentId, newArticleContent, newArticleHTMLContent, newArticleTitle, newArticleTabloid, newArticleDate)
-        values (#{adminId}, #{departmentId}, #{newArticleContent}, #{newArticleHTMLContent}, #{newArticleTitle}, #{newArticleTabloid}, #{newArticleDate})
+        insert into news_article(adminId, departmentId, newArticleContent, newArticleHTMLContent, newArticleTitle, newArticleTabloid, newArticleDate, newImageName)
+        values (#{adminId}, #{departmentId}, #{newArticleContent}, #{newArticleHTMLContent}, #{newArticleTitle}, #{newArticleTabloid}, #{newArticleDate}, #{newImageName})
     </insert>
 
     <select id="findAllNewsArticle" resultType="NewsArticle">
-        select * from news_article order by newArticleDate desc
+        select * from news_article where status = 1 order by newArticleDate desc
     </select>
 
     <select id="findArticleById" resultType="NewsArticle" parameterType="int">
@@ -19,7 +19,7 @@
     </select>
 
     <select id="findTop3Article" resultType="newsArticle">
-        select * from news_article where newImageName != 'news_default.png' limit 3;
+        select * from news_article where status = 1 and newImageName != 'news_default.png' limit 3;
     </select>
 
 </mapper>
