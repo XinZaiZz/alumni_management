@@ -43,4 +43,12 @@
         select forumId, forumTitle from forum limit 8;
     </select>
 
+    <select id="findAllForumByDepartmentId" resultMap="ForumMap" parameterType="int">
+        select * from forum join user on forum.userId = user.userId where forum.departmentId = #{departmentId} order by forumDate desc
+    </select>
+
+    <select id="findAllForumByUserId" resultMap="ForumMap" parameterType="int">
+        select * from forum join user on forum.userId = user.userId where forum.userId = #{userId} order by forumDate desc
+    </select>
+
 </mapper>

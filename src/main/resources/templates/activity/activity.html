@@ -33,7 +33,7 @@
     <div class="ah-tab-wrapper">
         <div class="ah-tab">
             <a class="ah-tab-item" data-ah-tab-active="true" href="">全部活动</a>
-            <a class="ah-tab-item" href="">只看本学院</a>
+            <a class="ah-tab-item" href="" onclick="notLogin()">只看本学院</a>
             <!--<a class="ah-tab-item" href="">菜单项4</a>-->
             <!--<a class="ah-tab-item" href="">菜单项5</a>-->
             <a type="button" class="btn btn-info btn-lg" id="toWriteForumPage" th:href="@{/activity/toActivityWritePage}">发起活动</a>
@@ -46,7 +46,7 @@
                     <td>
                         <div>
                             <p></p>
-                            <span style="font-size: 30px" th:text="${activity.getActivityTitle}"></span>
+                            <span style="font-size: 30px" th:text="${activity.getActivityTitle()}"></span>
                             <span class="my-nickname" style="position: absolute; right: 6%; width: 100%">
                                 <strong>活动学院 : </strong>
                                 <span th:text="${activity.getDepartment.getDepartmentName}"></span>
@@ -70,8 +70,36 @@
                 </div>
             </tr>
         </div>
+
         <div class="ah-tab-content">
-            <h2>Contacts</h2>
+            <tr th:each="activityByDepartmentId:${activityByDepartmentId}">
+                <div class="my-solid">
+                    <td>
+                        <div>
+                            <p></p>
+                            <span style="font-size: 30px" th:text="${activityByDepartmentId.getActivityTitle}"></span>
+                            <span class="my-nickname" style="position: absolute; right: 6%; width: 100%">
+                                <strong>活动学院 : </strong>
+                                <span th:text="${activityByDepartmentId.getDepartment.getDepartmentName}"></span>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <p th:text="${activityByDepartmentId.getActivityTabloid}"></p>
+                    </td>
+                    <td>
+                        <div>
+                            <p>
+                                <a class="btn" th:href="@{/activity/show/} + ${activityByDepartmentId.getActivityId}">查看详情 »</a>
+                                <span class="my-date" style="position: absolute; right: 9%">
+                                    <strong>发布时间 : </strong>
+                                    <span th:text="${activityByDepartmentId.getActivityDate}" ></span>
+                                </span>
+                            </p>
+                        </div>
+                    </td>
+                </div>
+            </tr>
         </div>
     </div>
 </div>
@@ -88,7 +116,7 @@
 <script th:src="@{/dist/js/jquery.min.js}"></script>
 <script th:src="@{/dist/js/jquery.horizontalmenu.js}"></script>
 <script th:src="@{/dist/js/bootstrap.js}"></script>
-<script>
+<script th:inline="javascript">
     $(function () {
         $('.ah-tab-wrapper').horizontalmenu({
             itemClick : function(item) {
@@ -98,6 +126,13 @@
             }
         });
     });
+
+    function notLogin() {
+        if ([[${session.user}]] == null) {
+            alert("您还未登录");
+            window.location.replace("/toActivityPage");
+        }
+    }
 </script>
 </body>
 </html>

@@ -1,10 +1,7 @@
 package com.youxin.alumni_management.controller;
 
 import com.youxin.alumni_management.pojo.*;
-import com.youxin.alumni_management.service.AlumniHelpService;
-import com.youxin.alumni_management.service.ArticleService;
-import com.youxin.alumni_management.service.ForumService;
-import com.youxin.alumni_management.service.RegisterUserService;
+import com.youxin.alumni_management.service.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -44,6 +41,8 @@ public class LoginController {
 
     private final ForumService forumService;
 
+    private final LoginService loginService;
+
     @GetMapping("/toindex1")
     public String toIndex_1() {
         return "index1";
@@ -74,11 +73,16 @@ public class LoginController {
      * @since
      */
     @PostMapping("/user/login")
-    public String login(@RequestParam("username") String username, String password, String rememberMe, Model model, HttpSession session, HttpServletRequest request) {
+    public String userLogin(@RequestParam("username") String username, String password, String rememberMe, Model model, HttpSession session, HttpServletRequest request) {
         //获取当前用户
         Subject subject = SecurityUtils.getSubject();
         //封装用户的登陆数据
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        User userByName = loginService.findUserByName(username);
+        if (userByName == null) {
+            model.addAttribute("msg","用户名错误！");
+            return "login/login";
+        }
         try {
             subject.login(token);
             User user = (User) subject.getPrincipal();
@@ -160,6 +164,10 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         //封装用户的登陆数据
         UsernamePasswordToken token = new UsernamePasswordToken(adminName, password);
+        if (loginService.findAdminByName(adminName) == null) {
+            model.addAttribute("msg","用户名错误！");
+            return "login/admin_login";
+        }
         try {
             subject.login(token);
             Admin admin = (Admin) subject.getPrincipal();

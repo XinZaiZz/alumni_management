@@ -330,7 +330,32 @@
 			// hide button
 			classie.add(loadMoreCtrl, 'button--hidden');
 			// add some extra items to the grid
-			var dummyContent = '<li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/1.jpg" alt="Some image" /><h3 class="grid__item-title">Natural saturation effects</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/2.jpg" alt="Some image" /><h3 class="grid__item-title">Auto-color and light</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/3.jpg" alt="Some image" /><h3 class="grid__item-title">That special blur</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/4.jpg" alt="Some image" /><h3 class="grid__item-title">Drama where you need it</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/5.jpg" alt="Some image" /><h3 class="grid__item-title">Realistic depth</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/6.jpg" alt="Some image" /><h3 class="grid__item-title">The common, but special</h3></a></li>';
+			let dummyContent = '';
+			$.ajax({
+				type: "GET",
+				url: "/showOtherPhoto",
+				dataType: "json",
+				async: false,
+				success: function (data) {
+					if (data.code === 1) {
+						for (let i = 0; i < data.data.length; i++ ) {
+							dummyContent += '<li class="grid__item grid__item--hidden">' +
+												'<a class="grid__link" href="#" href="/toAlumniShowPage/' + data.data[i].photoId + '">' +
+													'<img class="grid__img" src="/photos/' +  data.data[i].photoImageName + '"alt="Some image" style="width: 361px;height: 263px" />' +
+													'<h3 class="grid__item-title" >' + data.data[i].photoTitle + '</h3>' +
+												'</a>' +
+											'</li>';
+						}
+					}
+				}
+			})
+			// var dummyContent = '<li class="grid__item grid__item--hidden">' +
+			// 						'<a class="grid__link" href="#">' +
+			// 							'<img class="grid__img" src="img/photos/1.jpg" alt="Some image" />' +
+			// 							'<h3 class="grid__item-title">Natural saturation effects</h3>' +
+			// 						'</a>' +
+			// 					'</li>' +
+			// 	'<li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/2.jpg" alt="Some image" /><h3 class="grid__item-title">Auto-color and light</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/3.jpg" alt="Some image" /><h3 class="grid__item-title">That special blur</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/4.jpg" alt="Some image" /><h3 class="grid__item-title">Drama where you need it</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/5.jpg" alt="Some image" /><h3 class="grid__item-title">Realistic depth</h3></a></li><li class="grid__item grid__item--hidden"><a class="grid__link" href="#"><img class="grid__img" src="img/photos/6.jpg" alt="Some image" /><h3 class="grid__item-title">The common, but special</h3></a></li>';
 			gridEl.innerHTML += dummyContent;
 			[].slice.call(gridEl.querySelectorAll('.grid__item--hidden')).forEach(function(item) {
 				gridItems.push(item);

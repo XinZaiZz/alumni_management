@@ -3,6 +3,7 @@ package com.youxin.alumni_management.controller;
 import com.alibaba.fastjson.JSON;
 import com.youxin.alumni_management.pojo.Admin;
 import com.youxin.alumni_management.pojo.AlumniHelp;
+import com.youxin.alumni_management.pojo.User;
 import com.youxin.alumni_management.service.AlumniHelpService;
 import com.youxin.alumni_management.utils.BuildArticleTabloidUtil;
 import com.youxin.alumni_management.utils.DateUtil;
@@ -39,9 +40,14 @@ public class AlumniHelpController {
     private final AlumniHelpService alumniHelpService;
 
     @GetMapping("/toAlumniHelp")
-    public String toAlumniHelp(Model model) {
+    public String toAlumniHelp(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
         List<AlumniHelp> alumniHelps = alumniHelpService.findAllAlumniHelp();
         model.addAttribute("alumniHelps", alumniHelps);
+        if (user != null) {
+            List<AlumniHelp> allAlumniHelpByDepartmentId = alumniHelpService.findAllAlumniHelpByDepartmentId(user.getDepartmentId());
+            model.addAttribute("allAlumniHelpByDepartmentId", allAlumniHelpByDepartmentId);
+        }
         return "alumni_help/alumni_help";
     }
 

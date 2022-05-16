@@ -449,4 +449,60 @@ public class BackManagementController {
         return "500";
     }
 
+    @GetMapping("/toAdminInfoPage")
+    public String toAdminInfoPage(HttpServletRequest request, Model model) {
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        if (admin == null || admin.getDepartmentId() != 1000) {
+            return "redirect:/unAuthorized";
+        }else if (admin.getDepartmentId() == 1000) {
+            List<Admin> allAdmins = backManagementService.findAllAdmins();
+            model.addAttribute("allAdmins", allAdmins);
+            return "back_management/admin_info";
+        }
+        return "500";
+    }
+
+    @PostMapping("/insAdmin")
+    public String insAdmin(HttpServletRequest request) {
+        Admin insAdmin = new Admin();
+        insAdmin.setAdminName(request.getParameter("adminName"));
+        insAdmin.setPassword(request.getParameter("password"));
+        insAdmin.setDepartmentId(Integer.parseInt(request.getParameter("departmentId")));
+        insAdmin.setNickName(request.getParameter("nickName"));
+        insAdmin.setGender(request.getParameter("gender"));
+        int data = -1;
+        if ((data = backManagementService.insAdmin(insAdmin)) > 0) {
+            //新增成功
+            return "redirect:/toAdminInfoPage";
+        }
+        return "500";
+    }
+
+    @PostMapping("/updAdmin")
+    public String updAdmin(HttpServletRequest request) {
+        Admin updAdmin = new Admin();
+        updAdmin.setAdminId(Integer.parseInt(request.getParameter("adminId")));
+        updAdmin.setAdminName(request.getParameter("adminName"));
+        updAdmin.setPassword(request.getParameter("password"));
+        updAdmin.setDepartmentId(Integer.parseInt(request.getParameter("departmentId")));
+        updAdmin.setNickName(request.getParameter("nickName"));
+        int data = -1;
+        if ((data = backManagementService.updAdmin(updAdmin)) > 0) {
+            //修改成功
+            return "redirect:/toAdminInfoPage";
+        }
+        return "500";
+    }
+
+    @PostMapping("/delAdmin")
+    public String delAdmin(HttpServletRequest request) {
+        int adminId = Integer.parseInt(request.getParameter("adminId"));
+        int data = -1;
+        if ((data = backManagementService.delAdmin(adminId)) > 0) {
+            //删除成功
+            return "redirect:/toAdminInfoPage";
+        }
+        return "500";
+    }
+
 }

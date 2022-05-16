@@ -35,4 +35,8 @@
     <select id="selActivityById" resultMap="ActivityMap" parameterType="int">
         select * from activity join department on activity.departmentId = department.departmentId where activityId = #{activityId}
     </select>
+
+    <select id="selActivityByDepartmentId" resultMap="ActivityMap">
+        select * from activity join department on activity.departmentId = department.departmentId where status = 2 and activity.departmentId = #{departmentId} order by activityDate desc
+    </select>
 </mapper>

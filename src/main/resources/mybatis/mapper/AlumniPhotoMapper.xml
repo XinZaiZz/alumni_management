@@ -32,9 +32,9 @@
     </select>
 
     <select id="findOtherAlumniPhotos" resultType="alumniPhoto">
-        select *
-        from alumni_photo
-        where status = 1 order by photoDate desc limit 12, count(photoId);
+        select * from alumni_photo where status = 1 and  photoId not in
+        (SELECT photoId from (SELECT photoId from alumni_photo where status = 1
+        order by photoDate desc limit 12) as temp )order by photoDate desc ;
     </select>
 
     <select id="findAlumniPhotoById" resultType="alumniPhoto">

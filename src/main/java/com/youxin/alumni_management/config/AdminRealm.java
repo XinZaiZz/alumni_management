@@ -12,6 +12,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,11 @@ import java.util.List;
  * @date 2022-03-26 21:30
  */
 public class AdminRealm extends AuthorizingRealm {
+
+    public AdminRealm() {
+        super();
+        setAuthenticationTokenClass(AuthenticationToken.class);
+    }
 
     @Autowired
     LoginService loginService;
@@ -65,6 +71,11 @@ public class AdminRealm extends AuthorizingRealm {
         session.setAttribute("loginAdmin", admin.getAdminName());
 
         //密码验证由shiro完成
-        return new SimpleAuthenticationInfo(admin,admin.getPassword(),"");
+        return new SimpleAuthenticationInfo(admin,admin.getPassword(),"AdminRealm");
+    }
+
+    @Override
+    public boolean supports(AuthenticationToken var1){
+        return var1 instanceof UsernamePasswordToken;
     }
 }

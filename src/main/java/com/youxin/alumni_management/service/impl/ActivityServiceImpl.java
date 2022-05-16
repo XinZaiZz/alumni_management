@@ -36,4 +36,9 @@ public class ActivityServiceImpl implements ActivityService {
     public Activity selActivityById(Integer activityId) {
         return activityMapper.selActivityById(activityId);
     }
+
+    @Override
+    public List<Activity> selActivityByDepartmentId(Integer departmentId) {
+        return activityMapper.selActivityByDepartmentId(departmentId);
+    }
 }

@@ -113,4 +113,16 @@ public interface BackManagementMapper {
     //根据辅导员姓名分组学院人数
     @MapKey("")
     List<Map<String, Object>> countByInstructorName(Integer departmentId);
+
+    //查询所有管理员信息
+    List<Admin> findAllAdmins();
+
+    //新增管理员
+    int insAdmin(Admin admin);
+
+    //修改管理员用户信息
+    int updAdmin(Admin admin);
+
+    //删除管理员信息
+    int delAdmin(Integer adminId);
 }

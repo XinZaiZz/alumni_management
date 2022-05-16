@@ -16,4 +16,10 @@ public interface ForumService {
     Forum findForumById(Integer forumId);
 
     List<Forum> findTop8Forum();
+
+    //查询所属学院论坛
+    List<Forum> findAllForumByDepartmentId(Integer departmentId);
+
+    //查询当前用户发布的论坛
+    List<Forum> findAllForumByUserId(Integer userId);
 }

@@ -249,4 +249,22 @@
     <select id="countByInstructorName" parameterType="int" resultType="map">
         SELECT instructorName, COUNT(*) instructorNameCount FROM `user` where departmentId = #{departmentId} GROUP BY instructorName
     </select>
+
+    <select id="findAllAdmins" resultType="admin">
+        select adminId, adminName, password, nickName, gender, departmentId from admin where departmentId != 1000;
+    </select>
+
+    <insert id="insAdmin" parameterType="admin">
+        insert into admin(adminName, password, nickName, gender, departmentId)
+        values (#{adminName}, #{password}, #{nickName}, #{gender}, #{departmentId});
+    </insert>
+
+    <update id="updAdmin" parameterType="admin">
+        update admin set adminName=#{adminName}, password=#{password}, nickName=#{nickName}, departmentId=#{departmentId}
+        where adminId=#{adminId};
+    </update>
+
+    <delete id="delAdmin" parameterType="int">
+        delete from admin where adminId=#{adminId};
+    </delete>
 </mapper>

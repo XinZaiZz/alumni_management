@@ -38,7 +38,7 @@
     <section class="page page--static">
         <div class="page__title">
             <h2 class="page__title-main">欢迎查看攀枝花学院优秀校友个人风采展示</h2>
-            <p class="page__title-sub">单击重新刷新<a href="http://localhost:8080/toPhotoPage" target="_self">个人展示</a>页面</p>
+            <p class="page__title-sub">单击重新刷新<a th:href="@{/toPhotoPage}" target="_self">个人展示</a>页面</p>
         </div>
         <ul class="grid">
             <li class="grid__item" th:each="alumniPhoto : ${alumniPhotos}">
@@ -47,72 +47,6 @@
                     <h3 class="grid__item-title" th:text="${alumniPhoto.getPhotoTitle}">Natural saturation effects</h3>
                 </a>
             </li>
-            <!--<li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="/photos/2.jpg" th:src="@{/photos/2.jpg}" alt="Some image" />
-                    <h3 class="grid__item-title">Auto-color and light</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/3.jpg" th:src="@{/photos/3.jpg}" alt="Some image" />
-                    <h3 class="grid__item-title">That special blur</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/4.jpg" th:src="@{/photos/4.jpg}" alt="Some image" />
-                    <h3 class="grid__item-title">Drama where you need it</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/5.jpg" th:src="@{/photos/5.jpg}" alt="Some image" />
-                    <h3 class="grid__item-title">Realistic depth</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/6.jpg" th:src="@{/photos/6.jpg}" alt="Some image" />
-                    <h3 class="grid__item-title">The common, but special</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/7.jpg" th:src="@{/photos/7.jpg}" alt="Some image" />
-                    <h3 class="grid__item-title">Natural saturation effects</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/8.jpg" alt="Some image" />
-                    <h3 class="grid__item-title">That special blur</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/9.jpg" alt="Some image" />
-                    <h3 class="grid__item-title">Auto-color and light</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/1.jpg" alt="Some image" />
-                    <h3 class="grid__item-title">Natural saturation effects</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/2.jpg" alt="Some image" />
-                    <h3 class="grid__item-title">Auto-color and light</h3>
-                </a>
-            </li>
-            <li class="grid__item">
-                <a class="grid__link" href="#">
-                    <img class="grid__img" src="file://F://learn/相片瀑布流布局/img/photos/3.jpg" alt="Some image" />
-                    <h3 class="grid__item-title">That special blur</h3>
-                </a>
-            </li>-->
         </ul>
         <button class="button button--load" aria-label="Load more images">
             <svg class="polaroid" width="100%" height="100%" viewBox="0 0 220 243" preserveAspectRatio="xMidYMid meet">
@@ -124,7 +58,7 @@
                     <circle cx="159.5" cy="94.5" r="17.5"></circle>
                 </g>
             </svg>
-            <span class="button__text">Load more</span>
+            <span class="button__text">加载更多</span>
         </button>
     </section>
     <div class="device">

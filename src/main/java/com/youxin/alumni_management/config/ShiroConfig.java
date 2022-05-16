@@ -2,6 +2,9 @@ package com.youxin.alumni_management.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.mysql.cj.xdevapi.Collection;
+import org.apache.shiro.authc.Authenticator;
+import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
+import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -9,10 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author youxin
@@ -56,7 +56,7 @@ public class ShiroConfig {
 
     //第二步，DefaultWebSecurityManager
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager getDefaultWebSercurityManager(@Qualifier("userRealm") UserRealm userRealm, @Qualifier("adminRealm") AdminRealm adminRealm) {
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm, @Qualifier("adminRealm") AdminRealm adminRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //关联
 //        securityManager.setRealm(userRealm);
@@ -67,6 +67,7 @@ public class ShiroConfig {
         realms.add(userRealm);
         realms.add(adminRealm);
         securityManager.setRealms(realms);
+        securityManager.setAuthenticator(authenticator());//解决多realm的异常问题重点在此
         return securityManager;
     }
 
@@ -86,5 +87,14 @@ public class ShiroConfig {
     @Bean
     public ShiroDialect getShiroDialect() {
         return new ShiroDialect();
+    }
+
+    @Bean
+    public Authenticator authenticator() {
+        ModularRealmAuthenticator authenticator = new MyModularRealmAuthenticator();
+
+        authenticator.setRealms(Arrays.asList(userRealm(), adminRealm()));
+        authenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+        return authenticator;
     }
 }

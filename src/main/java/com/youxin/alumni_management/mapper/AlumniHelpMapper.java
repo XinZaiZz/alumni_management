@@ -21,4 +21,7 @@ public interface AlumniHelpMapper {
     AlumniHelp selAlumniHelpById(Integer helpId);
 
     List<AlumniHelp> findTop2AlumniHelp();
+
+    //只查看本学院的帮扶信息
+    List<AlumniHelp> findAllAlumniHelpByDepartmentId(Integer departmentId);
 }

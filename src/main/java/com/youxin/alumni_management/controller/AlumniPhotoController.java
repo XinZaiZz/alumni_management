@@ -5,6 +5,8 @@ import com.youxin.alumni_management.pojo.Admin;
 import com.youxin.alumni_management.pojo.AlumniPhoto;
 import com.youxin.alumni_management.service.AlumniPhotoService;
 import com.youxin.alumni_management.utils.DateUtil;
+import com.youxin.alumni_management.utils.Result;
+import com.youxin.alumni_management.utils.ResultCode;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
@@ -117,5 +119,16 @@ public class AlumniPhotoController {
         }else {
             return "500";
         }
+    }
+
+    @GetMapping("/showOtherPhoto")
+    @ResponseBody
+    public String showOtherPhoto() {
+        List<AlumniPhoto> otherAlumniPhotos = alumniPhotoService.findOtherAlumniPhotos();
+        if (otherAlumniPhotos != null) {
+            return Result.success(ResultCode.SUCCESS, otherAlumniPhotos);
+        }
+        else
+            return Result.failure(ResultCode.RESULT_EMPTY);
     }
 }

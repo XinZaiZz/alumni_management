@@ -58,16 +58,16 @@
     </div>
     <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
     <ul class="list-unstyled">
-        <li th:class="${active == 'main.html' ? 'active' : ''}"><a href="index.html" th:href="@{/toDashboard}" > <i class="icon-home"></i>主页 </a></li>
-        <li th:class="${active == 'user_info.html' ? 'active' : ''}"><a href="tables.html" th:href="@{/toUserInfoPage}"> <i class="icon-grid"></i>用户基本信息 </a></li>
-        <li th:class="${active == 'chart_management.html' ? 'active' : ''}"><a href="charts.html" th:href="@{/toHomePage}"> <i class="fa fa-bar-chart"></i>校友统计 </a></li>
-        <li th:class="${active == 'forum_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toForumManagementPage}"> <i class="icon-check"></i>校友论坛文章管理 </a></li>
+        <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'main.html' ? 'active' : ''}"><a href="index.html" th:href="@{/toDashboard}" > <i class="icon-home"></i>主页 </a></li>
+        <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'user_info.html' ? 'active' : ''}"><a href="tables.html" th:href="@{/toUserInfoPage}"> <i class="icon-grid"></i>用户基本信息 </a></li>
+        <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'chart_management.html' ? 'active' : ''}"><a href="charts.html" th:href="@{/toHomePage}"> <i class="fa fa-bar-chart"></i>校友统计 </a></li>
+        <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'forum_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toForumManagementPage}"> <i class="icon-check"></i>校友论坛文章管理 </a></li>
 <!--        <li th:class="${active == 'news_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toNewsManagementPage}"> <i class="icon-padnote"></i>新闻文章管理 </a></li>-->
         <li th:class="${active == 'news_examine.html' || active == 'news_management.html' || active == 'news_write.html' ? 'active' : ''}"><a href="#newsDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-padnote"></i>新闻管理 </a>
             <ul id="newsDropdown" class="collapse list-unstyled ">
                 <li th:if="${session.admin.getDepartmentId() eq 1000}" th:class="${active == 'news_admin_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toExamineNewsManagementPage}">新闻审核</a></li>
-                <li th:class="${active == 'news_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toNewsManagementPage}">已发布新闻管理</a></li>
-                <li th:class="${active == 'news_write.html' ? 'active' : ''}"><a href="#" th:href="@{/toWritePage}">新闻发布</a></li>
+                <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'news_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toNewsManagementPage}">已发布新闻管理</a></li>
+                <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'news_write.html' ? 'active' : ''}"><a href="#" th:href="@{/toWritePage}">新闻发布</a></li>
             </ul>
         </li>
 
@@ -75,25 +75,27 @@
         <li th:class="${active == 'alumniHelp_examine.html' || active == 'alumniHelp_management.html' || active == 'alumniHelp_write.html' ? 'active' : ''}"><a href="#helpDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-bill"></i>校友帮扶管理</a>
             <ul id="helpDropdown" class="collapse list-unstyled ">
                 <li th:if="${session.admin.getDepartmentId() eq 1000}" th:class="${active == 'alumniHelp_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toExamineAlumniHelpPage}">帮扶信息审核</a></li>
-                <li th:class="${active == 'alumniHelp_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toAlumniHelpManagementPage}">已发布帮扶信息管理</a></li>
-                <li th:class="${active == 'alumniHelp_write.html' ? 'active' : ''}"><a href="#" th:href="@{/help/toAlumniHelpWritePage}">帮扶发布</a></li>
+                <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'alumniHelp_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toAlumniHelpManagementPage}">已发布帮扶信息管理</a></li>
+                <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'alumniHelp_write.html' ? 'active' : ''}"><a href="#" th:href="@{/help/toAlumniHelpWritePage}">帮扶发布</a></li>
             </ul>
         </li>
 <!--        <li th:class="${active == 'alumniPhoto_management.html' ? 'active' : ''}"><a href="forms.html" th:href="@{/toAlumniPhotoManagementPage}"> <i class="icon-bill"></i>校友风采展示文章管理 </a></li>-->
         <li th:class="${active == 'alumniPhoto_examine.html' || active == 'alumniPhoto_management.html' || active == 'alumniPhoto_write.html' ? 'active' : ''}"><a href="#photoDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-picture"></i>校友风采展示管理</a>
             <ul id="photoDropdown" class="collapse list-unstyled ">
                 <li th:if="${session.admin.getDepartmentId() eq 1000}" th:class="${active == 'alumniPhoto_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toExamineAlumniPhotoPage}">风采展示信息审核</a></li>
-                <li th:class="${active == 'alumniPhoto_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toAlumniPhotoManagementPage}">已发布风采信息管理</a></li>
-                <li th:class="${active == 'alumniPhoto_write.html' ? 'active' : ''}"><a href="#" th:href="@{/toAlumniPhotoWritePage}">风采展示发布</a></li>
+                <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'alumniPhoto_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toAlumniPhotoManagementPage}">已发布风采信息管理</a></li>
+                <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'alumniPhoto_write.html' ? 'active' : ''}"><a href="#" th:href="@{/toAlumniPhotoWritePage}">风采展示发布</a></li>
             </ul>
         </li>
         <li th:class="${active == 'activity_examine.html' || active == 'activity_management.html' || active == 'activity_admin_examine.html' ? 'active' : ''}"><a href="#activityDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>校友活动管理 </a>
             <ul id="activityDropdown" class="collapse list-unstyled ">
                 <li th:if="${session.admin.getDepartmentId() eq 1000}" th:class="${active == 'activity_admin_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toActivityExamineAdminManagementPage}">总学院活动审核</a></li>
-                <li th:class="${active == 'activity_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toActivityExamineManagementPage}">活动审核</a></li>
-                <li th:class="${active == 'activity_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toActivityManagementPage}">已发布活动管理</a></li>
+                <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'activity_examine.html' ? 'active' : ''}"><a href="#" th:href="@{/toActivityExamineManagementPage}">活动审核</a></li>
+                <li th:if="${session.admin.getDepartmentId() ne 1000}" th:class="${active == 'activity_management.html' ? 'active' : ''}"><a href="#" th:href="@{/toActivityManagementPage}">已发布活动管理</a></li>
             </ul>
         </li>
+
+        <li th:if="${session.admin.getDepartmentId() eq 1000}" th:class="${active == 'admin_info.html' ? 'active' : ''}"><a href="charts.html" th:href="@{/toAdminInfoPage}"> <i class="fa fa-users"></i>二级学院管理员管理</a></li>
 
     </ul>
 </nav>

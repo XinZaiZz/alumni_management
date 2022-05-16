@@ -63,12 +63,12 @@
                                 <div class="form-group">
                                     <input type="text" id="username" class="form-control" name="username" th:placeholder="#{login.username}" required="required">
                                 </div>
-                                <p style="color: #ff0000; position: relative; left: 25%" th:text="${msg} " th:if="${msg == '用户名错误！'}"></p>
+                                <p style="color: #ff0000; position: relative; left: 0" th:text="${msg} " th:if="${msg == '用户名错误！'}"></p>
                                 <div class="form-group">
                                     <input id="password" type="password" class="form-control" name="password" placeholder="********" required="required">
                                     <i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
                                 </div>
-                                <p style="color: #ff0000; position: relative; left: 25%" th:text="${msg} " th:if="${msg == '密码错误！'}"></p>
+                                <p style="color: #ff0000; position: relative; left: 0" th:text="${msg} " th:if="${msg == '密码错误！'}"></p>
                                 <!-- 忘记密码 -->
                                 <!--<div class="form-group">
                                     <div class="fxt-switcher-description2 text-right">

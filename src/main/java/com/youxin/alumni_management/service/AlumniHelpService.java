@@ -20,4 +20,6 @@ public interface AlumniHelpService {
     AlumniHelp selAlumniHelpById(Integer helpId);
 
     List<AlumniHelp> findTop2AlumniHelp();
+
+    List<AlumniHelp> findAllAlumniHelpByDepartmentId(Integer departmentId);
 }

@@ -176,5 +176,25 @@ public class BackManagementServiceImpl implements BackManagementService {
         return backManagementMapper.countByInstructorName(departmentId);
     }
 
+    @Override
+    public List<Admin> findAllAdmins() {
+        return backManagementMapper.findAllAdmins();
+    }
+
+    @Override
+    public int insAdmin(Admin admin) {
+        return backManagementMapper.insAdmin(admin);
+    }
+
+    @Override
+    public int updAdmin(Admin admin) {
+        return backManagementMapper.updAdmin(admin);
+    }
+
+    @Override
+    public int delAdmin(Integer adminId) {
+        return backManagementMapper.delAdmin(adminId);
+    }
+
 
 }

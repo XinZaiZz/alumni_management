@@ -42,10 +42,15 @@ public class ActivityController {
     private final DateUtil dateUtil;
 
     @GetMapping("/toActivityPage")
-    public String toShowActivityPage(Model model) {
+    public String toShowActivityPage(Model model, HttpServletRequest request) {
         //查询所有活动
         List<Activity> activities = activityService.selAllActivity();
         model.addAttribute("activityList", activities);
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
+            List<Activity> activityByDepartmentId = activityService.selActivityByDepartmentId(user.getDepartmentId());
+            model.addAttribute("activityByDepartmentId", activityByDepartmentId);
+        }
         return "activity/activity";
     }
 

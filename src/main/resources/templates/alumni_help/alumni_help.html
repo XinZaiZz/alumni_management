@@ -33,7 +33,7 @@
     <div class="ah-tab-wrapper">
         <div class="ah-tab">
             <a class="ah-tab-item" data-ah-tab-active="true" href="">全部活动</a>
-            <a class="ah-tab-item" href="">只看本学院</a>
+            <a class="ah-tab-item" href="" onclick="notLogin()">只看本学院</a>
             <!--<a class="ah-tab-item" href="">菜单项4</a>-->
             <!--<a class="ah-tab-item" href="">菜单项5</a>-->
 <!--            <a type="button" class="btn btn-info btn-lg" id="toWriteForumPage" th:href="@{/activity/toActivityWritePage}">发起活动</a>-->
@@ -80,8 +80,46 @@
                 </div>
             </tr>
         </div>
+
         <div class="ah-tab-content">
-            <h2>Contacts</h2>
+            <tr th:each="alumniHelp:${allAlumniHelpByDepartmentId}">
+                <div class="my-solid">
+                    <div class="media">
+                        <div class="media-left media-middle" style="position: relative; top: 12px">
+                            <a th:href="@{/help/alumniHelp/show/} + ${alumniHelp.getHelpId}">
+                                <img class="media-object" th:src="@{/helpPhotos/} + ${alumniHelp.getHelpHeadImage()}" src="..." alt="..." style="height: 80px; width: 88px">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <td>
+                                <div>
+                                    <p></p>
+                                    <span style="font-size: 30px" th:text="${alumniHelp.getHelpTitle()}"></span>
+                                    <span class="my-nickname" style="position: absolute; right: 6%; width: 100%">
+                                        <strong>发布学院 : </strong>
+                                        <span th:text="${alumniHelp.getDepartment.getDepartmentName}"></span>
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <p th:text="${alumniHelp.getHelpTabloid()}"></p>
+                            </td>
+
+                            <td>
+                                <div>
+                                    <p>
+                                        <a class="btn" th:href="@{/help/alumniHelp/show/} + ${alumniHelp.getHelpId}">查看详情 »</a>
+                                        <span class="my-date" style="position: absolute; right: 9%">
+                                            <strong>发布时间 : </strong>
+                                            <span th:text="${alumniHelp.getHelpDate()}" ></span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </td>
+                        </div>
+                    </div>
+                </div>
+            </tr>
         </div>
     </div>
 </div>
@@ -98,7 +136,7 @@
 <script th:src="@{/dist/js/jquery.min.js}"></script>
 <script th:src="@{/dist/js/jquery.horizontalmenu.js}"></script>
 <script th:src="@{/dist/js/bootstrap.js}"></script>
-<script>
+<script th:inline="javascript">
     $(function () {
         $('.ah-tab-wrapper').horizontalmenu({
             itemClick : function(item) {
@@ -108,6 +146,13 @@
             }
         });
     });
+
+    function notLogin() {
+        if ([[${session.user}]] == null) {
+            alert("您还未登录");
+            window.location.replace("/help/toAlumniHelp");
+        }
+    }
 </script>
 </body>
 </html>

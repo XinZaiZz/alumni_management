@@ -51,10 +51,17 @@ public class AlumniForumController {
 
     //跳转校友论坛页面
     @GetMapping("/toAlumniForum")
-    public String toAlumniForumPage(Model model) {
+    public String toAlumniForumPage(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
         //查询所有论坛文章
         List<Forum> allForum = forumService.findAllForum();
         model.addAttribute("forumList", allForum);
+        if (user != null) {
+            List<Forum> allForumByDepartmentId = forumService.findAllForumByDepartmentId(user.getDepartmentId());
+            List<Forum> allForumByUserId = forumService.findAllForumByUserId(user.getUserId());
+            model.addAttribute("allForumByDepartmentId", allForumByDepartmentId);
+            model.addAttribute("allForumByUserId", allForumByUserId);
+        }
         return "forum/alumni_forum";
     }
 

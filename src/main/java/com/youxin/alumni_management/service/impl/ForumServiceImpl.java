@@ -41,4 +41,14 @@ public class ForumServiceImpl implements ForumService {
     public List<Forum> findTop8Forum() {
         return forumMapper.findTop8Forum();
     }
+
+    @Override
+    public List<Forum> findAllForumByDepartmentId(Integer departmentId) {
+        return forumMapper.findAllForumByDepartmentId(departmentId);
+    }
+
+    @Override
+    public List<Forum> findAllForumByUserId(Integer userId) {
+        return forumMapper.findAllForumByUserId(userId);
+    }
 }

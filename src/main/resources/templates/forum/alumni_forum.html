@@ -33,14 +33,14 @@
     <div class="ah-tab-wrapper">
         <div class="ah-tab">
             <a class="ah-tab-item" data-ah-tab-active="true" href="">全部讨论</a>
-            <a class="ah-tab-item" href="">只看本学院</a>
-            <a class="ah-tab-item" href="">我发起的</a>
+            <a class="ah-tab-item" href="" onclick="notLogin()">只看本学院</a>
+            <a class="ah-tab-item" href="" onclick="notLogin()">我发起的</a>
             <!--<a class="ah-tab-item" href="">菜单项4</a>-->
             <!--<a class="ah-tab-item" href="">菜单项5</a>-->
             <a type="button" class="btn btn-info btn-lg" id="toWriteForumPage" th:href="@{/toWriteForumPage}">发起讨论</a>
         </div>
-
     </div>
+
     <div class="ah-tab-content-wrapper">
         <div class="ah-tab-content" data-ah-tab-active="true">
             <tr th:each="forum:${forumList}" id="article">
@@ -70,14 +70,71 @@
                         </div>
                     </td>
                 </div>
-
             </tr>
         </div>
+
+        <!-- 查看当前学院 -->
         <div class="ah-tab-content">
-            <h2>Contacts</h2>
+            <tr th:each="forum:${allForumByDepartmentId}">
+                <div class="my-solid">
+                    <td>
+                        <div>
+                            <p></p>
+                            <span style="font-size: 30px" th:text="${forum.getForumTitle}"></span>
+                            <span class="my-nickname" style="position: absolute; right: -2.5%; width: 100%">
+                                <strong>发布者 : </strong>
+                                <span th:text="${forum.getUser.getNickName}"></span>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <p th:text="${forum.getForumTabloid}"></p>
+                    </td>
+                    <td>
+                        <div>
+                            <p>
+                                <a class="btn" th:href="@{/forum/show/} + ${forum.getForumId}">查看详情 »</a>
+                                <span class="my-date" style="position: absolute; right: 9%">
+                                    <strong>发布时间 : </strong>
+                                    <span th:text="${forum.getForumDate}" ></span>
+                                </span>
+                            </p>
+                        </div>
+                    </td>
+                </div>
+            </tr>
         </div>
+
+        <!-- 查看自己发布的论坛 -->
         <div class="ah-tab-content">
-            <h2>Tab item with a long name</h2>
+            <tr th:each="forum:${allForumByUserId}">
+                <div class="my-solid">
+                    <td>
+                        <div>
+                            <p></p>
+                            <span style="font-size: 30px" th:text="${forum.getForumTitle}"></span>
+                            <span class="my-nickname" style="position: absolute; right: -2.5%; width: 100%">
+                                <strong>发布者 : </strong>
+                                <span th:text="${forum.getUser.getNickName}"></span>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <p th:text="${forum.getForumTabloid}"></p>
+                    </td>
+                    <td>
+                        <div>
+                            <p>
+                                <a class="btn" th:href="@{/forum/show/} + ${forum.getForumId}">查看详情 »</a>
+                                <span class="my-date" style="position: absolute; right: 9%">
+                                    <strong>发布时间 : </strong>
+                                    <span th:text="${forum.getForumDate}" ></span>
+                                </span>
+                            </p>
+                        </div>
+                    </td>
+                </div>
+            </tr>
         </div>
     </div>
 </div>
@@ -94,7 +151,7 @@
 <script th:src="@{/dist/js/jquery.min.js}"></script>
 <script th:src="@{/dist/js/jquery.horizontalmenu.js}"></script>
 <script th:src="@{/dist/js/bootstrap.js}"></script>
-<script>
+<script th:inline="javascript">
     $(function () {
         $('.ah-tab-wrapper').horizontalmenu({
             itemClick : function(item) {
@@ -104,6 +161,13 @@
             }
         });
     });
+
+    function notLogin() {
+        if ([[${session.user}]] == null) {
+            alert("您还未登录");
+            window.location.replace("/toAlumniForum");
+        }
+    }
 </script>
 </body>
 </html>

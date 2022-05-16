@@ -17,4 +17,6 @@ public interface ActivityService {
     int insActivity(Activity activity);
 
     Activity selActivityById(Integer activityId);
+
+    List<Activity> selActivityByDepartmentId(Integer departmentId);
 }
