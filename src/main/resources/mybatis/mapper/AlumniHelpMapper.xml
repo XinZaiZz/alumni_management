@@ -43,7 +43,7 @@
         select *
         from alumni_help
                  join department on department.departmentId = alumni_help.departmentId
-        where status = 1 and helpHeadImage != 'default.png' limit 2;
+        where status = 1 and helpHeadImage != 'default.png' order by helpDate desc limit 2;
     </select>
 
     <select id="findAllAlumniHelpByDepartmentId" resultMap="AlumniHelpMap">

@@ -19,7 +19,7 @@
     </select>
 
     <select id="findTop3Article" resultType="newsArticle">
-        select * from news_article where status = 1 and newImageName != 'news_default.png' limit 3;
+        select * from news_article where status = 1 and newImageName != 'news_default.png' order by newArticleDate desc limit 3 ;
     </select>
 
 </mapper>
