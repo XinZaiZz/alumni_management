@@ -10,6 +10,7 @@ import com.youxin.alumni_management.utils.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,14 @@ import java.util.UUID;
 @RequestMapping("/help")
 @RequiredArgsConstructor
 public class AlumniHelpController {
+
+    //帮扶文件路径
+    @Value("${addr.alumni-help-file}")
+    private String helpArticlePath;
+
+    //帮扶照片
+    @Value("${addr.alumni-help-image}")
+    private String helpArticleImage;
 
     private final DateUtil dateUtil;
 
@@ -99,7 +108,7 @@ public class AlumniHelpController {
                     //获取文件类型
                     String suffix = imageFilename.substring(imageFilename.lastIndexOf("."));
                     //模拟存储路径
-                    String realPath = "F:/Test/alumniHelp images";
+                    String realPath = helpArticleImage;
                     String uuid = UUID.randomUUID().toString();
                     //服务器保存路径为files目录下的uuid加suffix
                     String filePath = realPath + "/" + prefix + uuid + suffix;
@@ -121,7 +130,7 @@ public class AlumniHelpController {
                 //获取文件类型
                 String suffix = filename.substring(filename.lastIndexOf("."));
                 //模拟存储路径
-                String realPath = "F:/Test/alumniHelp files";
+                String realPath = helpArticlePath;
                 String uuid = UUID.randomUUID().toString();
                 //服务器保存路径为files目录下的uuid加suffix
                 String filePath = realPath + "/" + prefix + uuid + suffix;
@@ -173,7 +182,7 @@ public class AlumniHelpController {
         os = response.getOutputStream();
 //        String path = request.getServletContext().getRealPath("files");
         //模拟存储路径
-        String path = "F:/Test/alumniHelp files";
+        String path = helpArticlePath;
 
 //        String path = "/www/wwwroot/mytest/files";
 //        System.out.println(path);

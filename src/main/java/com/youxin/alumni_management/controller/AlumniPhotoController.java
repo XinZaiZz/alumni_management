@@ -10,6 +10,7 @@ import com.youxin.alumni_management.utils.ResultCode;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,10 @@ import java.util.UUID;
 @Controller
 @RequiredArgsConstructor
 public class AlumniPhotoController {
+
+    //展示图片路径
+    @Value("${addr.alumni-photo-image}")
+    private String photoImagesPath;
 
     private final DateUtil dateUtil;
 
@@ -83,7 +88,7 @@ public class AlumniPhotoController {
             //获取文件类型
             String suffix = imageFilename.substring(imageFilename.lastIndexOf("."));
             //模拟存储路径
-            String realPath = "F:/Test/alumniPhoto images";
+            String realPath = photoImagesPath;
             String uuid = UUID.randomUUID().toString();
             //服务器保存路径为files目录下的uuid加suffix
             String filePath = realPath + "/" + prefix + uuid + suffix;

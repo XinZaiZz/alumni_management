@@ -70,9 +70,9 @@ public class UserController {
         user.setBirth(request.getParameter("birth"));
         //设置年龄
         user.setAge((request.getParameter("birth").equals("")) ? 0 : (cal.get(Calendar.YEAR) - Integer.parseInt(request.getParameter("birth").substring(0, 4))));
-        user.setStudentNumber(((request.getParameter("studentNumber").equals("")) || (request.getParameter("number").equals("0"))) ? 0 : Long.parseLong(request.getParameter("studentNumber")));
+        user.setStudentNumber(((request.getParameter("studentNumber").equals("")) || (request.getParameter("studentNumber").equals("0"))) ? 0 : Long.parseLong(request.getParameter("studentNumber")));
         user.setMajor(request.getParameter("major"));
-        user.setGrade(Integer.parseInt(request.getParameter("grade")));
+        user.setGrade(((request.getParameter("grade").equals("")) || (request.getParameter("grade").equals("0"))) ? 0 : Integer.parseInt(request.getParameter("grade")));
         user.setBedroomNumber(request.getParameter("bedroomNumber"));
         user.setOccupation(request.getParameter("occupation"));
         user.setCompany(request.getParameter("company"));

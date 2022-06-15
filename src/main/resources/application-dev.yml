@@ -33,3 +33,10 @@ mybatis:
 server:
   port: 8080
 
+addr:
+  alumni-photo-image: file:F://Test/alumniPhoto images/
+  alumni-help-image: file:F://Test/alumniHelp images/
+  new-article-image: file:F://Test/newsArticle images/
+  alumni-help-file: file:F://Test/alumniHelp files/
+  activity-file: file:F://Test/activity files/
+

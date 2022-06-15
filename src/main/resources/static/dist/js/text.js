@@ -65,7 +65,7 @@ $(document).ready(function () {
     $.ajax({
         // async: false,
         type: "get",
-        url:"http://127.0.0.1:8080/forum/findAllForums/" + forumId,
+        url:"/forum/findAllForums/" + forumId,
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -146,7 +146,7 @@ EventUtil.addLoadHandler(function () {
             $.ajax({
                 // async: false,
                 type: "post",
-                url:"http://127.0.0.1:8080/forum/saveComment",
+                url:"/forum/saveComment",
                 contentType: "application/x-www-form-urlencoded;charset=utf-8",
                 data : "forumId=" + forumId.text() +
                     "&userId=" + userId.text() +

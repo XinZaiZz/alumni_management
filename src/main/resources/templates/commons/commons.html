@@ -52,16 +52,17 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" th:style="'display:' + @{(${session.user} == null ? 'none' : 'show')} + ''">选项<strong class="caret"></strong></a>
                     <ul class="dropdown-menu">
 
-                        <li>
-                            <a href="#" th:href="@{/loginout}">登出</a>
-                        </li>
+
                         <li>
                             <a href="#" th:href="@{/toUpdatePage}">修改个人信息</a>
+                        </li>
+                        <li>
+                            <a href="#" th:href="@{/toChangePasswordPage}">修改密码</a>
                         </li>
                         <li class="divider">
                         </li>
                         <li>
-                            <a href="#" th:href="@{/toChangePasswordPage}">修改密码</a>
+                            <a href="#" th:href="@{/loginout}">登出</a>
                         </li>
                     </ul>
                 </li>

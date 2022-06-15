@@ -181,13 +181,13 @@
                     window.removeEventListener('beforeunload',fnClose);
                     alert(data['message']);
                     //成功后返回首页
-                    window.location.replace("/toDashboard");
+                    window.location.replace("/toAlumniForum");
                     // });
                 }else if (data['status'] === 0) {
                     //发布成功不需要确认是否需要退出该页面
                     // window.removeEventListener('beforeunload',fnClose);
                     alert(data['message']);
-                    window.location.replace("/toDashboard");
+                    window.location.replace("/toAlumniForum");
                 }else if (data['status'] === 2) {
                     alert(data['message']);
                     //如果未登录跳转登录界面

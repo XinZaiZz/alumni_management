@@ -47,7 +47,7 @@ public class BackManagementController {
         if (admin == null) {
             return "redirect:/unAuthorized";
         }
-        return "/back_management/dashboard";
+        return "back_management/dashboard";
     }
 
     @GetMapping("/toHomePage")

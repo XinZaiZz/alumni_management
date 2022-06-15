@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,10 @@ public class ActivityController {
     private final ActivityService activityService;
 
     private final DateUtil dateUtil;
+
+    //活动文件路径
+    @Value("${addr.activity-file}")
+    private String activityFilePath;
 
     @GetMapping("/toActivityPage")
     public String toShowActivityPage(Model model, HttpServletRequest request) {
@@ -97,7 +102,7 @@ public class ActivityController {
                 //获取文件类型
                 String suffix = filename.substring(filename.lastIndexOf("."));
                 //模拟存储路径
-                String realPath = "F:/Test/activity files";
+                String realPath = activityFilePath;
                 String uuid = UUID.randomUUID().toString();
                 //服务器保存路径为files目录下的uuid加suffix
                 String filePath = realPath + "/" + prefix + uuid + suffix;
@@ -155,7 +160,7 @@ public class ActivityController {
         os = response.getOutputStream();
 //        String path = request.getServletContext().getRealPath("files");
         //模拟存储路径
-        String path = "F:/Test/activity files";
+        String path = activityFilePath;
 
 //        String path = "/www/wwwroot/mytest/files";
 //        System.out.println(path);

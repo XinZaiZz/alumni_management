@@ -1,3 +1,6 @@
+server:
+  port: 8082
+
 spring:
   thymeleaf:
     cache: false
@@ -9,18 +12,34 @@ spring:
     basename: i18n.login
 
   datasource:
-    username: youxinblog
-    password: GZ2f5StEdYNtccDf
+    username: root
+    password: Liaoyx777
+    #username: youxinblog
+    #password: GZ2f5StEdYNtccDf
     #假如时区报错，则添加时区的配置 serverTimezone=UTC
-    url: jdbc:mysql://localhost:3306/youxinblog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/alumni_management?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
 
+  redis:
+    host: localhost
+    database: 7 #使用redis中第七个数据库
+    port: 6379
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+
 #整合mybatis
 mybatis:
-  type-aliases-package: com.youxin.pojo
+  type-aliases-package: com.youxin.alumni_management.pojo
   mapper-locations: classpath:mybatis/mapper/*.xml
 
-server:
-  port: 8082
+addr:
+  alumni-photo-image: file:/usr/local/alumni_management_files/alumniPhoto_images/
+  alumni-help-image: file:/usr/local/alumni_management_files/alumniHelp_images/
+  new-article-image: file:/usr/local/alumni_management_files/newsArticle_images/
+  alumni-help-file: file:/usr/local/alumni_management_files/alumniHelp_files/
+  activity-file: file:/usr/local/alumni_management_files/activity_files/

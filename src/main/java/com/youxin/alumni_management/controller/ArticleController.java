@@ -12,6 +12,7 @@ import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,10 @@ public class ArticleController {
 
     @Autowired
     DateUtil dateUtil;
+
+    //新闻文件存储路径
+    @Value("${addr.new-article-image}")
+    private String newArticleImage;
 
     @GetMapping("/toWritePage")
     public String toWritePage(HttpServletRequest request) {
@@ -88,7 +93,7 @@ public class ArticleController {
             //获取文件类型
             String suffix = imageFilename.substring(imageFilename.lastIndexOf("."));
             //模拟存储路径
-            String realPath = "F:/Test/newsArticle images";
+            String realPath = newArticleImage;
             String uuid = UUID.randomUUID().toString();
             //服务器保存路径为files目录下的uuid加suffix
             String filePath = realPath + "/" + prefix + uuid + suffix;
