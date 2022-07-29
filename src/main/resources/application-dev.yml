@@ -37,6 +37,8 @@ addr:
   alumni-photo-image: file:F://Test/alumniPhoto images/
   alumni-help-image: file:F://Test/alumniHelp images/
   new-article-image: file:F://Test/newsArticle images/
-  alumni-help-file: file:F://Test/alumniHelp files/
-  activity-file: file:F://Test/activity files/
-
+  alumni-help-file: F://Test/alumniHelp files/
+  activity-file: F://Test/activity files/
+  photo-image-path: F://Test/alumniPhoto images/
+  help-image-path: F://Test/alumniHelp images/
+  news-image-path: F://Test/newsArticle images/

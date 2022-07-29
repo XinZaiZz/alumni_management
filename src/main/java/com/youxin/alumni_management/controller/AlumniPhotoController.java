@@ -36,7 +36,7 @@ import java.util.UUID;
 public class AlumniPhotoController {
 
     //展示图片路径
-    @Value("${addr.alumni-photo-image}")
+    @Value("${addr.photo-image-path}")
     private String photoImagesPath;
 
     private final DateUtil dateUtil;
@@ -92,6 +92,7 @@ public class AlumniPhotoController {
             String uuid = UUID.randomUUID().toString();
             //服务器保存路径为files目录下的uuid加suffix
             String filePath = realPath + "/" + prefix + uuid + suffix;
+//            String filePath = realPath + prefix + uuid + suffix;
 //                    System.out.println(filePath);
             //如果封面图不为空，则将封面图路径设置到alumniHelp对象中
             alumniPhoto.setPhotoImageName(prefix + uuid + suffix);

@@ -41,7 +41,7 @@ public class AlumniHelpController {
     private String helpArticlePath;
 
     //帮扶照片
-    @Value("${addr.alumni-help-image}")
+    @Value("${addr.help-image-path}")
     private String helpArticleImage;
 
     private final DateUtil dateUtil;
@@ -112,6 +112,7 @@ public class AlumniHelpController {
                     String uuid = UUID.randomUUID().toString();
                     //服务器保存路径为files目录下的uuid加suffix
                     String filePath = realPath + "/" + prefix + uuid + suffix;
+//                    String filePath = realPath + prefix + uuid + suffix;
 //                    System.out.println(filePath);
                     //如果封面图不为空，则将封面图路径设置到alumniHelp对象中
                     alumniHelp.setHelpHeadImage(prefix + uuid + suffix);
@@ -134,6 +135,7 @@ public class AlumniHelpController {
                 String uuid = UUID.randomUUID().toString();
                 //服务器保存路径为files目录下的uuid加suffix
                 String filePath = realPath + "/" + prefix + uuid + suffix;
+//                String filePath = realPath + prefix + uuid + suffix;
 //                System.out.println(filePath);
                 alumniHelp.setHelpFileName(prefix + uuid + suffix);
                 data = alumniHelpService.insAlumniHelp(alumniHelp);

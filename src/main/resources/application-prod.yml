@@ -41,5 +41,8 @@ addr:
   alumni-photo-image: file:/usr/local/alumni_management_files/alumniPhoto_images/
   alumni-help-image: file:/usr/local/alumni_management_files/alumniHelp_images/
   new-article-image: file:/usr/local/alumni_management_files/newsArticle_images/
-  alumni-help-file: file:/usr/local/alumni_management_files/alumniHelp_files/
-  activity-file: file:/usr/local/alumni_management_files/activity_files/
+  alumni-help-file: /usr/local/alumni_management_files/alumniHelp_files
+  activity-file: /usr/local/alumni_management_files/activity_files
+  photo-image-path: /usr/local/alumni_management_files/alumniPhoto_images
+  help-image-path: /usr/local/alumni_management_files/alumniHelp_images
+  news-image-path: /usr/local/alumni_management_files/newsArticle_images

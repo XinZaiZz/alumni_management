@@ -44,7 +44,7 @@ public class ArticleController {
     DateUtil dateUtil;
 
     //新闻文件存储路径
-    @Value("${addr.new-article-image}")
+    @Value("${addr.news-image-path}")
     private String newArticleImage;
 
     @GetMapping("/toWritePage")
@@ -97,6 +97,7 @@ public class ArticleController {
             String uuid = UUID.randomUUID().toString();
             //服务器保存路径为files目录下的uuid加suffix
             String filePath = realPath + "/" + prefix + uuid + suffix;
+//            String filePath = realPath + prefix + uuid + suffix;
 //                    System.out.println(filePath);
             //如果封面图不为空，则将封面图路径设置到alumniHelp对象中
             newsArticle.setNewImageName(prefix + uuid + suffix);

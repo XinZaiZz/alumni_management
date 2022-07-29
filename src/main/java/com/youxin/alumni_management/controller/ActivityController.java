@@ -106,6 +106,7 @@ public class ActivityController {
                 String uuid = UUID.randomUUID().toString();
                 //服务器保存路径为files目录下的uuid加suffix
                 String filePath = realPath + "/" + prefix + uuid + suffix;
+//                String filePath = realPath + prefix + uuid + suffix;
                 System.out.println(filePath);
                 activity.setActivityFileName(prefix + uuid + suffix);
 
